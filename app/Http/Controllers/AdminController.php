@@ -37,12 +37,14 @@ class AdminController extends Controller
                 '--force' => true,
             ]);
 
-            // File uploaded and seeded successfully
+
+
             return redirect()->route('admin')->with('status', 'success');
         } catch (\Exception $e) {
             // An error occurred during file storage or seeding
             return redirect()->route('admin')->with('status', 'error');
-        }        return redirect()->route('admin');
+        }
+        return redirect()->route('admin');
     }
 
     //deletecsv
