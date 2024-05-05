@@ -47,8 +47,8 @@ class AdminController extends Controller
 
 
         // return response()->json(['message' => 'File uploaded successfully!', 'path' => $path]);
-
         return redirect()->route('admin');
+        // return redirect()->route('admin')->with('status', 'Data uploaded successfully!');
     }
 
     //deletecsv
