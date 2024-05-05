@@ -37,32 +37,14 @@ class AdminController extends Controller
                 '--force' => true,
             ]);
 
-<<<<<<< HEAD
-        //as the file is uploaded. seed it to database
-
-        Artisan::call('db:seed', [
-            '--class' => 'studentseeder',
-            '--force' => true,
-        ]);
 
 
-        //delete csv
-        // Storage::delete('csv-files/csvFile.csv');
-
-        // Return a response indicating success or redirect
-
-
-        // return response()->json(['message' => 'File uploaded successfully!', 'path' => $path]);
-        return redirect()->route('admin');
-        // return redirect()->route('admin')->with('status', 'Data uploaded successfully!');
-=======
-            // File uploaded and seeded successfully
             return redirect()->route('admin')->with('status', 'success');
         } catch (\Exception $e) {
             // An error occurred during file storage or seeding
             return redirect()->route('admin')->with('status', 'error');
-        }        return redirect()->route('admin');
->>>>>>> 8157ace11cc596b2a2227c2945a8c149da56f3d2
+        }
+        return redirect()->route('admin');
     }
 
     //deletecsv
