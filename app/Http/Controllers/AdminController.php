@@ -33,4 +33,11 @@ class AdminController extends Controller
         // Return a response indicating success or redirect
         return response()->json(['message' => 'File uploaded successfully!', 'path' => $path]);
     }
+    // this function will read uploaded csv file and then send registration successful message to newly registered students at their gmail
+    // this will read 3 columns from csv file that is
+    // student name, student ID, gmail ID, password
+    public function sendMailsToNewRegistrations($filePath)
+    {
+        
+    }
 }

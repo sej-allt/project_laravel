@@ -12,5 +12,5 @@ Route::get('/admin', [AdminController::class, 'index'])
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
 Route::group(['middleware'=> 'admin'], function(){
-
+    
 });
