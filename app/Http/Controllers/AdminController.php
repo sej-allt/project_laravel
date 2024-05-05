@@ -63,6 +63,6 @@ class AdminController extends Controller
     // student name, student ID, gmail ID, password
     public function sendMailsToNewRegistrations($filePath)
     {
-        
+
     }
 }
