@@ -69,3 +69,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
+<!-- @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Check the status in the response
+    const statusM = `{{ session('status') }}`;
+
+    if (statusM === 'success') {
+        // Display a pop-up alert for successful file upload
+        alert('File uploaded and seeded successfully!');
+    } else if (statusM === 'error') {
+        // Display a pop-up alert for errors
+        alert('An error occurred during file upload or seeding.');
+    }
+});
+</script>

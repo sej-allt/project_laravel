@@ -28,10 +28,16 @@ class AdminController extends Controller
         $filename = 'csvFile.csv'; // Use the original file name or specify a new name
 
         // Save the file to the storage folder
-        $path = $file->storeAs('csv-files', $filename, 'public');
+        try {
+            $path = $file->storeAs('csv-files', $filename, 'public');
 
-        // You can also use 'local' as the disk, but 'public' allows the file to be accessible via the web
+            // As the file is uploaded, seed it to the database
+            Artisan::call('db:seed', [
+                '--class' => 'studentseeder',
+                '--force' => true,
+            ]);
 
+<<<<<<< HEAD
         //as the file is uploaded. seed it to database
 
         Artisan::call('db:seed', [
@@ -49,6 +55,14 @@ class AdminController extends Controller
         // return response()->json(['message' => 'File uploaded successfully!', 'path' => $path]);
         return redirect()->route('admin');
         // return redirect()->route('admin')->with('status', 'Data uploaded successfully!');
+=======
+            // File uploaded and seeded successfully
+            return redirect()->route('admin')->with('status', 'success');
+        } catch (\Exception $e) {
+            // An error occurred during file storage or seeding
+            return redirect()->route('admin')->with('status', 'error');
+        }        return redirect()->route('admin');
+>>>>>>> 8157ace11cc596b2a2227c2945a8c149da56f3d2
     }
 
     //deletecsv
