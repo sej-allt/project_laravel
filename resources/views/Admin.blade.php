@@ -8,9 +8,12 @@
   </head>
   <body>
     <div class="container mt-5">
-    <button type="button" class="btn btn-success position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <div class = "position-absolute top-50 start-50 translate-middle">
+    <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal">
   Bulk Data Upload
 </button>
+<div><a href="{{route('logout')}}"><button type="button" class="btn btn-outline-success my-2 mx-4 btn-sm px-4">log-out</button></a></div>
+</div>
 
 <div class="modal fade" id="exampleModal"data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
