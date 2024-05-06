@@ -1,24 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\MailController;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('Admin');
+})->name('admin');
+Route::post('/upload-csv',[AdminController::class,'uploadCSV']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/admin', [AdminController::class, 'index'])
-//     ->middleware('admin');
+Route::get('/login', function () {
+    return view('Login');});
 
-Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
-
-// Route::group(['middleware'=> 'admin'], function(){
-    
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-Route::get('/admin', function () {
-    return view("Admin");
-})->name('admin');
-
-Route::get('/emailCSV',[MailController::class,'sendMailsToNewRegistrations']);
+require __DIR__.'/auth.php';
