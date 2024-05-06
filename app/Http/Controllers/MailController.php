@@ -5,23 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\RegistrationConfirmation;
+use Illuminate\Support\HtmlString;
 
 class MailController extends Controller
 {
     public function generateAndSendMail($student_id, $student_name, $student_email)
     {
         // Generate the email message and call Mailable Class
-        $message = "CONGRATULATIONS $student_name:\n\n"
-            . "You have been successfully registered to GRAPHIC ERA ERP PORTAL.\n\n"
-            . "Your STUDENT ID is: $student_id\n\n"
-            . "TO LOGIN:\n"
-            . "1) GO TO https://erp.geu.ac.in\n"
-            . "2) YOUR STUDENT ID IS YOUR USERNAME.\n"
-            . "3) CLICK ON FORGOT PASSWORD TO RESET AND SAVE YOUR NEW PASSWORD.\n\n"
-            . "WELCOME ABOARD.";
-
         // Send the email
-        Mail::to($student_email)->send(new \App\Mail\RegistrationConfirmation($message));
+        Mail::to($student_email)->send(new RegistrationConfirmation($student_name,$student_id));
     }
 
     // this function will read uploaded csv file and then send registration successful message to newly registered students at their gmail
@@ -29,7 +21,7 @@ class MailController extends Controller
     // student name, student ID, gmail ID, password
     public function sendMailsToNewRegistrations()
     {
-        $file=fopen(storage_path("app\public\csvFile.csv"),'r');
+        $file=fopen(storage_path("app\public\csv-files\csvFile.csv"),'r');
 
         // skipping head row( which contains column names)
         fgetcsv($file);
