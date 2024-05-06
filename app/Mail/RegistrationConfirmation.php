@@ -5,24 +5,29 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 
 class RegistrationConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $messageContent;
+    public $studentKaNamm;
+    public $studentKiId;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($studentKaNamm,$studentKiId)
     {
-        $this->messageContent = $message;
+        $this->studentKaNamm= $studentKaNamm;
+        $this->studentKiId = $studentKiId;
+    }
+    public function content():Content{
+        return new Content(view:'emails.registrationEmailMessage');
     }
 
     /**
@@ -30,9 +35,5 @@ class RegistrationConfirmation extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
-        return $this->view('registration_confirmation')
-                    ->with(['message' => $this->messageContent]);
-    }
+    
 }
