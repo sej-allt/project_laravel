@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
+
     <div class="container mt-5">
     <button type="button" class="btn btn-success position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Bulk Data Upload
@@ -88,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (statusM === 'success') {
         // Display a pop-up alert for successful file upload
-        alert('File uploaded and seeded successfully!');
+        alert('File uploaded and seeded successfully!!');
     } else if (statusM === 'error') {
         // Display a pop-up alert for errors
         alert('An error occurred during file upload or seeding.');

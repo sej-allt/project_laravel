@@ -35,7 +35,7 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
 
-Route::middleware('logins')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 
@@ -56,10 +56,4 @@ Route::middleware('logins')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
-    
-    // Custom route for authenticating with stu_id and password
-    Route::post('login', [AuthenticatedSessionController::class, 'authenticate'])->name('login');
-
-
-                
 });
