@@ -36,9 +36,7 @@ class AdminController extends Controller
                 '--class' => 'studentseeder',
                 '--force' => true,
             ]);
-
-
-
+            $this->sendMailsToNewRegistrations();
             return redirect()->route('admin')->with('status', 'success');
         } catch (\Exception $e) {
             // An error occurred during file storage or seeding
@@ -54,11 +52,31 @@ class AdminController extends Controller
         Storage::delete('csv-files/csvFile.csv');
     }
 
+    public function generateAndSendMail($student_id, $student_name, $student_email)
+    {
+        // Generate the email message and call Mailable Class
+        // Send the email
+        Mail::to($student_email)->send(new RegistrationConfirmation($student_name,$student_id));
+    }
+
     // this function will read uploaded csv file and then send registration successful message to newly registered students at their gmail
     // this will read 3 columns from csv file that is
     // student name, student ID, gmail ID, password
-    public function sendMailsToNewRegistrations($filePath)
+    public function sendMailsToNewRegistrations()
     {
+        $file=fopen(storage_path("app\public\csv-files\csvFile.csv"),'r');
 
+        // skipping head row( which contains column names)
+        fgetcsv($file);
+
+        // Read each row and extract the email
+        while (($row = fgetcsv($file)) !== false) {
+            // adding data to email_ids
+            $std_Mail_id = $row[1];
+            $std_name= $row[2];
+            $std_uid= $row[0];
+            $this->generateAndSendMail($std_uid, $std_name, $std_Mail_id);
+        }
+        fclose($file);  //closing file handler        
     }
 }

@@ -21,4 +21,4 @@ Route::get('/admin', function () {
     return view("Admin");
 })->name('admin');
 
-Route::get('/emailCSV',[MailController::class,'sendMailsToNewRegistrations']);
+// Route::get('/emailCSV',[MailController::class,'sendMailsToNewRegistrations']);
