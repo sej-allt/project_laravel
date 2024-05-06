@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mail;
+use App\Mail\RegistrationConfirmation;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Artisan;
 
