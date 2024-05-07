@@ -82,7 +82,9 @@ class AuthController extends Controller
 
     public function profile(){
         //user profile
-        return view('profile');
+        $student_id=session('student_id');
+        $user = DB::table('students')->where('student_id','=',$student_id)->first();
+        return view('profile')->with('user',$user);
     }
 
 }

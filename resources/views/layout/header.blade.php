@@ -46,9 +46,9 @@
                   Dropdown button
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here in future</a></li>
                 </ul>
               </div>
             </div>
@@ -80,7 +80,9 @@
   
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Das</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">
+            @yield("main_head")
+        </h1>
       </div>
     </header>
     <main>
