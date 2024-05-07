@@ -27,4 +27,8 @@ Route::group(['middleware' => 'admin'], function () {
 // Route::get('/emailCSV',[MailController::class,'sendMailsToNewRegistrations']);
 
 // Route::get('/login', [AuthController::class, 'login']);
+
+
+
+
 require __DIR__ . '/auth.php';

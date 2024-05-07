@@ -137,8 +137,24 @@
                     Success Alert
                 </div>
 
-                <h2>Hi "{{ $student_name }}", Welcome to the Dashboard</h2>
-                <p>This is the body content of your dashboard. You can add your own content here.</p>
+                <h2>Profile</h2>
+                <form class="profile-form" method="post" action="#">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" value="">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Save Changes</button>
+                    </div>
+                </form>
 
             </div>
         </div>
