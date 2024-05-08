@@ -60,4 +60,22 @@ class AuthController extends Controller
         session()->forget('user_type');
         return redirect()->route('login');
     }
+    public function forgot()
+    {
+        return view('auth.forgot');
+    }
+
+    public function forgot_password(Request $request)
+    {
+        $user = DB::table('emails')->where('email', '=', $request->email)->first();
+        if(!empty($user))
+        {
+            $user->remember_token= Str::random(40);
+            $user->save();
+        }
+        else
+        {
+            return redirect()->back()->with('error',"Email not found");
+        }
+    }
 }
