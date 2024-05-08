@@ -64,8 +64,27 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
+    public function forgot()
+    {
+        return view('auth.forgot');
+    }
 
-    public function home(){
+    public function forgot_password(Request $request)
+{
+    $user = DB::table('emails')->where('email', '=', $request->email)->first();
+if(!empty($user))
+        {
+        $user->remember_token= Str::random(40);
+        $user->save();
+        }
+        else
+        {
+        return redirect()->back()->with('error',"Email not found");
+    }
+}
+
+
+ public function home(){
         // after login
         $student_id = session('student_id'); 
         $user = DB::table('students')
@@ -82,7 +101,9 @@ class AuthController extends Controller
 
     public function profile(){
         //user profile
-        return view('profile');
+        $student_id=session('student_id');
+        $user = DB::table('students')->where('student_id','=',$student_id)->first();
+        return view('profile')->with('user',$user);
     }
-
 }
+    
