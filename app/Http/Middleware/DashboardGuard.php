@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
 
-class AdminGuard
+class DashboardGuard
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class AdminGuard
     {
         if (!session()->has('user_type')) {
             return redirect()->route('welcome');
-        } else if (session('user_type') != 1)
+        } else if (session('user_type') != 0)
             return redirect()->route('welcome');
         return $next($request);
     }
