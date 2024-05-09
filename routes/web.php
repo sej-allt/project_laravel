@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
@@ -31,20 +32,15 @@ Route::get('/forgot', function () {
 
 Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
 
-// Route::get('/admin',[AdminController::class, 'index'])->name('admin');
-
-// Route::get('/admin', function () {
-//     return view("Admin");
-// })->name('admin');
-
 // Route::get('/emailCSV',[MailController::class,'sendMailsToNewRegistrations']);
 
- Route::get('/login', [AuthController::class, 'login']);
+// Route::get('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'login']);
 require __DIR__ . '/auth.php';
-
 
 // Route::get('reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 // Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('reset-password');
+<<<<<<< HEAD
 
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
@@ -53,3 +49,8 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
 
 
  
+=======
+Route::get('reset-password/{stu_id}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
+Route::post('reset-password/{stu_id}', [ResetPasswordController::class, 'reset'])->name('reset-password');
+Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
+>>>>>>> 573ffae9cf4ed30aea8ed9b9c7aa7adcd3853676
