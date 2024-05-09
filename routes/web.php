@@ -46,7 +46,10 @@ require __DIR__ . '/auth.php';
 // Route::get('reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 // Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('reset-password');
 
-Route::get('reset-password/{stu_id}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
-Route::post('reset-password/{stu_id}', [ResetPasswordController::class, 'reset'])->name('reset-password');
+Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
+Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
 
  Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
+
+
+ 

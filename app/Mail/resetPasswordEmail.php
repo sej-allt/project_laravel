@@ -18,16 +18,18 @@ class resetPasswordEmail extends Mailable
      */
      use Queueable, SerializesModels;
 
-    public $studentKiId;
+    public $stu_id;
+    public $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($studentKiId)
+     public function __construct($stu_id, $token)
     {
-        $this->studentKiId = $studentKiId;
+        $this->stu_id = $stu_id;
+        $this->token = $token;
     }
     public function content():Content{
         return new Content(view:'emails.resetpasswordmessage');

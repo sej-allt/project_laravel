@@ -25,7 +25,7 @@ class RegistrationConfirmation extends Mailable
         $this->studentKiId = $studentKiId;
     }
     public function content():Content{
-        return new Content(view:'emails.resetpassowrdmessage');
+        return new Content(view:'emails.registrationEmailMessage');
     }
 
     /**
