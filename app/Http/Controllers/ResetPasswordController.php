@@ -80,7 +80,7 @@ $ttl=$us->TTL;
 
     if (!$resetToken) {
         // Token not found or expired, reject the request
-   return redirect()->back()->with('error', 'Token has expired. request a new password reset link.');
+   return redirect()->back()->with('error', 'Token has expired. Please request a new password reset link.');
     }
     
     // $expiration=$resetToken->expiration;

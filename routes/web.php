@@ -40,7 +40,7 @@ require __DIR__ . '/auth.php';
 
 // Route::get('reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 // Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('reset-password');
-<<<<<<< HEAD
+
 
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
@@ -48,9 +48,4 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
  Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
 
- 
-=======
-Route::get('reset-password/{stu_id}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
-Route::post('reset-password/{stu_id}', [ResetPasswordController::class, 'reset'])->name('reset-password');
-Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
->>>>>>> 573ffae9cf4ed30aea8ed9b9c7aa7adcd3853676
+
