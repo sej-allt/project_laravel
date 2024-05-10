@@ -16,16 +16,16 @@ class AdminController extends Controller
         return view('Admin_home');
     }
 
-
+    
     public function bulk()
     {
         return view('admin');
     }
 
 
-    public function IndividualRegistration(Request $request)
+    public function IndividualRegistration()
     {
-        return redirect()->route('admin');
+        return view('individualReg');
     }
 
 

@@ -15,11 +15,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
-Route::post('/individualReg', [AdminController::class, 'IndividualRegistration']);
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
+    Route::get('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
 });
 
 // routes/web.php
