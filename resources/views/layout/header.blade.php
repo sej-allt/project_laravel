@@ -26,7 +26,8 @@
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
+                @yield('header_content');
+                
               </div>
             </div>
           </div>
@@ -41,7 +42,9 @@
               </button>
   
               <!-- Profile dropdown -->
-              <div class="dropdown">
+
+              @yield('dropdown');
+              {{-- <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown button
                 </button>
@@ -50,7 +53,7 @@
                   <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
                   <li><a class="dropdown-item" href="#">Something else here in future</a></li>
                 </ul>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

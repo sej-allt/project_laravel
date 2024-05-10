@@ -12,7 +12,7 @@
     <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal">
   Bulk Data Upload
 </button>
-<div><a href="{{route('logout')}}"><button type="button" class="btn btn-outline-success my-2 mx-4 btn-sm px-4">log-out</button></a></div>
+{{-- <div><a href="{{route('logout')}}"><button type="button" class="btn btn-outline-success my-2 mx-4 btn-sm px-4">log-out</button></a></div> --}}
 </div>
 
 <div class="modal fade" id="exampleModal"data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -72,7 +72,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
-<!-- @if(session('success'))
+    {{-- @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
@@ -97,4 +97,4 @@ document.addEventListener("DOMContentLoaded", function() {
         alert('An error occurred during file upload or seeding.');
     }
 });
-</script>
+</script> --}}

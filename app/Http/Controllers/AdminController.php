@@ -13,8 +13,23 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('Admin');
+        return view('Admin_home');
     }
+
+
+    public function bulk()
+    {
+        return view('admin');
+    }
+
+
+    public function IndividualRegistration(Request $request)
+    {
+        return redirect()->route('admin');
+    }
+
+
+
     public function uploadCSV(Request $request)
     {
         // Validate the request to ensure a file is uploaded

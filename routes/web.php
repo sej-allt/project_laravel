@@ -14,13 +14,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
+Route::post('/individualReg', [AdminController::class, 'IndividualRegistration']);
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-
+    Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
 });
 
 // routes/web.php
