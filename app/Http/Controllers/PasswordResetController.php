@@ -67,7 +67,7 @@ class PasswordResetController extends Controller
     $ttl = DB::table('logins')->where('stu_id', $stu_id)->value('TTL');
 
     // Define the expiration timestamp based on TTL
-    $expiration = now()->addMinutes(2); // Adjust as needed
+    $expiration = now()->addMinutes(15); // Adjust as needed
     
 //     // Store the token in the database with the user's ID and expiration timestamp
 //     DB::table('password_reset_tokens')->insert([
@@ -98,7 +98,7 @@ else {
         'created_at' => now(),
     ]);
 }
-$newttl=1;
+$newttl=15;
 
 // Update the TTL in the logins table
 DB::table('logins')
