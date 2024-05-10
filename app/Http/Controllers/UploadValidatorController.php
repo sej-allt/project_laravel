@@ -20,4 +20,16 @@ class UploadValidatorController extends Controller
             echo $response;
         }
     }
+    public function doValidation2(){
+        $validator=new StudentCsvValidator();
+        $response=$validator->validatingLocalCsvDuplicateFields();
+        if(is_array($response)){
+            foreach ($response as $error){
+                echo $error . "<br>";
+            }
+        }
+        else{
+            echo $response;
+        }
+    }
 }
