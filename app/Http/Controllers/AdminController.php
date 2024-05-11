@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
+use App\Models\Blog;
 use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
@@ -48,6 +49,22 @@ class AdminController extends Controller
         return redirect()->route('admin');
     }
 
+    public function store(Request $request){
+        $title="Bulk Upload";
+
+        $filename= time().'.'.request()->file->getClientOriginalExtension();
+
+        $request->file->move(public_path('blogs'), $filename);
+
+        $blog= new Blog;
+        $blog->title= $title;
+        $blog->file =$filename;
+        //$progress= ...;//fetch progress
+        $blog->save();
+
+        return response()->json(['succsess'=>'File uploaded successfully']);
+
+    }
     //deletecsv
 
     public function deletecsv()
@@ -82,4 +99,5 @@ class AdminController extends Controller
         }
         fclose($file);  //closing file handler        
     }
+    
 }

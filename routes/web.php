@@ -7,12 +7,17 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\BlogController;
 
 
+Route::get('/progress', 'ProgressController@getProgress')->name('progress');
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('/file-upload',[BlogController::class,'index']);
+Route::post('/store',[BlogController::class,'store']);
 
 
 
