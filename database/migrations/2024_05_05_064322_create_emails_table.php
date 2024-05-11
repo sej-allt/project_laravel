@@ -12,9 +12,8 @@ return new class extends Migration {
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('stu_id');
-            $table->string('email')->unique();
-            $table->foreign('stu_id')->references('student_id')->on('students')->onUpdate('cascade');
+            $table->string('message_type')->unique();
+            $table->string('message')->unique();
             $table->timestamps();
         });
     }

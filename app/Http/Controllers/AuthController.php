@@ -29,7 +29,7 @@ class AuthController extends Controller
         // echo $error;
         // dd($credentials);
         $student_id = $credentials['stu_id'];
-        $student_password = $credentials['password'];
+        $student_password = md5($credentials['password']);
         // dd($student_id);
         $user = DB::table('logins')->where('stu_id', '=', $student_id)->first();
         // dd($user);
@@ -38,13 +38,13 @@ class AuthController extends Controller
             $a_type = $user->type;
             $a_id = $user->stu_id;
             if ($a_password == $student_password) {
-                
+
                 if ($a_type == 0) {
-                    session(['student_id'=> $a_id]);
+                    session(['student_id' => $a_id]);
                     session(['user_type' => $a_type]);
                     return redirect()->route('home');
                 } else {
-                    session(['student_id'=> $a_id]);
+                    session(['student_id' => $a_id]);
                     session(['user_type' => $a_type]);
                     return redirect()->route('admin');
                 }
@@ -70,40 +70,39 @@ class AuthController extends Controller
     }
 
     public function forgot_password(Request $request)
-{
-    $user = DB::table('emails')->where('email', '=', $request->email)->first();
-if(!empty($user))
-        {
-        $user->remember_token= Str::random(40);
-        $user->save();
+    {
+        $user = DB::table('emails')->where('email', '=', $request->email)->first();
+        if (!empty($user)) {
+            $user->remember_token = Str::random(40);
+            $user->save();
+        } else {
+            return redirect()->back()->with('error', "Email not found");
         }
-        else
-        {
-        return redirect()->back()->with('error',"Email not found");
     }
-}
 
 
- public function home(){
+    public function home()
+    {
         // after login
-        $student_id = session('student_id'); 
+        $student_id = session('student_id');
         $user = DB::table('students')
             ->select('student_name')
-            ->where( 'student_id','=',$student_id)
+            ->where('student_id', '=', $student_id)
             ->first();
 
-            // dd($user);
+        // dd($user);
         $student_name = $user->student_name ?? null;
-    
+
         return view('home')->with('student_name', $student_name);
     }
-    
 
-    public function profile(){
+
+    public function profile()
+    {
         //user profile
-        $student_id=session('student_id');
-        $user = DB::table('students')->where('student_id','=',$student_id)->first();
-        return view('profile')->with('user',$user);
+        $student_id = session('student_id');
+        $user = DB::table('students')->where('student_id', '=', $student_id)->first();
+        return view('profile')->with('user', $user);
     }
 }
-    
+

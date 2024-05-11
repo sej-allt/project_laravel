@@ -27,7 +27,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 });
-
+// Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 // routes/web.php
 Route::get('/forgot', function () {
     return view('auth.forgot');
@@ -50,7 +50,7 @@ require __DIR__ . '/auth.php';
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
 
- Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
+Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
 
 

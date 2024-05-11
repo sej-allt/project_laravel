@@ -10,16 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('update_approvals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id')->unique();
-            $table->string('email')->unique()->nullable(false);
-            $table->string('student_name')->nullable(false);
-            $table->string('father_name')->nullable();
-            $table->unsignedBigInteger('phone_number')->nullable(false);
-            $table->string('campus')->nullable(false);
-            $table->integer('type')->nullable();
-            $table->string('address')->nullable();
+            $table->unsignedBigInteger('stu_id');
+            $table->string('update_type');
             $table->string('marks10')->nullable();
             $table->string('marks12')->nullable();
             $table->string('sem1')->nullable();
@@ -32,6 +26,9 @@ return new class extends Migration {
             $table->string('sem8')->nullable();
             $table->string('sem9')->nullable();
             $table->string('sem10')->nullable();
+            $table->integer('delete');
+            $table->integer('approve/disapprove')->nullable();
+            $table->foreign('stu_id')->references('student_id')->on('students')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -41,6 +38,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('update_approvals');
     }
 };
