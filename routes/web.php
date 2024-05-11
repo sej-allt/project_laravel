@@ -47,5 +47,6 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
 
 Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
-
+ Route::get('/validateEmpty-csv', [UploadValidatorController::class, 'doValidation1'])->name('validate.csv');
+ Route::get('/validateLocalDuplicate-csv',[UploadValidatorController::class,'doValidation2']);
 
