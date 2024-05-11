@@ -8,7 +8,7 @@ class StudentCsvValidator
     public function validatingLocalCsvEmptyFields()
     {
         // using locally hosted csf file for validation
-        $file=fopen(storage_path("app\public\csv-files\csvFile.csv"),'r');  // opening in read mode
+        $file = fopen(storage_path("app\public\csv-files\csvFile.csv"), 'r');  // opening in read mode
         // errors array to store error messages.
         $errors = [];
 
@@ -53,49 +53,46 @@ class StudentCsvValidator
 
     // this function checks locally hosted csv files for duplicacy of student id and email
     // return type => array of errors or string 'NO LOCAL DUPLICACY FOUND'
-    public function validatingLocalCsvDuplicateFields(){
+    public function validatingLocalCsvDuplicateFields()
+    {
 
         // using locally hosted csf file for validation
-        $file=fopen(storage_path("app\public\csv-files\csvFile.csv"),'r');  // opening in read mode
+        $file = fopen(storage_path("app\public\csv-files\csvFile.csv"), 'r');  // opening in read mode
         // errors array to store error messages.
         $errors = [];
-        $student_Id_Map= [];  //to store studentid
-        $email_Id_Map= [];    //to store email ids
+        $student_Id_Map = [];  //to store studentid
+        $email_Id_Map = [];    //to store email ids
 
         // Skip the header row
         fgetcsv($file);
 
-        $rowNumber=2;   //row 1 is header
-        while(($row=fgetcsv($file))!= false){
+        $rowNumber = 2;   //row 1 is header
+        while (($row = fgetcsv($file)) != false) {
             // step1 extraction op :)
-            $currentStudentId=$row[0];
-            $currentEmailId= $row[1];
-            
+            $currentStudentId = $row[0];
+            $currentEmailId = $row[1];
+
             // step2 checking for previous existence
 
             // Check for duplicate student ID
-            if(isset($student_Id_Map[$currentStudentId]) )
-            {
-                $errors[]= "Row Numbers {$student_Id_Map[$currentStudentId]} and $rowNumber Have same Student Ids:- $currentStudentId. (STUDENT ID MUST BE UNIQUE FOR EACH STUDENT";
-            }
-            else{
+            if (isset($student_Id_Map[$currentStudentId])) {
+                $errors[] = "Row Numbers {$student_Id_Map[$currentStudentId]} and $rowNumber Have same Student Ids:- $currentStudentId. (STUDENT ID MUST BE UNIQUE FOR EACH STUDENT";
+            } else {
                 // means no duplicate found for current student id
-                $student_Id_Map[$currentStudentId]= $rowNumber;
+                $student_Id_Map[$currentStudentId] = $rowNumber;
             }
             // Check for duplicate email ids
-            if(isset($email_Id_Map[$currentEmailId]) )
-            {
-                $errors[]= "Row Numbers {$email_Id_Map[$currentEmailId]} and $rowNumber Have same Email ids:- $currentEmailId. (EMAIL IDS MUST BE UNIQUE FOR EACH STUDENT";
-            }
-            else{
+            if (isset($email_Id_Map[$currentEmailId])) {
+                $errors[] = "Row Numbers {$email_Id_Map[$currentEmailId]} and $rowNumber Have same Email ids:- $currentEmailId. (EMAIL IDS MUST BE UNIQUE FOR EACH STUDENT";
+            } else {
                 // means no duplicate found for current student id
-                $email_Id_Map[$currentEmailId]= $rowNumber;
+                $email_Id_Map[$currentEmailId] = $rowNumber;
             }
             $rowNumber++;
         }
         fclose($file);
 
-        if(!empty($errors)){
+        if (!empty($errors)) {
             return $errors;
         }
         return 'NO DUPLICATE FIELDS IN LOCAL CSV FILE';
