@@ -11,12 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('logins', function (Blueprint $table) {
-            $table->unsignedBigInteger('uid');
+            $table->id();
             $table->unsignedBigInteger('stu_id');
             $table->string('password');
             $table->integer('type');
             $table->boolean('TTL');
-            $table->foreign('uid')->references('id')->on('emails')->onUpdate('cascade');
             $table->foreign('stu_id')->references('student_id')->on('students')->onUpdate('cascade');
             $table->timestamps();
         });
