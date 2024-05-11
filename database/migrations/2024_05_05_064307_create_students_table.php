@@ -11,13 +11,27 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->unsignedBigInteger('student_id')->primary();
-            $table->string('email')->unique();
-            $table->string('student_name');
-            $table->string('father_name');
-            $table->unsignedBigInteger('phone_number');
-            $table->string('campus');
-            $table->integer('type');
+            $table->id();
+            $table->unsignedBigInteger('student_id')->unique();
+            $table->string('email')->unique()->nullable(false);
+            $table->string('student_name')->nullable(false);
+            $table->string('father_name')->nullable();
+            $table->unsignedBigInteger('phone_number')->nullable(false);
+            $table->string('campus')->nullable(false);
+            $table->integer('type')->nullable();
+            $table->string('address')->nullable();
+            $table->string('marks10')->nullable();
+            $table->string('marks12')->nullable();
+            $table->string('sem1')->nullable();
+            $table->string('sem2')->nullable();
+            $table->string('sem3')->nullable();
+            $table->string('sem4')->nullable();
+            $table->string('sem5')->nullable();
+            $table->string('sem6')->nullable();
+            $table->string('sem7')->nullable();
+            $table->string('sem8')->nullable();
+            $table->string('sem9')->nullable();
+            $table->string('sem10')->nullable();
             $table->timestamps();
         });
     }
