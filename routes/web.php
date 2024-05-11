@@ -45,8 +45,10 @@ require __DIR__ . '/auth.php';
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
 
+
 Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
- Route::get('/validateEmpty-csv', [UploadValidatorController::class, 'doValidation1'])->name('validate.csv');
- Route::get('/validateLocalDuplicate-csv',[UploadValidatorController::class,'doValidation2']);
+
+Route::get('/validateEmpty-csv', [UploadValidatorController::class, 'doValidation1'])->name('validate.csv');
+Route::get('/validateLocalDuplicate-csv', [UploadValidatorController::class, 'doValidation2']);
 
