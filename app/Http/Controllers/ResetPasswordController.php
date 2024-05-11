@@ -31,35 +31,6 @@ class ResetPasswordController extends Controller
     
 
 
-// public function reset(Request $request, $stu_id)
-// {
-//     $request->validate([
-//         'password' => ['required', 'string', 'min:8', 'confirmed'],
-//     ], [
-//         'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
-//     ]);
-//        if($request->password == $request->password_confirmation)
-//        {
-//         // $stu_id= $request->input('stu');
-//         //  $stu_id = $request->stu_id;
-        
-//         $stud_id = $request->stu_id;
-
-//         //dd($stu_id);
-        
-//        DB::table('logins')
-//     // ->where('stu_id', '=', $stud_id)
-//     ->update(['password' => $request->password]);
-
-//             dd(DB::table('logins')->where('stu_id', '=', $stu_id)->update(['password' => $request->password]));
-
-//         return redirect()->back()->with('success', 'Password reset successfully');
-//     }
-//     else
-
-//     return redirect()->back()->with('error', 'The password and confirmation do not match');
-// }
-
 public function reset(Request $request, $stu_id, $token)
 {
 
@@ -100,15 +71,10 @@ $ttl=$us->TTL;
 
     if($request->password == $request->password_confirmation)
     {
-        // Corrected the variable name from $stud_id to $stu_id
-        // $stud_id = $request->stu_id;
-        
-        // dd($stu_id); // You can uncomment this line for debugging
-        
-        // Updated the variable name to $stu_id
+       
         DB::table('logins')
             ->where('stu_id', '=', $stu_id)
-            ->update(['password' => $request->password]);
+            ->update(['password' =>md5($request->password)]);
 
             DB::table('password_reset_tokens')
         ->where('token', $token)

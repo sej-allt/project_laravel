@@ -42,25 +42,16 @@ class PasswordResetController extends Controller
     {
        
         $request->validate(['email' => 'required|email']);
-        $user = DB::table('emails')->where('email', $request->email)->first();
-        // dd($user);
-
-        // $user = User::where('email', $request->email)->first();
+        $user = DB::table('students')->where('email', $request->email)->first();
+        
 
     // If user is not found, display error message
     if (!$user) {
         return redirect()->back()->with('error', 'No user found with that email.');
     }
         $email = $user->email;
-        $stu_id = $user->stu_id;
-        // echo $email;
-        //is email pe mail bhejdo 
-        //  Mail::to($email)->send(new resetPasswordEmail($student_id));
-
-        //   DB::table('logins')
-        //     ->where('stu_id', '=', $student_id)
-        //     ->update(['TTL' => 1]);
-
+        $stu_id = $user->student_id;
+       
         $token = Str::random(32); // Adjust the length as needed
     
     // Retrieve TTL value from the logins table
@@ -70,11 +61,7 @@ class PasswordResetController extends Controller
     $expiration = now()->addMinutes(15); // Adjust as needed
     
 //     // Store the token in the database with the user's ID and expiration timestamp
-//     DB::table('password_reset_tokens')->insert([
-//     'email' => $email,
-//     'token' => $token,
-//     'created_at' => now(),
-// ]);
+//     
 
 $existingRecord = DB::table('password_reset_tokens')
     ->where('email', $email)
@@ -110,24 +97,5 @@ DB::table('logins')
 
     }
 }
-
-
-
-// if (!$email) {
-//         return back()->withErrors(['email' => 'Email not found']);
-//     }
-
-    
-
-
-    //     $status = Password::sendResetLink(
-    //         $request->only('email')
-    //     );
-
-    //     return $status === Password::RESET_LINK_SENT
-    //                 ? back()->with(['status' => __($status)])
-    //                 : back()->withErrors(['email' => __($status)]);
-    // }
-
 
 

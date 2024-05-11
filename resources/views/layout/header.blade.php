@@ -47,8 +47,14 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="profile">Profile</a></li>
-                  <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here in future</a></li>
+               
+                   <li><a class="dropdown-item" href="#">Update your details</a></li> 
+
+                   
+
+                      <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+
+                  {{-- <li><a class="dropdown-item" href="#">Something else here in future</a></li> --}}
                 </ul>
               </div>
             </div>
