@@ -8,26 +8,38 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
+use App\Models\EmailContent;
 
 class RegistrationConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $studentKaNamm;
+    public $studentName;
     public $studentKiId;
-
+    public $emailContent;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($studentKaNamm,$studentKiId)
+    public function __construct($studentKaNamm,$studentKiId,$emailContent)
     {
-        $this->studentKaNamm= $studentKaNamm;
+        $this->studentName= $studentKaNamm;
         $this->studentKiId = $studentKiId;
+        $this->emailContent= $emailContent;
     }
     public function content():Content{
-        return new Content(view:'emails.registrationEmailMessage');
+         // Retrieve email content from the database
+         //$emailContent = EmailContent::where('type', 'welcome')->first();
+         return new Content(
+            view: 'emails.registrationEmailMessage',
+            with: [
+                'studentName' => $this->studentName,
+                'body' => $this->emailContent->body,
+                'link' => $this->emailContent->link,
+                'conclusion' => $this->emailContent->conclusion,
+            ]
+        );
     }
 
     /**
@@ -35,5 +47,5 @@ class RegistrationConfirmation extends Mailable
      *
      * @return $this
      */
-    
+
 }

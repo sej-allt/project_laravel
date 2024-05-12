@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="flex justify-center my-2 min-w-80">
+    <div class="flex justify-center min-w-80">
         <div class="bg-red-50 text-red-800 px-4 py-2 rounded relative min-h-2 text-sm w-4/5" role="alert">
             <div class="text-red-800 flex space-x-2 sm">
                 <svg xmlns="http://www.w3.org/2000/svg" fill = "#fee2e2" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-5 h-5">
