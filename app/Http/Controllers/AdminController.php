@@ -17,12 +17,12 @@ class AdminController extends Controller
         return view('Admin_home');
     }
 
-    
+
     public function bulk()
     {
         return view('admin');
     }
-    
+
     public function IndividualReg()
     {
         return view('individualReg');
@@ -41,74 +41,10 @@ class AdminController extends Controller
             'marks12' => 'required',
         ]);
 
+        // try {
+        // Create CSV file and get the filename
+        $csvFilename = $this->createCSVFile($request);
         try {
-            // Create CSV file and get the filename
-            $csvFilename = $this->createCSVFile($request);
-
-            // Redirect to the uploadCSVindi method with the CSV filename
-            return $this->uploadCSVindi($csvFilename);
-        } catch (\Exception $e) {
-            // An error occurred during CSV file creation
-            // Log the error or handle it appropriately
-            return redirect()->route('admin')->with('status', 'error');
-        }
-    }
-
-    private function createCSVFile(Request $request)
-{
-    // Form the header row for CSV
-    $header = [
-        'student_id', 'email', 'student_name', 'father_name', 'phone_number',
-        'campus', 'type', 'qddress', 'marks10', 'marks12'
-    ];
-    for ($i = 1; $i <= 10; $i++) {
-        $header[] =  'sem'.$i;
-    }
-
-    // Form the data row for CSV
-    $data = [
-        $request->student_id,
-        $request->email,
-        $request->name,
-        $request->father_name, // Assuming father_name might be optional
-        $request->phn_no,
-        $request->campus,
-        $request->type, // Assuming type might be optional
-        $request->address , // Assuming address might be optional
-        $request->marks10,
-        $request->marks12,
-    ];
-    for ($i = 1; $i <= 10; $i++) {
-        $semesterGradeKey = 'sem'.$i ;
-        $data[] = $request->has($semesterGradeKey) ? $request->$semesterGradeKey : '';
-    }
-
-    // Combine header and data rows
-    $rows = [$header, $data];
-
-    // Serialize each row into CSV-compatible strings
-    $csvRows = array_map(function($row) {
-        return implode(',', $row);
-    }, $rows);
-
-    // Combine rows with end of line character
-    $csvData = implode(PHP_EOL, $csvRows);
-
-    // Save CSV data to a temporary file
-    $temporary = 'temp_' . uniqid() . '.csv';
-    Storage::put($temporary, $csvData);
-
-    return $temporary;
-}
-
-
-    private function uploadCSVindi($csvFilename)
-    {
-        try {
-            // Move the temporary CSV file to storage folder
-            Storage::move($csvFilename, 'csv-files/' . $csvFilename);
-
-            // As the file is uploaded, seed it to the database
             Artisan::call('db:seed', [
                 '--class' => 'studentseeder',
                 '--force' => true,
@@ -121,7 +57,64 @@ class AdminController extends Controller
         }
     }
 
+    private function createCSVFile(Request $request)
+    {
+        // Form the header row for CSV
+        $header = [
+            'student_id',
+            'email',
+            'student_name',
+            'father_name',
+            'phone_number',
+            'campus',
+            'type',
+            'qddress',
+            'marks10',
+            'marks12'
+        ];
+        for ($i = 1; $i <= 10; $i++) {
+            $header[] = 'sem' . $i;
+        }
 
+        // Form the data row for CSV
+        $data = [
+            $request->student_id,
+            $request->email,
+            $request->name,
+            $request->father_name, // Assuming father_name might be optional
+            $request->phn_no,
+            $request->campus,
+            $request->type, // Assuming type might be optional
+            $request->address, // Assuming address might be optional
+            $request->marks10,
+            $request->marks12,
+        ];
+        for ($i = 1; $i <= 10; $i++) {
+            $semesterGradeKey = 'sem' . $i;
+            $data[] = $request->has($semesterGradeKey) ? $request->$semesterGradeKey : '';
+        }
+
+        // Combine header and data rows
+        $rows = [$header, $data];
+
+        // Serialize each row into CSV-compatible strings
+        $csvRows = array_map(function ($row) {
+            return implode(',', $row);
+        }, $rows);
+
+        // Combine rows with end of line character
+        $csvData = implode(PHP_EOL, $csvRows);
+
+        // Generate a unique filename
+        $filename = 'csvFile.csv'; // You can use a dynamic filename if needed
+
+        // Create the CSV file
+        $filePath = storage_path('app/public/csv-files/' . $filename);
+        file_put_contents($filePath, $csvData);
+
+        // Return the file path
+        return $filePath;
+    }
 
     public function uploadCSV(Request $request)
     {
@@ -167,7 +160,7 @@ class AdminController extends Controller
     {
         // Generate the email message and call Mailable Class
         // Send the email
-        Mail::to($student_email)->send(new RegistrationConfirmation($student_name,$student_id));
+        Mail::to($student_email)->send(new RegistrationConfirmation($student_name, $student_id));
     }
 
     // this function will read uploaded csv file and then send registration successful message to newly registered students at their gmail
@@ -175,7 +168,7 @@ class AdminController extends Controller
     // student name, student ID, gmail ID, password
     public function sendMailsToNewRegistrations()
     {
-        $file=fopen(storage_path("app\public\csv-files\csvFile.csv"),'r');
+        $file = fopen(storage_path("app\public\csv-files\csvFile.csv"), 'r');
 
         // skipping head row( which contains column names)
         fgetcsv($file);
@@ -184,8 +177,8 @@ class AdminController extends Controller
         while (($row = fgetcsv($file)) !== false) {
             // adding data to email_ids
             $std_Mail_id = $row[1];
-            $std_name= $row[2];
-            $std_uid= $row[0];
+            $std_name = $row[2];
+            $std_uid = $row[0];
             $this->generateAndSendMail($std_uid, $std_name, $std_Mail_id);
         }
         fclose($file);  //closing file handler        
