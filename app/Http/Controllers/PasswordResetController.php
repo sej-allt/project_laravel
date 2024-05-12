@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use App\Models\Email;
 use App\Models\User;
-// use App\Http\Mail;
+use App\Models\EmailContent;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 
@@ -104,8 +104,8 @@ $newttl=1;
 DB::table('logins')
     ->where('stu_id', $stu_id) // Assuming email is the unique identifier for a user
     ->update(['TTL' => $newttl]);
-
-    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token));
+    $emailContent = EmailContent::where('type', 'password reset')->first();
+    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token,$emailContent));
 
 
     }

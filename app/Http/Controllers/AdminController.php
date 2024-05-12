@@ -8,6 +8,7 @@ use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\EmailContent;
 
 class AdminController extends Controller
 {
@@ -59,7 +60,8 @@ class AdminController extends Controller
     {
         // Generate the email message and call Mailable Class
         // Send the email
-        Mail::to($student_email)->send(new RegistrationConfirmation($student_name,$student_id));
+        $emailContent = EmailContent::where('type', 'welcome')->first();
+        Mail::to($student_email)->send(new RegistrationConfirmation($student_name,$student_id,$emailContent));
     }
 
     // this function will read uploaded csv file and then send registration successful message to newly registered students at their gmail
