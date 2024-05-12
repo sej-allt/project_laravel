@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
-
+use App\Http\Controllers\EmailController;
 
 
 Route::get('/', function () {
@@ -47,5 +47,6 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
 
  Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
-
+ Route::get('/email/create', [EmailContentController::class, 'create'])->name('email.create');
+ Route::post('/email/store', [EmailContentController::class, 'store'])->name('email.store');
 

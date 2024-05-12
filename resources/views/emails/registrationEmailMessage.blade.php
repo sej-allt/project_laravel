@@ -6,15 +6,13 @@
     <title>Registration Confirmation</title>
 </head>
 <body>
-    <p>CONGRATULATIONS <h3>{{$studentKaNamm}}</h3></p>
-    <p>You have been successfully registered to GRAPHIC ERA ERP PORTAL.</p>
-    <p>Your STUDENT ID is:{{$studentKiId}} </p>
-    <p>TO LOGIN:</p>
-    <ol>
-        <li>GO TO <a href="https://erp.geu.ac.in">https://erp.geu.ac.in</a></li>
-        <li>YOUR STUDENT ID IS YOUR USERNAME.</li>
-        <li>CLICK ON FORGOT PASSWORD TO RESET AND SAVE YOUR NEW PASSWORD.</li>
-    </ol>
-    <p>WELCOME ABOARD.</p>
+    <p>Dear {{$studentName}},</p>
+    <p>{!! nl2br(preg_replace('/\R/', "\n", $body)) !!}</p>
+    @if ($link)
+        <p><a href="{{ $link }}" target="_blank">Click here to visit</a></p>
+    @endif
+    @if($conclusion)
+        <p>{!! nl2br(preg_replace('/\R/', "\n", $conclusion)) !!}</p>
+    @endif
 </body>
 </html>
