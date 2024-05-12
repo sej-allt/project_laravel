@@ -14,7 +14,7 @@ use App\Models\Email;
 use App\Models\User;
 // use App\Http\Mail;
 use Illuminate\Support\Str;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 use App\Mail\resetPasswordEmail;
 
@@ -40,7 +40,7 @@ class PasswordResetController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-       
+
         $request->validate(['email' => 'required|email']);
         $user = DB::table('emails')->where('email', $request->email)->first();
         // dd($user);
@@ -54,7 +54,7 @@ class PasswordResetController extends Controller
         $email = $user->email;
         $stu_id = $user->stu_id;
         // echo $email;
-        //is email pe mail bhejdo 
+        //is email pe mail bhejdo
         //  Mail::to($email)->send(new resetPasswordEmail($student_id));
 
         //   DB::table('logins')
@@ -62,13 +62,13 @@ class PasswordResetController extends Controller
         //     ->update(['TTL' => 1]);
 
         $token = Str::random(32); // Adjust the length as needed
-    
+
     // Retrieve TTL value from the logins table
     $ttl = DB::table('logins')->where('stu_id', $stu_id)->value('TTL');
 
     // Define the expiration timestamp based on TTL
     $expiration = now()->addMinutes(2); // Adjust as needed
-    
+
 //     // Store the token in the database with the user's ID and expiration timestamp
 //     DB::table('password_reset_tokens')->insert([
 //     'email' => $email,
@@ -89,7 +89,7 @@ if ($existingRecord) {
             'created_at' => now(),
         ]);
 
-} 
+}
 else {
     // If no record exists, insert a new record
     DB::table('password_reset_tokens')->insert([
@@ -117,7 +117,7 @@ DB::table('logins')
 //         return back()->withErrors(['email' => 'Email not found']);
 //     }
 
-    
+
 
 
     //     $status = Password::sendResetLink(

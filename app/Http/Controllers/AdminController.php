@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
@@ -80,6 +80,6 @@ class AdminController extends Controller
             $std_uid= $row[0];
             $this->generateAndSendMail($std_uid, $std_name, $std_Mail_id);
         }
-        fclose($file);  //closing file handler        
+        fclose($file);  //closing file handler
     }
 }
