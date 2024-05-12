@@ -30,62 +30,97 @@ class AdminController extends Controller
 
     public function IndividualRegistration(Request $request)
     {
-        $request->validate(
-            [
-                'student_id'=>'required',
-                'email'=>'required|email',
-                'name'=>'required',
-                'phn_no'=>'required',
-                'campus'=>'required',
-                'marks10'=>'required',
-                'marks12'=>'required',
-            ]
-        );
+        // Validate the incoming request data
+        $request->validate([
+            'student_id' => 'required',
+            'email' => 'required|email',
+            'name' => 'required',
+            'phn_no' => 'required',
+            'campus' => 'required',
+            'marks10' => 'required',
+            'marks12' => 'required',
+        ]);
 
-        // // Convert form data to CSV format
-        // $csvData = implode(',', [
-        //     $request->student_id,
-        //     $request->email,
-        //     $request->name,
-        //     $request->father_name,
-        //     $request->phone_number,
-        //     $request->campus,
-        //     $request->type,
-        //     $request->address,
-        //     $request->makrs10,
-        //     $request->marks12,
-        // ]);
+        try {
+            // Create CSV file and get the filename
+            $csvFilename = $this->createCSVFile($request);
 
-        // // Save CSV data to a temporary file
-        // $temporary = 'temp_' . uniqid() . '.csv';
-        // Storage::put($temporary, $csvData);
-
-        // try {
-        //     // Run the seeder with the CSV file
-        //     Artisan::call('db:seed', [
-        //         '--class' => 'studentseeder',
-        //         '--file' => $temporary,
-        //         '--force' => true,
-        //     ]);
-
-        //     // Optionally, perform any additional actions
-        //     $this->sendMailsToNewRegistrations();
-
-        //     // Redirect back to the form with a success message
-        //     return redirect()->back()->with('status', 'success');
-        // } catch (\Exception $e) {
-        //     // An error occurred during seeding or additional actions
-        //     // Log the error or handle it appropriately
-        //     return redirect()->back()->with('status', 'error');
-        // } finally {
-        //     // Delete the temporary CSV file
-        //     Storage::delete($temporary);
-        // }
-
-        echo"<pre>";
-        print_r($request->all());
+            // Redirect to the uploadCSVindi method with the CSV filename
+            return $this->uploadCSVindi($csvFilename);
+        } catch (\Exception $e) {
+            // An error occurred during CSV file creation
+            // Log the error or handle it appropriately
+            return redirect()->route('admin')->with('status', 'error');
+        }
     }
-    
+
+    private function createCSVFile(Request $request)
+{
+    // Form the header row for CSV
+    $header = [
+        'student_id', 'email', 'student_name', 'father_name', 'phone_number',
+        'campus', 'type', 'qddress', 'marks10', 'marks12'
+    ];
+    for ($i = 1; $i <= 10; $i++) {
+        $header[] =  'sem'.$i;
+    }
+
+    // Form the data row for CSV
+    $data = [
+        $request->student_id,
+        $request->email,
+        $request->name,
+        $request->father_name, // Assuming father_name might be optional
+        $request->phn_no,
+        $request->campus,
+        $request->type, // Assuming type might be optional
+        $request->address , // Assuming address might be optional
+        $request->marks10,
+        $request->marks12,
+    ];
+    for ($i = 1; $i <= 10; $i++) {
+        $semesterGradeKey = 'sem'.$i ;
+        $data[] = $request->has($semesterGradeKey) ? $request->$semesterGradeKey : '';
+    }
+
+    // Combine header and data rows
+    $rows = [$header, $data];
+
+    // Serialize each row into CSV-compatible strings
+    $csvRows = array_map(function($row) {
+        return implode(',', $row);
+    }, $rows);
+
+    // Combine rows with end of line character
+    $csvData = implode(PHP_EOL, $csvRows);
+
+    // Save CSV data to a temporary file
+    $temporary = 'temp_' . uniqid() . '.csv';
+    Storage::put($temporary, $csvData);
+
+    return $temporary;
+}
+
+
+    private function uploadCSVindi($csvFilename)
+    {
+        try {
+            // Move the temporary CSV file to storage folder
+            Storage::move($csvFilename, 'csv-files/' . $csvFilename);
+
+            // As the file is uploaded, seed it to the database
+            Artisan::call('db:seed', [
+                '--class' => 'studentseeder',
+                '--force' => true,
+            ]);
+            $this->sendMailsToNewRegistrations();
+            return redirect()->route('admin')->with('status', 'success');
+        } catch (\Exception $e) {
+            // An error occurred during file storage or seeding
+            return redirect()->route('admin')->with('status', 'error');
+        }
+    }
+
 
 
     public function uploadCSV(Request $request)
