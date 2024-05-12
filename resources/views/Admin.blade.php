@@ -28,26 +28,37 @@
     
   </head>
   <body>
+   {{-- {{ dd(session()->has('errors'))}} --}}
     @if(session()->has('errors'))
-     <?php
-     $errors = session('errors');
-    //  dd($errors);
-      ?>
-      <div class="flex justify-center my-2">
 
-   <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative " role="alert">
-    <ul>
-      @foreach ($errors as $error )
-      <li>{{$error}}</li> 
-      @endforeach
-    </ul>
-  </div> 
-</div>
+    <?php
+      $errors = session('errors');
+      $size = count($errors);
+    //  dd($errors);
+    ?>
+      @extends((session()->has('errors'))?'partials.erroralert':'partials.sample')
+    
+      @section('head')
+        There are {{$size}} errors in the uploaded file :
+      @endsection
+      @section('content')
+          <ul class="list-disc list-outside font-normal">
+          @foreach ($errors as $error )
+            <li>{{$error}}</li>
+          @endforeach
+          </ul>
+      @endsection
+      @section('footmessage')
+        Kindly correct the errors and refresh the page.
+      @endsection
+
     @endif
     @if (session()->has('status'))
         @if (session('status')=='success')
-            <div class="alert">success
-            </div>
+            @extends((session('status')=='success')?'partials.successalert':'partials.sample')
+            @section('head')
+              Data successfully added to the records.
+            @endsection
         @endif
     @endif
     <div class="container mt-5">

@@ -77,7 +77,7 @@ class AdminController extends Controller
             $std_uid = $row[0];
             $this->generateAndSendMail($std_uid, $std_name, $std_Mail_id);
         }
-        fclose($file);  //closing file handler        
+        fclose($file);  //closing file handler
     }
 
     //validation
