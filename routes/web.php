@@ -16,7 +16,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/file-upload',[BlogController::class,'index']);
+// Route::get('/file-upload',[BlogController::class,'index']);
+// Route::post('/store',[BlogController::class,'store']);
+//Route::get('/admin',[BlogController::class,'index']);
 Route::post('/store',[BlogController::class,'store']);
 
 
@@ -24,7 +26,8 @@ Route::post('/store',[BlogController::class,'store']);
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::post('/store',[AdminController::class,'store']);
 
 });
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin');

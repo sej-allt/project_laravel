@@ -23,6 +23,8 @@ class AdminController extends Controller
             'csvFile' => 'required|mimes:csv,txt', // Accept only CSV files
         ]);
 
+        
+
         // Retrieve the uploaded file
         $file = $request->file('csvFile');
 
@@ -46,6 +48,7 @@ class AdminController extends Controller
             // An error occurred during file storage or seeding
             return redirect()->route('admin')->with('status', 'error');
         }
+        
         return redirect()->route('admin');
     }
 
@@ -56,8 +59,8 @@ class AdminController extends Controller
 
         $request->file->move(public_path('blogs'), $filename);
 
-        $blog= new Blog;
-        $blog->title= $title;
+        $blog= new student;
+        //$blog->title= $title;
         $blog->file =$filename;
         //$progress= ...;//fetch progress
         $blog->save();
