@@ -119,7 +119,7 @@
             @csrf
             <label for="type">Type:</label>
                 <select name="type" id="type">
-                    <option value="welcome">Welcome</option>
+                    <option value="welcome">Registration Confirmation</option>
                     <option value="password reset">Forgot Password</option>
                     <!-- Add more options as needed -->
             </select>
