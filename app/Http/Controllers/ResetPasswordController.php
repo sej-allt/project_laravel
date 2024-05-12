@@ -108,7 +108,7 @@ $ttl=$us->TTL;
         // Updated the variable name to $stu_id
         DB::table('logins')
             ->where('stu_id', '=', $stu_id)
-            ->update(['password' => $request->password]);
+            ->update(['password' => md5($request->password)]);
 
             DB::table('password_reset_tokens')
         ->where('token', $token)

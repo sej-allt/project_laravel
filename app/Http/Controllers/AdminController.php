@@ -8,6 +8,7 @@ use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -21,13 +22,70 @@ class AdminController extends Controller
     {
         return view('admin');
     }
-
-
-    public function IndividualRegistration()
+    
+    public function IndividualReg()
     {
         return view('individualReg');
     }
 
+    public function IndividualRegistration(Request $request)
+    {
+        $request->validate(
+            [
+                'student_id'=>'required',
+                'email'=>'required|email',
+                'name'=>'required',
+                'phn_no'=>'required',
+                'campus'=>'required',
+                'marks10'=>'required',
+                'marks12'=>'required',
+            ]
+        );
+
+        // // Convert form data to CSV format
+        // $csvData = implode(',', [
+        //     $request->student_id,
+        //     $request->email,
+        //     $request->name,
+        //     $request->father_name,
+        //     $request->phone_number,
+        //     $request->campus,
+        //     $request->type,
+        //     $request->address,
+        //     $request->makrs10,
+        //     $request->marks12,
+        // ]);
+
+        // // Save CSV data to a temporary file
+        // $temporary = 'temp_' . uniqid() . '.csv';
+        // Storage::put($temporary, $csvData);
+
+        // try {
+        //     // Run the seeder with the CSV file
+        //     Artisan::call('db:seed', [
+        //         '--class' => 'studentseeder',
+        //         '--file' => $temporary,
+        //         '--force' => true,
+        //     ]);
+
+        //     // Optionally, perform any additional actions
+        //     $this->sendMailsToNewRegistrations();
+
+        //     // Redirect back to the form with a success message
+        //     return redirect()->back()->with('status', 'success');
+        // } catch (\Exception $e) {
+        //     // An error occurred during seeding or additional actions
+        //     // Log the error or handle it appropriately
+        //     return redirect()->back()->with('status', 'error');
+        // } finally {
+        //     // Delete the temporary CSV file
+        //     Storage::delete($temporary);
+        // }
+
+        echo"<pre>";
+        print_r($request->all());
+    }
+    
 
 
     public function uploadCSV(Request $request)

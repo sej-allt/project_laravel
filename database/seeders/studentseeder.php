@@ -15,6 +15,7 @@ class studentseeder extends Seeder
      */
     public function run(): void
     {
+
         DB::disableQueryLog();
         LazyCollection::make(function () {        //files handle memory efficient
             $filecontent = fopen(storage_path('app\public\csv-files\csvFile.csv'), 'r');
@@ -37,6 +38,11 @@ class studentseeder extends Seeder
             ->each(function (LazyCollection $chunk) {
 
                 $records = $chunk->map(function ($row) {
+                    // dd($row);
+                    if (!$row[6])
+                        $type = 0;
+                    else
+                        $type = $row[6];
                     return
                         [
                             'student_id' => $row[0],
@@ -45,28 +51,31 @@ class studentseeder extends Seeder
                             'father_name' => $row[3],
                             'phone_number' => $row[4],
                             'campus' => $row[5],
-                            'type' => $row[6]
+                            'type' => $type,
+                            'address' => $row[7],
+                            'marks10' => $row[8],
+                            'marks12' => $row[9],
+                            'sem1' => $row[10],
+                            'sem2' => $row[11],
+                            'sem3' => $row[12],
+                            'sem4' => $row[13],
+                            'sem5' => $row[14],
+                            'sem6' => $row[15],
+                            'sem7' => $row[16],
+                            'sem8' => $row[17],
+                            'sem9' => $row[18],
+                            'sem10' => $row[19],
+
                         ];
                 })->toArray();
 
-                $email_array = $chunk->map(function ($row) {
-                    return
-                        [
-                            'stu_id' => $row[0],
-                            'email' => $row[1]
-                        ];
-                })->toArray();
                 DB::table('students')->insert($records);
-                DB::table('emails')->insert($email_array);
-
 
                 $login_array = $chunk->map(function ($row) {
 
-                    $uidfr = DB::table('emails')->select('id')->where('stu_id', '=', $row[0])->first();
                     return [
-                        'uid' => $uidfr->id,
                         'stu_id' => $row[0],
-                        'password' => fake()->password(),
+                        'password' => md5($row[0]),
                         'type' => $row[6],
                         'TTL' => 0
                     ];

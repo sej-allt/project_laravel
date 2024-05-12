@@ -14,15 +14,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
+Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('individualReg');
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
-    Route::get('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
 });
 
+// Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 // routes/web.php
+
 Route::get('/forgot', function () {
     return view('auth.forgot');
 })->name('forgot');
@@ -44,7 +47,7 @@ require __DIR__ . '/auth.php';
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
 
- Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
+Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
 
 

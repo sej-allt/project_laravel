@@ -15,6 +15,7 @@
     </ul>
   </div>
   @endsection
+  
 @section('main_head')
     Welcome {{$student_name}}   
 @endsection

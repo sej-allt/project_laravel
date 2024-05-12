@@ -1,4 +1,6 @@
 @extends('layout.header')
+
+
 @section('header_content')
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,7 +33,7 @@
     <div class="alert alert-danger">
         {{ session('error') }}
     </div>
-@endif -->
+@endif
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
