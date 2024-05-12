@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\UpdateUserDataController;
 
 
 
@@ -47,5 +48,24 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
 
 Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
+// Route::get('updateName/{student_id}/{student_name}/{password}', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
 
 
+// Route::post('updateName/{student_id}/{student_name}/{password}', [UpdateUserDataController::class, 'update'])->name('updateName');
+
+
+// Show update form
+Route::get('updateName', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
+Route::post('updateName', [UpdateUserDataController::class, 'updateName'])->name('updateUserDataName');
+
+Route::get('updateEmail', [UpdateUserDataController::class, 'showUpdateEmailForm'])->name('updateEmail');
+Route::post('updateEmail', [UpdateUserDataController::class, 'updateEmail'])->name('updateUserDataEmail');
+
+Route::get('updatePhone', [UpdateUserDataController::class, 'showUpdatePhoneForm'])->name('updatePhone');
+Route::post('updatePhone', [UpdateUserDataController::class, 'updatePhone'])->name('updateUserDataPhone');
+
+Route::get('updateFatherName', [UpdateUserDataController::class, 'showUpdateFNameForm'])->name('updateFatherName');
+Route::post('updateFatherName', [UpdateUserDataController::class, 'updateFName'])->name('updateUserDataFName');
+
+Route::get('updateAddress', [UpdateUserDataController::class, 'showUpdateAdrForm'])->name('updateAddress');
+Route::post('updateAddress', [UpdateUserDataController::class, 'updateAddress'])->name('updateUserDataAddress');
