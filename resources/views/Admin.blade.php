@@ -5,8 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    
   </head>
   <body>
+    @if(session()->has('errors'))
+     <?php
+     $errors = session('errors');
+    //  dd($errors);
+      ?>
+      <div class="flex justify-center my-2">
+
+   <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative " role="alert">
+    <ul>
+      @foreach ($errors as $error )
+      <li>{{$error}}</li> 
+      @endforeach
+    </ul>
+  </div> 
+</div>
+    @endif
+    @if (session()->has('status'))
+        @if (session('status')=='success')
+            <div class="alert">success
+            </div>
+        @endif
+    @endif
     <div class="container mt-5">
       <div class = "position-absolute top-50 start-50 translate-middle">
     <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -69,32 +112,11 @@
         </div>
     </div>
     </div>
+    
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
-<!-- @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif -->
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Check the status in the response
-    const statusM = `{{ session('status') }}`;
 
-    if (statusM === 'success') {
-        // Display a pop-up alert for successful file upload
-        alert('File uploaded and seeded successfully!');
-    } else if (statusM === 'error') {
-        // Display a pop-up alert for errors
-        alert('An error occurred during file upload or seeding.');
-    }
-});
-</script>

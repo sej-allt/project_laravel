@@ -51,4 +51,5 @@ Route::post('password/update', [ResetPasswordController::class, 'update'])->name
 
 Route::get('/validateEmpty-csv', [UploadValidatorController::class, 'doValidation1'])->name('validate.csv');
 Route::get('/validateLocalDuplicate-csv', [UploadValidatorController::class, 'doValidation2']);
+Route::get('/databasedup', [UploadValidatorController::class, 'databaseDuplicacy']);
 

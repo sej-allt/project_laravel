@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\LazyCollection;
+use DB;
 
 class StudentCsvValidator
 {
@@ -96,5 +98,77 @@ class StudentCsvValidator
             return $errors;
         }
         return 'NO DUPLICATE FIELDS IN LOCAL CSV FILE';
+    }
+
+    public function duplicateFilevsDb()
+    {
+        $errors = [];
+        $rownumber = 2;
+
+
+
+        DB::disableQueryLog();
+        LazyCollection::make(function () use (&$rownumber, &$errors) {
+            //accessing file in chunks taking one row at a time through yeild 
+
+
+            $filecontent = fopen(storage_path('app\public\csv-files\csvFile.csv'), 'r');
+            while (($line = fgetcsv($filecontent, 4500)) != false) {
+
+                $datastring = implode(',', $line);
+                $row = explode(',', $datastring);
+
+                //like return
+
+                yield $row;
+
+
+
+            }
+
+            fclose($filecontent);
+        })->skip(1)
+            ->chunk(1)
+            ->each(function (LazyCollection $chunk) use (&$rownumber, &$errors) {
+
+                $error = $chunk->map(function ($row) use (&$rownumber, &$errors) {
+                    // we have $row for each chunkrow
+                    $student_id = $row[0];
+                    // echo $student_id;
+                    $email = $row[1];
+                    // echo $email . '<br>';
+                    $duplicate = DB::table('students')->where('student_id', '=', $student_id)->where('email', '=', $email)->exists();
+                    // dd($duplicate);
+                    if ($duplicate) {
+                        return ['Student with ID ' . $student_id . 'and email ' . $email . 'on row ' . $rownumber . ' already exists in University records'];
+                    }
+                    $duplicate = DB::table('students')->where('student_id', '=', $student_id)->exists();
+                    if ($duplicate) {
+                        return ['Student with ID ' . $student_id . 'on row ' . $rownumber . ' already exists in University records'];
+                    }
+                    $duplicate = DB::table('students')->where('email', '=', $email)->exists();
+                    if ($duplicate) {
+                        return ['Student with  email ' . $email . 'on row ' . $rownumber . ' already exists in University records'];
+                    }
+
+                })->flatten()->toArray();
+
+                $rownumber++;
+
+                // echo $error;
+                // dd($error);
+                $eror = implode(',', $error);
+                // echo $eror;
+                if ($eror)
+                    $errors[] = $eror;
+                // dd($errors);
+            });
+        // dd($errors);
+        if ($errors) {
+            // dd($errors);
+            return $errors;
+        } else
+            return 'all good continue seeding';
+
     }
 }
