@@ -42,7 +42,7 @@ class PasswordResetController extends Controller
     {
 
         $request->validate(['email' => 'required|email']);
-        $user = DB::table('emails')->where('email', $request->email)->first();
+        $user = DB::table('students')->where('email', $request->email)->first();
         // dd($user);
 
         // $user = User::where('email', $request->email)->first();
@@ -53,6 +53,7 @@ class PasswordResetController extends Controller
     }
         $email = $user->email;
         $stu_id = $user->stu_id;
+        $stu_name =$user->student_name;
         // echo $email;
         //is email pe mail bhejdo
         //  Mail::to($email)->send(new resetPasswordEmail($student_id));
@@ -105,7 +106,7 @@ DB::table('logins')
     ->where('stu_id', $stu_id) // Assuming email is the unique identifier for a user
     ->update(['TTL' => $newttl]);
     $emailContent = EmailContent::where('type', 'password reset')->first();
-    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token,$emailContent));
+    Mail::to($email)->send(new resetPasswordEmail($stu_name,$stu_id, $token,$emailContent));
 
 
     }
