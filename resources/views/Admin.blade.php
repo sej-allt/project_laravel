@@ -1,4 +1,8 @@
+@extends('layout.header')
 
+@section('header_content')
+    <a href="Admin_home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+@endsection
 
 
  <!doctype html>
@@ -32,44 +36,8 @@
   </head>
   <body>
   
-  @extends('layout.header')
-
-@section('header_content')
-    <a href="Admin_home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-@endsection
-   {{-- {{ dd(session()->has('errors'))}} --}}
-    @if(session()->has('errors'))
-
-    <?php
-      $errors = session('errors');
-      $size = count($errors);
-    //  dd($errors);
-    ?>
-      @extends((session()->has('errors'))?'partials.erroralert':'partials.sample')
-    
-      @section('head')
-        There are {{$size}} errors in the uploaded file :
-      @endsection
-      @section('content')
-          <ul class="list-disc list-outside font-normal">
-          @foreach ($errors as $error )
-            <li>{{$error}}</li>
-          @endforeach
-          </ul>
-      @endsection
-      @section('footmessage')
-        Kindly correct the errors and refresh the page.
-      @endsection
-
-    @endif
-    @if (session()->has('status'))
-        @if (session('status')=='success')
-            @extends((session('status')=='success')?'partials.successalert':'partials.sample')
-            @section('head')
-              Data successfully added to the records.
-            @endsection
-        @endif
-    @endif
+  
+  
 
 
 @section('main_head')
@@ -78,7 +46,39 @@
 
 
 @section('main_content')
+ {{-- {{ dd(session()->has('errors'))}} --}}
+ @if(session()->has('errors'))
 
+ <?php
+   $errors = session('errors');
+   $size = count($errors);
+ //  dd($errors);
+ ?>
+   @extends((session()->has('errors'))?'partials.erroralert':'partials.sample')
+ 
+   @section('head')
+     There are {{$size}} errors in the uploaded file :
+   @endsection
+   @section('content')
+       <ul class="list-disc list-outside font-normal">
+       @foreach ($errors as $error )
+         <li>{{$error}}</li>
+       @endforeach
+       </ul>
+   @endsection
+   @section('footmessage')
+     Kindly correct the errors and refresh the page.
+   @endsection
+
+ @endif
+ @if (session()->has('status'))
+     @if (session('status')=='success')
+         @extends((session('status')=='success')?'partials.successalert':'partials.sample')
+         @section('head')
+           Data successfully added to the records.
+         @endsection
+     @endif
+ @endif
 <div class="container mt-5">
   <div class="position-absolute top-50 start-50 translate-middle">
     <div class="flex justify-center items-center">

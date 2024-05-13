@@ -1,8 +1,43 @@
 @extends('layout.header')
+
 @section('main_head')
     Registration
 @endsection
 @section('main_content')
+
+ {{-- {{ dd(session()->has('errors'))}} --}}
+ @if(session()->has('errors'))
+
+ <?php
+   $errors = session('errors');
+   $size = count($errors);
+ //  dd($errors);
+ ?>
+   @extends((session()->has('errors'))?'partials.erroralert':'partials.sample')
+ 
+   @section('head')
+     There are {{$size}} errors in the uploaded file :
+   @endsection
+   @section('content')
+       <ul class="list-disc list-outside font-normal">
+       @foreach ($errors as $error )
+         <li>{{$error}}</li>
+       @endforeach
+       </ul>
+   @endsection
+   @section('footmessage')
+     Kindly correct the errors and refresh the page.
+   @endsection
+
+ @endif
+ @if (session()->has('status'))
+     @if (session('status')=='success')
+         @extends((session('status')=='success')?'partials.successalert':'partials.sample')
+         @section('head')
+           Data successfully added to the records.
+         @endsection
+     @endif
+ @endif
 <form action="{{url('/individualReg')}}/" method="POST">
   @csrf
   <div class="mb-3">

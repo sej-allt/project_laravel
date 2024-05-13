@@ -50,17 +50,11 @@ class AdminController extends Controller
         // try {
         // Create CSV file and get the filename
         $csvFilename = $this->createCSVFile($request);
-        try {
-            Artisan::call('db:seed', [
-                '--class' => 'studentseeder',
-                '--force' => true,
-            ]);
-            $this->sendMailsToNewRegistrations();
-            return redirect()->route('admin')->with('status', 'success');
-        } catch (\Exception $e) {
-            // An error occurred during file storage or seeding
-            return redirect()->route('admin')->with('status', 'error');
-        }
+        $this->doValidation1();
+        if (is_array($this->errorOccured))
+            return redirect()->route('individualReg')->with('errors', $this->errorOccured);
+        else
+            return redirect()->route('individualReg')->with('status', 'success');
     }
 
     private function createCSVFile(Request $request)
@@ -143,9 +137,9 @@ class AdminController extends Controller
 
         $this->doValidation1();
         if (is_array($this->errorOccured))
-            return redirect()->route('admin')->with('errors', $this->errorOccured);
+            return redirect()->route('bulk')->with('errors', $this->errorOccured);
         else
-            return redirect()->route('admin')->with('status', 'success');
+            return redirect()->route('bulk')->with('status', 'success');
     }
 
     //deletecsv
