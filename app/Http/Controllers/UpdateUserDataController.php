@@ -29,6 +29,10 @@ class UpdateUserDataController extends Controller
     {
         return view('updateUserDetails.updateAddress');
     }
+    public function showUpdateMarksForm()
+    {
+        return view('updateUserDetails.updateMarks');
+    }
 
     public function updateName(Request $request)
     {
@@ -213,8 +217,88 @@ class UpdateUserDataController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'Address updated successfully');
     }
+ 
+    public function updateMarks(Request $request)
+    {
+        // Validate the request data if necessary
+
+        // Retrieve the approval ID and status from the request
+        $approvalId = $request->input('approval_id');
+        $status = $request->input('status');
+
+        // Find the update approval record by ID
+       $approval = DB::table('update_approvals')->where('id', $approvalId)->first();
 
 
+        // Check if the approval record exists
+        if ($approval) {
+
+            DB::table('update_approvals')
+   
+    ->where('id', $approvalId)
+    ->update(['delete' => 1]);
+            // If the status is 'approve', update the marks in the students table
+            if ($status === 'approve') 
+            {
+                    
+                 DB::table('update_approvals')
+            ->where('id', $approvalId)
+             ->where('delete',1)
+            ->update(['approve/disapprove'=>1]);
+
+            $updatewhat = DB::table('update_approvals')
+    ->where('id', $approvalId)
+    ->where('delete', 1)
+    ->value('update_type');
+    
+
+    $studentId = DB::table('update_approvals')
+    ->where('id', $approvalId)
+    ->where('delete', 1)
+    ->value('stu_id');
+    
+
+    $marks=DB::table('update_approvals')
+    ->where('id', $approvalId)
+    ->where('delete', 1)
+     
+    ->value($updatewhat);
+
+                DB::table('students')
+            ->where('student_id', $studentId)
+            ->update([$updatewhat => $marks]);
+ return redirect()->route('updateMarks')->with('success', 'Update approved');
+
+
+
+
+                
+
+               
+            }
+
+           
+           
+           
+        
+
+         else{
+                 DB::table('update_approvals')
+                ->where('id', $approvalId)
+                ->where('delete',1)
+                ->update(['approve/disapprove'=>1]);
+
+                return redirect()->route('updateMarks')->with('error', 'Update disapproved');
+
+            }
+
+        // Redirect back or to any other route after handling the approval
+       return redirect()->route('updateMarks')->with('success', 'Update approved/disapproved successfully');
+
+    }
 }
 
 
+
+
+}

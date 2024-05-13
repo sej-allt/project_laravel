@@ -1,23 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
-</head>
-<body>
-    
-    <p>Click on this link to Reset Password</p>
-       
-   
-      <li>GO TO <a href="{{ route('reset-password', ['stu_id' => $stu_id, 'token' => $token]) }}">Click to change password</a></li>
-
-       
-    </ol>
-   
-</body>
-</html> --}}
-
 
 <!DOCTYPE html>
 <html lang="en">

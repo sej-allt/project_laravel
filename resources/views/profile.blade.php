@@ -1,4 +1,36 @@
 @extends('layout.header')
+
+
+@section('dropdown')
+
+
+    <!-- Profile dropdown -->
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="profile">Profile</a></li>
+
+                  
+                     <li><a class="dropdown-item" href="{{ route('updateName') }}">Update Name</a></li>  
+                     <li><a class="dropdown-item" href="{{ route('updateEmail') }}">Update Email</a></li>   
+                    <li><a class="dropdown-item" href="{{ route('updatePhone') }}">Update Phone Number</a></li>  
+                      <li><a class="dropdown-item" href="{{ route('updateFatherName') }}">Update Father's Name</a></li>  
+                       
+                    <li><a class="dropdown-item" href="{{ route('updateAddress') }}">Update Address</a></li>   
+                       <li><a class="dropdown-item" href="{{ route('updateMarks') }}">Update Marks</a></li>  
+                      <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li> 
+
+                  {{-- <li><a class="dropdown-item" href="#">Something else here in future</a></li> --}}
+                </ul>
+              </div>
+
+
+
+  @endsection
+
+
 @section("main_head")
     Profile
 @endsection
