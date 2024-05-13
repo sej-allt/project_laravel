@@ -262,6 +262,14 @@
 
 @extends('layout.header')
 
+@section('header_content')
+    <a href="Admin_home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+@endsection
+
+@section('main_head')
+    Requests
+@endsection
+
 @section('main_content')
 <!-- On tables -->
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white dark:bg-gray-800">
@@ -308,4 +316,15 @@
         </tbody>
     </table>
 </div>
+@endsection
+
+
+
+@section('logout')
+    <div class="relative"> <!-- Added margin-right for spacing -->
+                <a href="{{ route('logout') }}" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+                  <span class="sr-only">Logout</span>
+                  <img class="w-8 h-8 rounded-full" src="https://toppng.com/uploads/preview/free-login-logout-black-icon-116420824011bgykrtibc.png" alt="user photo">
+                </a>
+              </div>
 @endsection
