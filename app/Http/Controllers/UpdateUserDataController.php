@@ -244,7 +244,7 @@ class UpdateUserDataController extends Controller
                  DB::table('update_approvals')
             ->where('id', $approvalId)
              ->where('delete',1)
-            ->update(['approve/disapprove'=>1]);
+            ->update(['approve/disapprove'=>1,'updated_at' => now()]);
 
             $updatewhat = DB::table('update_approvals')
     ->where('id', $approvalId)
@@ -269,31 +269,21 @@ class UpdateUserDataController extends Controller
             ->update([$updatewhat => $marks]);
  return redirect()->route('updateMarks')->with('success', 'Update approved');
 
-
-
-
-                
-
                
             }
-
-           
-           
-           
         
 
          else{
                  DB::table('update_approvals')
                 ->where('id', $approvalId)
                 ->where('delete',1)
-                ->update(['approve/disapprove'=>1]);
+                ->update(['approve/disapprove'=>0,'updated_at' => now()]);
 
                 return redirect()->route('updateMarks')->with('error', 'Update disapproved');
 
             }
 
-        // Redirect back or to any other route after handling the approval
-       return redirect()->route('updateMarks')->with('success', 'Update approved/disapproved successfully');
+       
 
     }
 }

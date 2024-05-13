@@ -99,8 +99,10 @@ class AdminRequestController extends Controller
     public function index()
     {
         // Retrieve data from the update_approvals table using the UpdateApproval model
-       $data = DB::table('update_approvals')->get();
-        
+       $data = DB::table('update_approvals')
+            ->where('delete', 0)
+            ->get();
+
         // Pass the data to the 'viewRequests' view
         return view('viewRequests', compact('data'));
     }
