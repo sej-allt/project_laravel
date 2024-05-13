@@ -115,7 +115,6 @@ class AdminController extends Controller
         // Return the file path
         return $filePath;
     }
-
     public function uploadCSV(Request $request)
     {
         // Validate the request to ensure a file is uploaded
