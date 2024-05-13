@@ -58,11 +58,21 @@
                   <li><a class="dropdown-item" href="#">Something else here in future</a></li>
                 </ul>
               </div> --}}
+
+              @yield('logout')
+              {{-- <div class="relative"> <!-- Added margin-right for spacing -->
+                <a href="{{ route('logout') }}" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+                  <span class="sr-only">Logout</span>
+                  <img class="w-8 h-8 rounded-full" src="https://toppng.com/uploads/preview/free-login-logout-black-icon-116420824011bgykrtibc.png" alt="user photo">
+                </a>
+              </div> --}}
             </div>
           </div>
         </div>
       </div>
-  
+      
+
+
       <!-- Mobile menu, show/hide based on menu state. -->
       <div class="md:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
