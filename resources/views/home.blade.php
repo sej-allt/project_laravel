@@ -19,7 +19,17 @@
     <!-- Profile dropdown -->
     
     <div class="flex">
-      <!-- Dropdown menu -->
+      
+      <div class="ml-4 flex items-center md:ml-6">
+        <a href="{{route('viewRequests')}}" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+            <span class="absolute -inset-1.5"></span>
+            <span class="sr-only">View notifications</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+        </a>
+    </div>
+    
       <div class="relative mr-4"> <!-- Added margin-right for spacing -->
         <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
           <span class="sr-only">Open user menu</span>
@@ -69,6 +79,8 @@
         </a>
       </div>
     </div>
+
+
     
     <script>
     document.getElementById('dropdownUserAvatarButton').addEventListener('click', function() {
