@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
 
 
@@ -15,20 +16,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
+Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
+Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('individualReg');
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
-// Anshul ne comment krvaya
-
-// Route::group(['middleware' => 'admin'], function () {
-//     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-
-// });
-
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
+});
 
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 // routes/web.php
+
 Route::get('/forgot', function () {
     return view('auth.forgot');
 })->name('forgot');
@@ -50,15 +49,14 @@ require __DIR__ . '/auth.php';
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
 Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'reset'])->name('reset-password');
 
+
 Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
-// Route::get('updateName/{student_id}/{student_name}/{password}', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
+Route::get('/email/create', [EmailContentController::class, 'create'])->name('email.create');
+Route::post('/email/store', [EmailContentController::class, 'store'])->name('email.store');
 
 
-// Route::post('updateName/{student_id}/{student_name}/{password}', [UpdateUserDataController::class, 'update'])->name('updateName');
 
-
-// Show update form
 Route::get('updateName', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
 Route::post('updateName', [UpdateUserDataController::class, 'updateName'])->name('updateUserDataName');
 
@@ -82,17 +80,6 @@ Route::post('updateMarks', [UpdateUserDataController::class, 'updateMarks'])->na
 //Route::get('reqAdmin', [AdminRequestController::class, 'show'])->name('reqAdminShow');
 Route::post('reqAdmin', [AdminRequestController::class, 'updatereqtable'])->name('reqAdmin');
 
-//Anshul k routes
-
-
-Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
-Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('individualReg');
-
-
-Route::group(['middleware' => 'admin'], function () {
-    Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
-    Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
-});
 
 
 Route::get('/viewRequests', function () {

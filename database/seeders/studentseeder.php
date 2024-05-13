@@ -72,11 +72,15 @@ class studentseeder extends Seeder
                 DB::table('students')->insert($records);
 
                 $login_array = $chunk->map(function ($row) {
+                    if (!$row[6])
+                        $type = 0;
+                    else
+                        $type = $row[6];
 
                     return [
                         'stu_id' => $row[0],
                         'password' => md5($row[0]),
-                        'type' => $row[6],
+                        'type' => $type,
                         'TTL' => 0
                     ];
                 })->toArray();

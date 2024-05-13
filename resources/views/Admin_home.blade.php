@@ -9,7 +9,7 @@
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="admin">Bulk Upload</a></li>
     <li><a class="dropdown-item" href="individualReg">Individual Registration</a></li>
-    <li><a class="dropdown-item" href="#">Something else here in future</a></li>
+    <li><a class="dropdown-item" href="{{route('email.create')}}">Update email</a></li>
   </ul>
 </div>
 @endsection

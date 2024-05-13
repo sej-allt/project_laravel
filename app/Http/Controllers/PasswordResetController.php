@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use App\Models\Email;
 use App\Models\User;
-// use App\Http\Mail;
+use App\Models\EmailContent;
 use Illuminate\Support\Str;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 use App\Mail\resetPasswordEmail;
 
@@ -40,7 +40,7 @@ class PasswordResetController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-       
+
         $request->validate(['email' => 'required|email']);
         $user = DB::table('students')->where('email', $request->email)->first();
         
@@ -53,7 +53,7 @@ class PasswordResetController extends Controller
         $stu_id = $user->student_id;
        
         $token = Str::random(32); // Adjust the length as needed
-    
+
     // Retrieve TTL value from the logins table
     $ttl = DB::table('logins')->where('stu_id', $stu_id)->value('TTL');
 
@@ -76,7 +76,7 @@ if ($existingRecord) {
             'created_at' => now(),
         ]);
 
-} 
+}
 else {
     // If no record exists, insert a new record
     DB::table('password_reset_tokens')->insert([
@@ -91,8 +91,8 @@ $newttl=15;
 DB::table('logins')
     ->where('stu_id', $stu_id) // Assuming email is the unique identifier for a user
     ->update(['TTL' => $newttl]);
-
-    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token));
+    $emailContent = EmailContent::where('type', 'password reset')->first();
+    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token,$emailContent));
 
 
     }
