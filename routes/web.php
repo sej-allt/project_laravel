@@ -8,22 +8,26 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\UpdateUserDataController;
+
 
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
-
+Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
+Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('individualReg');
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-
+    Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
 });
+
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 // routes/web.php
+
 Route::get('/forgot', function () {
     return view('auth.forgot');
 })->name('forgot');
@@ -48,12 +52,38 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
 
 Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
-
-
-// Route::get('/validateEmpty-csv', [UploadValidatorController::class, 'doValidation1'])->name('validate.csv');
-// Route::get('/validateLocalDuplicate-csv', [UploadValidatorController::class, 'doValidation2']);
-// Route::get('/databasedup', [UploadValidatorController::class, 'databaseDuplicacy']);
-
 Route::get('/email/create', [EmailContentController::class, 'create'])->name('email.create');
 Route::post('/email/store', [EmailContentController::class, 'store'])->name('email.store');
 
+
+
+Route::get('updateName', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
+Route::post('updateName', [UpdateUserDataController::class, 'updateName'])->name('updateUserDataName');
+
+Route::get('updateEmail', [UpdateUserDataController::class, 'showUpdateEmailForm'])->name('updateEmail');
+Route::post('updateEmail', [UpdateUserDataController::class, 'updateEmail'])->name('updateUserDataEmail');
+
+Route::get('updatePhone', [UpdateUserDataController::class, 'showUpdatePhoneForm'])->name('updatePhone');
+Route::post('updatePhone', [UpdateUserDataController::class, 'updatePhone'])->name('updateUserDataPhone');
+
+Route::get('updateFatherName', [UpdateUserDataController::class, 'showUpdateFNameForm'])->name('updateFatherName');
+Route::post('updateFatherName', [UpdateUserDataController::class, 'updateFName'])->name('updateUserDataFName');
+
+Route::get('updateAddress', [UpdateUserDataController::class, 'showUpdateAdrForm'])->name('updateAddress');
+Route::post('updateAddress', [UpdateUserDataController::class, 'updateAddress'])->name('updateUserDataAddress');
+
+
+Route::get('updateMarks', [UpdateUserDataController::class, 'showUpdateMarksForm'])->name('updateMarks');
+Route::post('updateMarks', [UpdateUserDataController::class, 'updateMarks'])->name('updateMarks');
+
+
+//Route::get('reqAdmin', [AdminRequestController::class, 'show'])->name('reqAdminShow');
+Route::post('reqAdmin', [AdminRequestController::class, 'updatereqtable'])->name('reqAdmin');
+
+
+
+Route::get('/viewRequests', function () {
+    return view('viewRequests');
+})->name('viewRequests');
+
+Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('viewRequests');
