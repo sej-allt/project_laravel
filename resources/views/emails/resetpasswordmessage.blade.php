@@ -7,7 +7,7 @@
     <title>Reset Password Email</title>
 </head>
 <body>
-        <p>Dear Recepeint,</p>
+        <p>Dear {{$stu_name}},</p>
         <p>Your University Roll No. is:{{$stu_id}} </p>
         <p>{!! nl2br(preg_replace('/\R/', "\n", $body)) !!}</p>
       <li>GO TO <a href="{{ route('reset-password', ['stu_id' => $stu_id, 'token' => $token]) }}">click to change password</a></li>

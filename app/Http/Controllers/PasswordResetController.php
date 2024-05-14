@@ -51,7 +51,9 @@ class PasswordResetController extends Controller
     }
         $email = $user->email;
         $stu_id = $user->student_id;
-       
+
+        $stu_name = $user->student_name;
+
         $token = Str::random(32); // Adjust the length as needed
 
     // Retrieve TTL value from the logins table
@@ -92,7 +94,7 @@ DB::table('logins')
     ->where('stu_id', $stu_id) // Assuming email is the unique identifier for a user
     ->update(['TTL' => $newttl]);
     $emailContent = EmailContent::where('type', 'password reset')->first();
-    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token,$emailContent));
+    Mail::to($email)->send(new resetPasswordEmail($stu_name,$stu_id, $token,$emailContent));
 
 
     }
