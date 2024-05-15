@@ -40,12 +40,13 @@ class EmailContentController extends Controller
 {
     $type = $request->input('type');
     $email = EmailContent::where('type', $type)->first();
-
-    return response()->json([
+    // dd($email);
+    return (response()->json([
         'subject' => $email->subject,
         'body' => $email->body,
         'link' => $email->link,
         'conclusion' => $email->conclusion,
-    ]);
+    ]));
+
 }
 }

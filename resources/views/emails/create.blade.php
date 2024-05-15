@@ -119,6 +119,7 @@
             @csrf
             <label for="type">Type:</label>
                 <select name="type" id="type">
+                    <option value="" disabled selected>Please select an option</option>
                     <option value="welcome">Registration Confirmation</option>
                     <option value="password reset">Forgot Password</option>
                     <!-- Add more options as needed -->
@@ -141,18 +142,26 @@
         </form>
         <script>
     // Fetch email content based on selected type
+
     document.getElementById('type').addEventListener('change', function () {
-        var selectedType = this.value;
-        fetch('{{ route("email.get-content") }}?type=' + selectedType)
-            .then(response => response.json())
-            .then(data => {  console.log("hello");
-                document.getElementById('subject').value = "qwert";
-                document.getElementById('body').value = data.body;
-                document.getElementById('link').value = data.link;
-                document.getElementById('conclusion').value = data.conclusion;
-            })
-            .catch(error => console.error('Error:', error));
-    });
+    var selectedType = this.value;
+    fetch("{{ route('email.get-content') }}?type=" + selectedType)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            document.getElementById('subject').value = data.subject;
+            document.getElementById('body').value = data.body;
+            document.getElementById('link').value = data.link;
+            document.getElementById('conclusion').value = data.conclusion;
+        })
+        .catch(error => console.error('Error:', error));
+});
+
 </script>
     </div>
 </body>
