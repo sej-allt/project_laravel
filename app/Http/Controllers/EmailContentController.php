@@ -35,4 +35,18 @@ class EmailContentController extends Controller
 
         return redirect()->route('email.create')->with('success', 'Email content saved successfully!');
     }
+
+    public function getEmailContent(Request $request)
+{
+    $type = $request->input('type');
+    $email = EmailContent::where('type', $type)->first();
+    // dd($email);
+    return (response()->json([
+        'subject' => $email->subject,
+        'body' => $email->body,
+        'link' => $email->link,
+        'conclusion' => $email->conclusion,
+    ]));
+
+}
 }
