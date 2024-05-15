@@ -39,43 +39,47 @@ class studentseeder extends Seeder
 
                 $records = $chunk->map(function ($row) {
                     // dd($row);
-                    if (!$row[6])
+                    if (!$row[8])
                         $type = 0;
                     else
-                        $type = $row[6];
+                        $type = $row[8];
                     return
                         [
                             'student_id' => $row[0],
                             'email' => $row[1],
                             'student_name' => $row[2],
-                            'father_name' => $row[3],
-                            'phone_number' => $row[4],
-                            'campus' => $row[5],
+                            'course' => $row[3],
+                            'semester' => $row[4],
+                            'father_name' => $row[5],
+                            'phone_number' => $row[6],
+                            'campus' => $row[7],
                             'type' => $type,
-                            'address' => $row[7],
-                            'marks10' => $row[8],
-                            'marks12' => $row[9],
-                            'sem1' => $row[10],
-                            'sem2' => $row[11],
-                            'sem3' => $row[12],
-                            'sem4' => $row[13],
-                            'sem5' => $row[14],
-                            'sem6' => $row[15],
-                            'sem7' => $row[16],
-                            'sem8' => $row[17],
-                            'sem9' => $row[18],
-                            'sem10' => $row[19],
-
+                            'address' => $row[9],
+                            'marks10' => $row[10],
+                            'marks12' => $row[11],
+                            'sem1' => $row[12],
+                            'sem2' => $row[13],
+                            'sem3' => $row[14],
+                            'sem4' => $row[15],
+                            'sem5' => $row[16],
+                            'sem6' => $row[17],
+                            'sem7' => $row[18],
+                            'sem8' => $row[19],
+                            'sem9' => $row[20],
+                            'sem10' => $row[21],
+                            'cgpa' => $row[22],
+                            'created_at' => now(),
+                            'updated_at' => now()
                         ];
                 })->toArray();
 
                 DB::table('students')->insert($records);
 
                 $login_array = $chunk->map(function ($row) {
-                    if (!$row[6])
+                    if (!$row[8])
                         $type = 0;
                     else
-                        $type = $row[6];
+                        $type = $row[8];
 
                     return [
                         'stu_id' => $row[0],

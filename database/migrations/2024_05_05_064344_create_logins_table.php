@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->integer('type');
             $table->boolean('TTL');
             $table->foreign('stu_id')->references('student_id')->on('students')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

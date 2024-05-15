@@ -15,10 +15,12 @@ return new class extends Migration {
             $table->unsignedBigInteger('student_id')->unique();
             $table->string('email')->unique()->nullable(false);
             $table->string('student_name')->nullable(false);
+            $table->string('course')->nullable(false)->default('-');
+            $table->string('semester')->nullable(false)->default('-');
             $table->string('father_name')->nullable();
             $table->unsignedBigInteger('phone_number')->nullable(false);
             $table->string('campus')->nullable(false);
-            $table->integer('type')->nullable();
+            $table->integer('type')->nullable()->default(0);
             $table->string('address')->nullable();
             $table->string('marks10')->nullable();
             $table->string('marks12')->nullable();
@@ -32,6 +34,7 @@ return new class extends Migration {
             $table->string('sem8')->nullable();
             $table->string('sem9')->nullable();
             $table->string('sem10')->nullable();
+            $table->string('cgpa')->nullable();
             $table->timestamps();
         });
     }
