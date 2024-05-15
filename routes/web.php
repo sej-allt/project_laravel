@@ -58,6 +58,10 @@ Route::post('/email/store', [EmailContentController::class, 'store'])->name('ema
 
 
 
+Route::get('profile', function () {
+    return view('profile');
+})->name('profile');
+
 Route::get('updateName', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
 Route::post('updateName', [UpdateUserDataController::class, 'updateName'])->name('updateUserDataName');
 

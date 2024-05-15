@@ -87,15 +87,15 @@
               </button>
   
 
-                {{-- tester --}}
+              <!-- Profile dropdown -->
                 <div class="relative inline-block">
                   <button id = "dropdown" data-dropdown-toggle="dropdownHover" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" type = "button">
                     <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                   </button>
-                  <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-full left-0 mt-0">
+                  <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 absolute top-full left-0 mt-0">
                       <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdown"> <!-- Changed text color to dark -->
                         <li>
-                          <a href="{{route('logout')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Logout</a> <!-- Removed text color for hover state -->
+                          <a href="{{route('logout')}}" class="block px-2 py-1 font-medium text-center text-sm hover:underline dark:hover:underline">Logout</a> <!-- Removed text color for hover state -->
                         </li>
                         
                         {{-- <li>
@@ -104,8 +104,6 @@
                       </ul>
                     </div>
               </div>
-
-              <!-- Profile dropdown -->
               
             </div>
           </div>
