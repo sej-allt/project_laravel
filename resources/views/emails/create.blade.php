@@ -139,6 +139,23 @@
 
             <button type="submit">Submit</button>
         </form>
+        <script>
+    // Fetch email content based on selected type
+    document.getElementById('type').addEventListener('change', function () {
+        var selectedType = this.value;
+        fetch('{{ route("email.get-content") }}?type=' + selectedType)
+            .then(response => response.json())
+            .then(data => {  console.log("hello");
+                document.getElementById('subject').value = "qwert";
+                document.getElementById('body').value = data.body;
+                document.getElementById('link').value = data.link;
+                document.getElementById('conclusion').value = data.conclusion;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
     </div>
 </body>
 </html>
+
+

@@ -87,3 +87,5 @@ Route::get('/viewRequests', function () {
 })->name('viewRequests');
 
 Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('viewRequests');
+
+Route::get('/get-email-content', 'EmailContentController@getEmailContent')->name('email.get-content');
