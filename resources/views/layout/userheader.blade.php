@@ -104,7 +104,7 @@
                   <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 absolute top-full left-0 mt-0">
                       <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdown"> <!-- Changed text color to dark -->
                         <li>
-                          <a href='profile' class="block px-2 py-1 font-medium text-center text-sm hover:underline dark:hover:underline">Profile</a> <!-- Removed text color for hover state -->
+                          <a href='#' class="block px-2 py-1 font-medium text-center text-sm hover:underline dark:hover:underline">Profile</a> <!-- Removed text color for hover state -->
                         </li>
                         <li>
                           <a href="{{route('logout')}}" class="block px-2 py-1 font-medium text-center text-sm hover:underline dark:hover:underline">Logout</a> <!-- Removed text color for hover state -->
