@@ -7,14 +7,21 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\FilterController;
+
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
 
 
+Route::get('/progress', 'ProgressController@getProgress')->name('progress');
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+
+Route::post('/store',[BlogController::class,'store']);
+
 
 Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
 Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('individualReg');
@@ -31,6 +38,11 @@ Route::group(['middleware' => 'admin'], function () {
 Route::get('/forgot', function () {
     return view('auth.forgot');
 })->name('forgot');
+
+//Route::get(url: '/', action: [FilterController::class,'index']);
+
+Route::get('/', [FilterController::class, 'index']);
+
 
 //  Route::get('/forgot',[AuthController::class,'forgot_password'])->name('forgot');
 
