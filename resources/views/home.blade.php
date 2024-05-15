@@ -8,12 +8,12 @@
 @endsection --}}
 
 
-@extends('layout.header')
-@section('header_content')
+@extends('layout.userheader')
+{{-- @section('header_content')
     <a href="home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-@endsection
+@endsection --}}
 
-@section('dropdown')
+{{-- @section('dropdown')
 
 
     <!-- Profile dropdown -->
@@ -41,7 +41,7 @@
           <div class="px-4 py-3 text-sm font-semibold text-black dark:text-white"> <!-- Changed text color to black and made it bold -->
             <div>{{$student_name}} </div>
             {{-- <div class="font-medium truncate">{{email}} </div> --}}
-          </div>
+          {{-- </div>
           <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdownUserAvatarButton"> <!-- Changed text color to black -->
             <li>
               <a href="profile" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
@@ -69,25 +69,25 @@
             <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-black hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white dark:hover:text-white">Sign out</a> <!-- Changed default text color to black and hover text color to white -->
           </div>
         </div>
-      </div>
+      </div> --}}
     
       <!-- Logout button -->
-      <div class="relative"> <!-- Added margin-right for spacing -->
+      {{-- <div class="relative"> <!-- Added margin-right for spacing -->
         <a href="{{ route('logout') }}" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
           <span class="sr-only">Logout</span>
           <img class="w-8 h-8 rounded-full" src="https://toppng.com/uploads/preview/free-login-logout-black-icon-116420824011bgykrtibc.png" alt="user photo">
         </a>
       </div>
-    </div>
+    </div> --}}
 
 
     
-    <script>
+    {{-- <script>
     document.getElementById('dropdownUserAvatarButton').addEventListener('click', function() {
       var dropdownMenu = document.getElementById('dropdownAvatar');
       dropdownMenu.classList.toggle('hidden');
     });
-  </script>
+  </script> --}}
     
     {{-- <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -109,7 +109,7 @@
                   {{-- <li><a class="dropdown-item" href="#">Something else here in future</a></li> 
                 </ul>
               </div> --}}
-  @endsection
+  {{-- @endsection
   
 @section('main_head')
     Welcome {{$student_name}}   
@@ -117,4 +117,4 @@
 @section('main_content')
 {!!"<h1>Content</h1>"!!}
 
-@endsection
+@endsection --}}
