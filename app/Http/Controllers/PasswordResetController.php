@@ -43,9 +43,7 @@ class PasswordResetController extends Controller
 
         $request->validate(['email' => 'required|email']);
         $user = DB::table('students')->where('email', $request->email)->first();
-        // dd($user);
-
-        // $user = User::where('email', $request->email)->first();
+        
 
     // If user is not found, display error message
     if (!$user) {
@@ -53,13 +51,8 @@ class PasswordResetController extends Controller
     }
         $email = $user->email;
         $stu_id = $user->student_id;
-        // echo $email;
-        //is email pe mail bhejdo
-        //  Mail::to($email)->send(new resetPasswordEmail($student_id));
 
-        //   DB::table('logins')
-        //     ->where('stu_id', '=', $student_id)
-        //     ->update(['TTL' => 1]);
+        $stu_name = $user->student_name;
 
         $token = Str::random(32); // Adjust the length as needed
 
@@ -67,14 +60,10 @@ class PasswordResetController extends Controller
     $ttl = DB::table('logins')->where('stu_id', $stu_id)->value('TTL');
 
     // Define the expiration timestamp based on TTL
-    $expiration = now()->addMinutes(2); // Adjust as needed
-
+    $expiration = now()->addMinutes(15); // Adjust as needed
+    
 //     // Store the token in the database with the user's ID and expiration timestamp
-//     DB::table('password_reset_tokens')->insert([
-//     'email' => $email,
-//     'token' => $token,
-//     'created_at' => now(),
-// ]);
+//     
 
 $existingRecord = DB::table('password_reset_tokens')
     ->where('email', $email)
@@ -98,36 +87,17 @@ else {
         'created_at' => now(),
     ]);
 }
-$newttl=1;
+$newttl=15;
 
 // Update the TTL in the logins table
 DB::table('logins')
     ->where('stu_id', $stu_id) // Assuming email is the unique identifier for a user
     ->update(['TTL' => $newttl]);
     $emailContent = EmailContent::where('type', 'password reset')->first();
-    Mail::to($email)->send(new resetPasswordEmail($stu_id, $token,$emailContent));
+    Mail::to($email)->send(new resetPasswordEmail($stu_name,$stu_id, $token,$emailContent));
 
 
     }
 }
-
-
-
-// if (!$email) {
-//         return back()->withErrors(['email' => 'Email not found']);
-//     }
-
-
-
-
-    //     $status = Password::sendResetLink(
-    //         $request->only('email')
-    //     );
-
-    //     return $status === Password::RESET_LINK_SENT
-    //                 ? back()->with(['status' => __($status)])
-    //                 : back()->withErrors(['email' => __($status)]);
-    // }
-
 
 
