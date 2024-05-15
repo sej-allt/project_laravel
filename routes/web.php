@@ -23,6 +23,8 @@ Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
+    Route::get('/email/create', [EmailContentController::class, 'create'])->name('email.create');
+    Route::post('/email/store', [EmailContentController::class, 'store'])->name('email.store');
 });
 
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin');
@@ -52,8 +54,7 @@ Route::post('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 
 
 Route::post('password/update', [ResetPasswordController::class, 'update'])->name('password.update');
 
-Route::get('/email/create', [EmailContentController::class, 'create'])->name('email.create');
-Route::post('/email/store', [EmailContentController::class, 'store'])->name('email.store');
+
 
 
 
