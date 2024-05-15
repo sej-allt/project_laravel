@@ -1,11 +1,7 @@
-@extends('layout.header')
-
-@section('header_content')
-    <a href="home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-@endsection
+@extends('layout.userheader')
 
 
-@section("main_head")
+@section("header")
 Update Phone Number
 @endsection
 

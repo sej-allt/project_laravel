@@ -35,40 +35,49 @@
   <body class="h-full">
   ```
 -->
-<div class="h-screen bg-gray-300">
-  <div class = "w-full bg-gray-700 rounded-b-xl">
+<div class="min-h-screen bg-gray-300">
+  <div class = "w-full bg-gray-700 rounded-b-[40px]">
     <nav class="bg-gray-800 m-auto rounded-lg w-4/5 h-12 underline">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-12 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0 ">
-            <a class = "text-white font-medium text-medium"href="{{route('admin')}}">Admin</a>
+            <a class = "text-white font-medium text-medium"href="{{route('admin')}}">@yield('name')</a>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                 <a href="{{route('admin')}}" class="{{Request::is('Admin_home')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
+                 <a href="{{route('home')}}" class="{{Request::is('home')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
                 
                 <div class="relative inline-block">
-                    <button id = "dropdown" data-dropdown-toggle="dropdownHover" class="{{Request::is('admin')||Request::is('individualReg')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 h-13 text-sm font-medium " type = "button">User Registration</button>
+                    <button id = "dropdown" data-dropdown-toggle="dropdownHover" class="{{Request::is('updateName')||Request::is('updateEmail')||Request::is('updateAddress')||Request::is('updatePhone')||Request::is('updateName')||Request::is('updateMarks')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 h-13 text-sm font-medium " type = "button">Update Details</button>
                     <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-full left-0 mt-0">
                         <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdown"> <!-- Changed text color to dark -->
                           <li>
-                            <a href="{{route('bulk')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Bulk Upload</a> <!-- Removed text color for hover state -->
+                            <a href="{{route('updateName')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update Name</a> <!-- Removed text color for hover state -->
                           </li>
                           <li>
-                            <a href="{{route('individualReg')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Individual Registration</a> <!-- Removed text color for hover state -->
+                            <a href="{{route('updateEmail')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update Email</a> <!-- Removed text color for hover state -->
                           </li>
-                          {{-- <li>
-                            <a href="{{route('email.create')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update email</a> <!-- Removed text color for hover state -->
-                          </li> --}}
+                          <li>
+                            <a href="{{route('updatePhone')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update Phone Number</a> <!-- Removed text color for hover state -->
+                          </li>
+                          <li>
+                            <a href="{{route('updateFatherName')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update Father's Name</a> <!-- Removed text color for hover state -->
+                          </li>
+                          <li>
+                            <a href="{{route('updateAddress')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update Address</a> <!-- Removed text color for hover state -->
+                          </li>
+                          <li>
+                            <a href="{{route('updateMarks')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update Marks</a> <!-- Removed text color for hover state -->
+                          </li>
                         </ul>
                       </div>
                 </div>
-
-                <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Add Event</a>
-                <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Student List</a>
-                <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a>
+{{-- 
+                <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Add Event</a>
+                <a href="{{route('list')}}" class="{{Request::is('list')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Student List</a>
+                <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a> --}}
                
                 @yield('navbar')
 
@@ -78,27 +87,36 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
-              <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <button type="button"  class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">View notifications</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                 </svg>
               </button>
-  
+
+
               <!-- Profile dropdown -->
-              <div class="relative ml-3">
-                <div>
-                  <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                    <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">Open user menu</span>
+                <div class="relative inline-block">
+                  <button id = "dropdown" data-dropdown-toggle="dropdownHover" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" type = "button">
                     <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                   </button>
-                </div>
-  
-                {{-- dropdown aana chahiye --}}
-                
+                  <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 absolute top-full left-0 mt-0">
+                      <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdown"> <!-- Changed text color to dark -->
+                        <li>
+                          <a href='#i' class="block px-2 py-1 font-medium text-center text-sm hover:underline dark:hover:underline">Profile</a> <!-- Removed text color for hover state -->
+                        </li>
+                        <li>
+                          <a href="{{route('logout')}}" class="block px-2 py-1 font-medium text-center text-sm hover:underline dark:hover:underline">Logout</a> <!-- Removed text color for hover state -->
+                        </li>
+                        
+                        {{-- <li>
+                          <a href="{{route('email.create')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update email</a> <!-- Removed text color for hover state -->
+                        </li> --}}
+                      </ul>
+                    </div>
               </div>
+              
             </div>
           </div>
          
@@ -114,8 +132,7 @@
     </header>
     @yield('cards')
   </div>
-  </div>
-   
+ 
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         @yield('main_content')

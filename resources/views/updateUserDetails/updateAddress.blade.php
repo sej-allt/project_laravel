@@ -1,16 +1,14 @@
-@extends('layout.header')
-
-@section('header_content')
-    <a href="home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-@endsection
+@extends('layout.userheader')
 
 
-@section("main_head")
+
+@section("header")
     Update Address
 @endsection
 
 @section("main_content")
-<body class="bg-white">
+
+<body>
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         {{-- <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Update Address</h2>
