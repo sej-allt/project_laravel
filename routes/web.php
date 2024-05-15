@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FilterController;
 
 
 Route::get('/progress', 'ProgressController@getProgress')->name('progress');
@@ -35,6 +35,11 @@ Route::post('/store',[AdminController::class,'store']);
 Route::get('/forgot', function () {
     return view('auth.forgot');
 })->name('forgot');
+
+//Route::get(url: '/', action: [FilterController::class,'index']);
+
+Route::get('/', [FilterController::class, 'index']);
+
 
 //  Route::get('/forgot',[AuthController::class,'forgot_password'])->name('forgot');
 
