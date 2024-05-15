@@ -1,4 +1,4 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootsrap.min.css" rel="stylesheet" id="">
+{{-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootsrap.min.css" rel="stylesheet" id="">
 <script src= "//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome">
 
@@ -72,4 +72,4 @@
           
 
 
-      
+       --}}
