@@ -1,46 +1,14 @@
-@extends('layout.header')
-
-@section('header_content')
-    <a href="Admin_home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-@endsection
+@extends('layout.adminheader')
 
 
- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              clifford: '#da373d',
-            }
-          }
-        }
-      }
-    </script>
-    <style type="text/tailwindcss">
-      @layer utilities {
-        .content-auto {
-          content-visibility: auto;
-        }
-      }
-    </style>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
-    
-  </head>
-  <body>
+
+
   
   
   
 
 
-@section('main_head')
+@section('header')
     Bulk Upload
 @endsection
 
@@ -144,8 +112,7 @@
 </div>
 
 @endsection
-</body>
-</html>
+
 
 
 

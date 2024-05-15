@@ -1,6 +1,6 @@
-@extends('layout.header')
+@extends('layout.adminheader')
 
-@section('main_head')
+@section('header')
     Registration
 @endsection
 @section('main_content')
@@ -38,14 +38,14 @@
          @endsection
      @endif
  @endif
-<form action="{{url('/individualReg')}}/" method="POST">
+<form action="{{url('/individualReg')}}/" class = "w-2/5 mx-auto" method="POST">
   @csrf
   <div class="mb-3">
-    <div class="relative">
-      <label for="studentId" class="form-label">Student ID</label>
-      <input type="text" class="form-control" name="student_id" id="studentId" value="{{old('student_id')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
-    </div>
+      <div class="relative">
+        <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
+        <label for="studentId" class="form-label left-1 px-1 mx-2">Student ID</label>
+        <input type="text" class="form-control" name="student_id" id="studentId" value="{{old('student_id')}}">
+
     <span class='text-danger' style='color: red;'>
       @error('student_id')
         {{$message}}
@@ -54,9 +54,9 @@
   </div>
   <div class="mb-3">
     <div class="relative">
-      <label for="exampleInputEmail" class="form-label">Email address</label>
+      <label for="exampleInputEmail" class="form-label left-1 px-1 mx-2">Email address</label>
       <input type="email" class="form-control" name="email" id="exampleInputEmail" aria-describedby="emailHelp" value="{{old('email')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
     </div>
     <span class='text-danger' style='color: red;'>
       @error('email')
@@ -66,9 +66,9 @@
   </div>
   <div class="mb-3">
     <div class="relative">
-      <label for="studentName" class="form-label">Student Name</label>
+      <label for="studentName" class="form-label left-1 px-1 mx-2">Student Name</label>
       <input type="text" class="form-control" name="name" id="studentName" value="{{old('name')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
     </div>
     <span class='text-danger' style='color: red;'>
       @error('name')
@@ -82,9 +82,9 @@
   </div>
   <div class="mb-3">
     <div class="relative">
-      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <label for="phoneNumber" class="form-label left-1 px-1 mx-2">Phone Number</label>
       <input type="tel" class="form-control" name="phn_no" id="phoneNumber" value="{{old('phn_no')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
     </div>
     <span class='text-danger' style='color: red;'>
       @error('phn_no')
@@ -94,9 +94,9 @@
   </div>
   <div class="mb-3">
     <div class="relative">
-      <label for="campus" class="form-label">Campus</label>
+      <label for="campus" class="form-label left-1 px-1 mx-2">Campus</label>
       <input type="text" class="form-control" name="campus" id="campus" value="{{old('campus')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
     </div>
     <span class='text-danger' style='color: red;'>
       @error('campus')
@@ -110,9 +110,9 @@
   </div>
   <div class="mb-3">
     <div class="relative">
-      <label for="10thGrade" class="form-label">10th Grade</label>
+      <label for="10thGrade" class="form-label left-1 px-1 mx-2">10th Grade</label>
       <input type="text" class="form-control" name="marks10" id="10thGrade" value="{{old('marks10')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
     </div>
     <span class='text-danger' style='color: red;'>
       @error('marks10')
@@ -122,9 +122,9 @@
   </div>
   <div class="mb-3">
     <div class="relative">
-      <label for="12thGrade" class="form-label">12th Grade</label>
+      <label for="12thGrade" class="form-label left-1 px-1 mx-2">12th Grade</label>
       <input type="text" class="form-control" name="marks12" id="12thGrade" value="{{old('marks12')}}">
-      <span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
     </div>
     <span class='text-danger' style='color: red;'>
       @error('marks12')
@@ -136,7 +136,7 @@
     {{-- <div id="semesterFields">
       <!-- JavaScript will dynamically add semester fields here -->
     </div>
-    <label for="semester" class="form-label">Select Semester</label>
+    <label for="semester" class="form-label left-1 px-1 mx-2">Select Semester</label>
     <select id="semester" class="form-select mb-3" onchange="addSemesterFields()">
       <option value="1">Semester 1</option>
       <option value="2">Semester 2</option>
@@ -152,7 +152,7 @@
     </select> --}}
     
     {{-- <div class="mb-3">
-      <label for="semester_grade" class="form-label">Select Semester and Enter Grade</label>
+      <label for="semester_grade" class="form-label left-1 px-1 mx-2">Select Semester and Enter Grade</label>
       <select class="form-select" id="semester_grade" name="semester_grade">
           <option value="">Select Semester and Enter Grade</option>
           @for ($i = 1; $i <= 10; $i++)
@@ -220,9 +220,9 @@
                 // Create input field for the entered grade
                 var inputField = '<div class="mb-3">';
                 inputField += '<div class="relative">';
-                inputField += '<label for="semester' + semester + 'Grade" class="form-label">Semester ' + semester + ' Grade</label>';
+                inputField += '<label for="semester' + semester + 'Grade" class="form-label left-1 px-1 mx-2">Semester ' + semester + ' Grade</label>';
                 inputField += '<input type="text" class="form-control" name="semester' + semester + 'Grade" id="semester' + semester + 'Grade" value="' + grade + '">';
-                inputField += '<span class="absolute top-0 right-0 mt-1 mr-2 text-red-500">*</span>';
+                inputField += '<span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>';
                 inputField += '</div>';
                 inputField += '</div>';
 

@@ -1,3 +1,8 @@
+@extends('layout.adminheader')
+@section('header')
+Email Formatter
+@endsection
+@section('main_content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +69,7 @@
             height: 150px;
         }
 
-        button {
+        #emailbutton {
             background-color: #28a745;
             color: #fff;
             border: none;
@@ -137,8 +142,9 @@
             <label for="conclusion">Conclusion:</label>
             <textarea name="conclusion" id="conclusion"></textarea>
 
-            <button type="submit">Submit</button>
+            <button id = "emailbutton" type="submit">Submit</button>
         </form>
     </div>
 </body>
 </html>
+@endsection
