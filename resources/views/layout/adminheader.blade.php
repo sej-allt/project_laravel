@@ -35,8 +35,8 @@
   <body class="h-full">
   ```
 -->
-<div class="h-screen bg-gray-300">
-  <div class = "w-full bg-gray-700 rounded-b-xl">
+<div class="min-h-screen bg-gray-300">
+  <div class = "w-full bg-gray-700 rounded-b-[40px]">
     <nav class="bg-gray-800 m-auto rounded-lg w-4/5 h-12 underline">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-12 items-center justify-between">
@@ -47,7 +47,7 @@
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                 <a href="{{route('admin')}}" class="{{Request::is('Admin_home')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
+                 <a href="{{route('admin')}}" class="{{Request::is('Admin_home')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
                 
                 <div class="relative inline-block">
                     <button id = "dropdown" data-dropdown-toggle="dropdownHover" class="{{Request::is('admin')||Request::is('individualReg')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 h-13 text-sm font-medium " type = "button">User Registration</button>
@@ -66,9 +66,9 @@
                       </div>
                 </div>
 
-                <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Add Event</a>
-                <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Student List</a>
-                <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a>
+                <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Add Event</a>
+                <a href="{{route('list')}}" class="{{Request::is('list')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Student List</a>
+                <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a>
                
                 @yield('navbar')
 
@@ -78,7 +78,7 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
-              <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <button type="button"  class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">View notifications</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -86,19 +86,27 @@
                 </svg>
               </button>
   
-              <!-- Profile dropdown -->
-              <div class="relative ml-3">
-                <div>
-                  <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                    <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">Open user menu</span>
+
+                {{-- tester --}}
+                <div class="relative inline-block">
+                  <button id = "dropdown" data-dropdown-toggle="dropdownHover" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" type = "button">
                     <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                   </button>
-                </div>
-  
-                {{-- dropdown aana chahiye --}}
-                
+                  <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-full left-0 mt-0">
+                      <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdown"> <!-- Changed text color to dark -->
+                        <li>
+                          <a href="{{route('logout')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Logout</a> <!-- Removed text color for hover state -->
+                        </li>
+                        
+                        {{-- <li>
+                          <a href="{{route('email.create')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update email</a> <!-- Removed text color for hover state -->
+                        </li> --}}
+                      </ul>
+                    </div>
               </div>
+
+              <!-- Profile dropdown -->
+              
             </div>
           </div>
          
@@ -114,8 +122,7 @@
     </header>
     @yield('cards')
   </div>
-  </div>
-   
+ 
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         @yield('main_content')
@@ -126,6 +133,10 @@
     /* Show dropdown menu on hover */
     #dropdown:hover + #dropdownHover,
     #dropdownHover:hover{
+      display: block;
+    }
+    #user-menu-button:hover + #usermenuhover,
+    #usermenuhover:hover{
       display: block;
     }
     /* #dropdown:active + #dropdownHover,

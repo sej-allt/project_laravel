@@ -27,8 +27,11 @@ Email Formatter
         }
 
         h2 {
-            margin-top: 0;
+            margin-top:0 ;
             color: #333;
+            font-weight: 700;
+            margin-bottom: 4px;
+            
         }
 
         label {
@@ -40,7 +43,7 @@ Email Formatter
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 12px;
             box-sizing: border-box;
             font-size: 16px;
             outline: none; /* Remove default outline */
@@ -53,6 +56,7 @@ Email Formatter
         select option[selected] {
             background-color: #007bff; /* Background color of selected option */
             color: #fff; /* Text color of selected option */
+
         }
 
         input[type="text"],
@@ -61,25 +65,25 @@ Email Formatter
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 12px;
             box-sizing: border-box;
         }
 
         textarea {
-            height: 150px;
+            height: 70px;
         }
 
         #emailbutton {
-            background-color: #28a745;
+            /* background-color: #28a745; */
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 10px 50px;
+            border-radius: 20px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color:#218838;
+        #emailbutton:hover {
+            /* background-color:#218838; */
         }
 
         .alert {
@@ -102,7 +106,7 @@ Email Formatter
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-0 rounded-[20px] shadow">
         <h2>Create Email Content</h2>
         @if(session('success'))
             <div class="alert alert-success">
@@ -119,7 +123,7 @@ Email Formatter
                 </ul>
             </div>
         @endif
-
+        <div class="">
         <form method="POST" action="{{ route('email.store') }}">
             @csrf
             <label for="type">Type:</label>
@@ -142,8 +146,9 @@ Email Formatter
             <label for="conclusion">Conclusion:</label>
             <textarea name="conclusion" id="conclusion"></textarea>
 
-            <button id = "emailbutton" type="submit">Submit</button>
+            <div class = "flex justify-center"><button class=" bg-gray-700 hover:bg-gray-800 px-5 py-2.5 tracking-wide " id = "emailbutton" type="submit">Submit</button></div>
         </form>
+    </div>
     </div>
 </body>
 </html>

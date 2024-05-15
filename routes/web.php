@@ -10,6 +10,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
 
+require __DIR__ . '/adminroutes.php';
 
 
 Route::get('/', function () {
