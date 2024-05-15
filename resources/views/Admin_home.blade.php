@@ -1,34 +1,7 @@
-@extends('layout.header')
+@extends('layout.adminheader')
 
 
-@section('header_content')
-
-
-<!-- Button with hover dropdown -->
-<div class="relative inline-block">
-    <button id="dropdownHoverButton" class="text-white bg-gray-900 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-blue-800" type="button">
-    Registration
-    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-    </svg>
-  </button>
-
-  <!-- Dropdown menu -->
-  <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-full left-0 mt-1">
-    <ul class="py-2 text-sm text-black dark:text-white" aria-labelledby="dropdownHoverButton"> <!-- Changed text color to dark -->
-      <li>
-        <a href="admin" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Bulk Upload</a> <!-- Removed text color for hover state -->
-      </li>
-      <li>
-        <a href="individualReg" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Individual Registration</a> <!-- Removed text color for hover state -->
-      </li>
-      <li>
-        <a href="{{route('email.create')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update email</a> <!-- Removed text color for hover state -->
-      </li>
-    </ul>
-  </div>
-</div>
-
+{{-- 
 <style>
   /* Show dropdown menu on hover */
   #dropdownHoverButton:hover + #dropdownHover,
@@ -36,7 +9,7 @@
     display: block;
   }
 </style>
-    
+     --}}
 
 
 {{-- <div class="dropdown">
@@ -49,13 +22,15 @@
     <li><a class="dropdown-item" href="{{route('email.create')}}">Update email</a></li>
   </ul>
 </div> --}}
+@section('cards')
+  @include('partials.card')
 @endsection
 
-@section('main_head')
+@section('header')
     Admin   
 @endsection
 
-
+{{-- 
 @section('notification')
 {{-- <div class="ml-4 flex items-center md:ml-6">
               <button type="button" href="#" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -66,7 +41,7 @@
                 </svg>
               </button> --}}
 
-
+{{-- 
               <div class="ml-4 flex items-center md:ml-6">
     <a href="{{route('viewRequests')}}" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
         <span class="absolute -inset-1.5"></span>
@@ -76,11 +51,11 @@
         </svg>
     </a>
 </div>
-@endsection
+@endsection --}} 
 
 
 
-
+{{-- 
 
 
 
@@ -110,4 +85,4 @@ document.addEventListener("DOMContentLoaded", function() {
         alert('An error occurred during file upload or seeding.');
     }
 });
-</script>
+</script> --}}

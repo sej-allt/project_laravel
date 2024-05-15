@@ -18,6 +18,7 @@ class adminseeder extends Seeder
             'student_id' => 1000,
             'email' => 'admin@college.in',
             'student_name' => 'admin',
+            'type' => 1,
             'campus' => 'geu',
             'phone_number' => 9999999
         ];
