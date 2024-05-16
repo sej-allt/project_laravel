@@ -50,7 +50,7 @@
 <div class="container mt-5">
   <div class="position-absolute top-50 start-50 translate-middle">
     <div class="flex justify-center items-center">
-      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+      <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" data-bs-toggle="modal" data-bs-target="#exampleModal">BULK DATA UPLOAD </button>
     </div>
   </div>
 {{-- <div><a href="{{route('logout')}}"><button type="button" class="btn btn-outline-success my-2 mx-4 btn-sm px-4">log-out</button></a></div> --}}
@@ -64,13 +64,13 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-        <a href="http://localhost:8000/data-template.csv" class="btn btn-success" download="template.csv">
+        <a href="http://localhost:8000/data-template.csv" class="btn bg-gray-600" download="template.csv">
                     Download CSV Template
         </a>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload file</button>
+    <button type="button" class="btn bg-gray-800 text-white  hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3 text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload file</button>
   </div>
 </div>
 </div>
