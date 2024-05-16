@@ -15,20 +15,54 @@ class AdminRequestController extends Controller
     //     return view('updateUserDetails.updateMarks', compact('message'));
     // }
 
-    public function  updatereqtable(Request $request)
+    public function store(Request $request)
+
     {
-             $validatedData = $request->validate([
-            'student_id' => 'required',
-            'class' => 'required',
-            'new_marks' => 'required',
-            'password' => 'required',
-        ]);
 
+{
+    $request->validate([
+        'class' => 'required',
+        'new_marks' => 'required',
+        'pdf_document' => 'required|file|mimes:pdf|max:10240', // Max file size is 10MB
+    ]);
 
-         $studentId = $request->input('student_id');
+    $file = $request->file('pdf_document');
+    $fileName = $file->getClientOriginalName();
+    $filePath = $file->storeAs('pdf_documents', $fileName, 'public');
+    // Store the uploaded file
+   // $filePath = $request->file('pdf_document')->store('pdf_documents');
+
+    // Create a new UpdateApproval instance and store it in the database
+    // UpdateApproval::create([
+    //     'class' => $request->class,
+    //     'new_marks' => $request->new_marks,
+    //     'file_path' => $filePath,
+    // ]);
+
+//     return redirect()->back()->with('success', 'File uploaded and record created successfully.');
+// }
+
+    //     $request->validate([
+    //     'pdf_document' => 'required|file|mimes:pdf', // Example validation rules
+    // ]);
+
+        //      $validatedData = $request->validate([
+        //     //'student_id' => 'required',
+        //     'class' => 'required',
+        //     'new_marks' => 'required',
+        //     //'password' => 'required',
+        // ]);
+  $studentId = session('student_id');
+
+        // $studentId = $request->input('student_id');
         $class = $request->input('class');
          $new_marks = $request->input('new_marks');
-        $password = $request->input('password');
+        //$password = $request->input('password');
+
+        $storagePath = 'storage/app/public/markspdf files';
+        $filename = 'marks.pdf'; 
+
+        $path = $file->storeAs('markspdf', $filename, 'public');
 
         $user=DB::table('logins')
         ->where('stu_id',$studentId)
@@ -37,11 +71,7 @@ class AdminRequestController extends Controller
         {
             return redirect()->back()->with('error', 'User not found');
         }
-        if($user->password !=md5($password))
-        {
-            return redirect()->back()->with('error', 'Incorrect Password');
-
-        }
+       
 
           $columnName = 'marks10'; // Initialize column name variable
             
@@ -87,6 +117,8 @@ class AdminRequestController extends Controller
     DB::table('update_approvals')->insert([
         'stu_id' => $studentId,
         $columnName => $new_marks,
+        'filepath' => $filePath,
+
         'update_type' => $columnName ,
         'delete' => '0'
     ]);
@@ -95,6 +127,7 @@ class AdminRequestController extends Controller
         return redirect()->back()->with('success', 'Your request has been sent to admin');
 
     }
+}
 
     public function index()
     {
@@ -106,6 +139,9 @@ class AdminRequestController extends Controller
         // Pass the data to the 'viewRequests' view
         return view('viewRequests', compact('data'));
     }
+
+
+   
 }
 
 

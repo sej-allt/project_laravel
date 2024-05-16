@@ -38,15 +38,16 @@ class UpdateUserDataController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'student_id' => 'required',
+           // 'student_id' => 'required',
             'student_name' => 'required',
-            'password' => 'required',
+            //'password' => 'required',
         ]);
 
         // Retrieve the form data
-        $studentId = $request->input('student_id');
+        //$studentId = $request->input('student_id');
         $studentName = $request->input('student_name');
-        $password = $request->input('password');
+        //$password = $request->input('password');
+          $studentId = session('student_id');
 
         $user=DB::table('logins')
         ->where('stu_id',$studentId)
@@ -55,11 +56,7 @@ class UpdateUserDataController extends Controller
         {
             return redirect()->back()->with('error', 'User not found');
         }
-        if($user->password !=md5($password))
-        {
-            return redirect()->back()->with('error', 'Incorrect Password');
-
-        }
+       
 
 
         
@@ -76,15 +73,16 @@ class UpdateUserDataController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'student_id' => 'required',
+           // 'student_id' => 'required',
             'email' => 'required',
-            'password' => 'required',
+            //'password' => 'required',
         ]);
 
         // Retrieve the form data
-        $studentId = $request->input('student_id');
+       // $studentId = $request->input('student_id');
         $email = $request->input('email');
-        $password = $request->input('password');
+       // $password = $request->input('password');
+         $studentId = session('student_id');
 
         $user=DB::table('logins')
         ->where('stu_id',$studentId)
@@ -93,11 +91,7 @@ class UpdateUserDataController extends Controller
         {
             return redirect()->back()->with('error', 'User not found');
         }
-        if($user->password !=md5($password))
-        {
-            return redirect()->back()->with('error', 'Incorrect Password');
-
-        }
+      
 
         DB::table('students')
             ->where('student_id', $studentId)
@@ -112,15 +106,16 @@ class UpdateUserDataController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'student_id' => 'required',
+            //'student_id' => 'required',
             'phone_number' => 'required',
-            'password' => 'required',
+            //'password' => 'required',
         ]);
 
         // Retrieve the form data
-        $studentId = $request->input('student_id');
+      //  $studentId = $request->input('student_id');
         $phone_number = $request->input('phone_number');
-        $password = $request->input('password');
+       // $password = $request->input('password');
+         $studentId = session('student_id');
 
         $user=DB::table('logins')
         ->where('stu_id',$studentId)
@@ -129,11 +124,7 @@ class UpdateUserDataController extends Controller
         {
             return redirect()->back()->with('error', 'User not found');
         }
-        if($user->password !=md5($password))
-        {
-            return redirect()->back()->with('error', 'Incorrect Password');
-
-        }
+        
 
         DB::table('students')
             ->where('student_id', $studentId)
@@ -147,15 +138,16 @@ class UpdateUserDataController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'student_id' => 'required',
+            //'student_id' => 'required',
             'father_name' => 'required',
-            'password' => 'required',
+            //'password' => 'required',
         ]);
 
         // Retrieve the form data
-        $studentId = $request->input('student_id');
+       // $studentId = $request->input('student_id');
         $fatherName = $request->input('father_name');
-        $password = $request->input('password');
+       // $password = $request->input('password');
+         $studentId = session('student_id');
 
         $user=DB::table('logins')
         ->where('stu_id',$studentId)
@@ -164,12 +156,7 @@ class UpdateUserDataController extends Controller
         {
             return redirect()->back()->with('error', 'User not found');
         }
-        if($user->password !=md5($password))
-        {
-            return redirect()->back()->with('error', 'Incorrect Password');
-
-        }
-
+        
 
         
         DB::table('students')
@@ -183,17 +170,23 @@ class UpdateUserDataController extends Controller
     
     public function updateAddress(Request $request)
     {
+
+        // if (!auth()->check()) {
+        // return redirect()->route('login')->with('error', 'You must be logged in to update your address.');
+        // }
         // Validate the form data
         $validatedData = $request->validate([
-            'student_id' => 'required',
+            //'student_id' => 'required',
             'address' => 'required',
-            'password' => 'required',
+            //'password' => 'required',
         ]);
 
         // Retrieve the form data
-        $studentId = $request->input('student_id');
+       // $studentId = $request->input('student_id');
         $address = $request->input('address');
-        $password = $request->input('password');
+        //$password = $request->input('password');
+      
+         $studentId = session('student_id');
 
         $user=DB::table('logins')
         ->where('stu_id',$studentId)
@@ -202,11 +195,11 @@ class UpdateUserDataController extends Controller
         {
             return redirect()->back()->with('error', 'User not found');
         }
-        if($user->password !=md5($password))
-        {
-            return redirect()->back()->with('error', 'Incorrect Password');
+        // if($user->password !=md5($password))
+        // {
+        //     return redirect()->back()->with('error', 'Incorrect Password');
 
-        }
+        // }
 
 
         

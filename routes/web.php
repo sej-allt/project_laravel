@@ -84,7 +84,7 @@ Route::post('updateMarks', [UpdateUserDataController::class, 'updateMarks'])->na
 
 
 //Route::get('reqAdmin', [AdminRequestController::class, 'show'])->name('reqAdminShow');
-Route::post('reqAdmin', [AdminRequestController::class, 'updatereqtable'])->name('reqAdmin');
+Route::post('reqAdmin', [AdminRequestController::class, 'store'])->name('reqAdmin');
 
 
 
