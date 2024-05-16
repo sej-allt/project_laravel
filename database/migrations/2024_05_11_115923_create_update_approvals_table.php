@@ -26,7 +26,8 @@ return new class extends Migration {
             $table->string('sem8')->nullable();
             $table->string('sem9')->nullable();
             $table->string('sem10')->nullable();
-            $table->integer('delete')->default(0); 
+            $table->string('filepath');
+            $table->integer('delete')->default(0);
             $table->integer('approve/disapprove')->nullable();
             $table->foreign('stu_id')->references('student_id')->on('students')->onUpdate('cascade');
             $table->timestamps();
