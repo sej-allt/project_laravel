@@ -8,6 +8,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UpdateUserDataController;
 
 require __DIR__ . '/adminroutes.php';
@@ -17,16 +18,28 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::post('/store',[AdminController::class,'store']);
+
+Route::get('/items', 'ItemController@index');
+Route::post('/items/filter', 'ItemController@filter');
+
+
 Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
 Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('individualReg');
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
+
+//Route::get('/', [FilterController::class, 'list']);
+
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
     Route::get('/email/create', [EmailContentController::class, 'create'])->name('email.create');
     Route::post('/email/store', [EmailContentController::class, 'store'])->name('email.store');
+    //Route::get('/admin',[AdminController::class, 'index'])->name('admin');
 });
+
+   
 
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 // routes/web.php
