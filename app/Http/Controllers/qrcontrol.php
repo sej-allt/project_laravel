@@ -7,10 +7,12 @@ use DB;
 
 class qrcontrol extends Controller
 {
-    public function generateqr(/*string $event_id*/)
+    public function generateqr(string $event_id)
     {
         // dd(session('student_id'));
-        return view('qrcode.generateqr')->with('event_id', '1232');
+        // dd($event_id);
+        session(['event_id' => $event_id]);
+        return redirect()->route('qrcode');
 
     }
 }

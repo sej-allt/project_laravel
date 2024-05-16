@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\qrcontrol;
+use App\Http\Controllers\EventController;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginreq'])->name('login');
@@ -42,4 +43,9 @@ Route::group(['middleware' => 'dashboard'], function () {
 // })->name('other');
 
 //qrtest
-Route::get('/qrgen', [qrcontrol::class, 'generateqr'])->name('generate');
+Route::get('/qrgen/{event_id}', [qrcontrol::class, 'generateqr'])->name('generate');
+Route::get('/events', [EventController::class, 'checkeligibletable'])->name('events');
+
+Route::get('/scan', function () {
+    return view('userside.qrcode.generateqr');
+})->name('qrcode');

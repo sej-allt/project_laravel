@@ -75,7 +75,9 @@
                       </div>
                 </div>
 
-                <a href="{{route('generate')}}" class="{{Request::is('qrgen')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">GET qr</a>
+
+
+                <a href="{{route('events')}}" class="{{Request::is('events')||Request::is('scan')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">EVENTS</a>
                 {{-- <a href="{{route('list')}}" class="{{Request::is('list')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Student List</a>
                 <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a> --}} 
                
