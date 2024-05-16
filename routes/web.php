@@ -59,6 +59,10 @@ Route::post('password/update', [ResetPasswordController::class, 'update'])->name
 
 
 
+Route::get('profile', function () {
+    return view('profile');
+})->name('profile');
+
 Route::get('updateName', [UpdateUserDataController::class, 'showUpdateForm'])->name('updateName');
 Route::post('updateName', [UpdateUserDataController::class, 'updateName'])->name('updateUserDataName');
 

@@ -20,7 +20,9 @@ class adminseeder extends Seeder
             'student_name' => 'admin',
             'type' => 1,
             'campus' => 'geu',
-            'phone_number' => 9999999
+            'phone_number' => 9999999,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
         DB::table('students')->insert($admin_student);
         $adminlogin = [
