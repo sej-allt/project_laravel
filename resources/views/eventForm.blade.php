@@ -29,7 +29,7 @@
             <div class="relative">
                 <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="name" id="event_name" placeholder="Enter Event Name" value="{{ old('name') }}" required>
             </div>
-            <span class="text-danger" style="color: red;">@error('name') {{ $message }} @enderror</span>
+            {{-- <span class="text-danger" style="color: red;">@error('name') {{ $message }} @enderror</span> --}}
         </div>
 
         <div class="mb-3">
@@ -73,7 +73,7 @@
             <div class="relative">
                 <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter marks in 10th" name="marks10" id="marks10" value="{{ old('marks10') }}" required>
             </div>
-            <span class="text-danger" style="color: red;">@error('marks10') {{ $message }} @enderror</span>
+            {{-- <span class="text-danger" style="color: red;">@error('marks10') {{ $message }} @enderror</span> --}}
         </div>
         
         <div class="mb-3">
@@ -84,7 +84,7 @@
             <div class="relative">
                 <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter marks in 12th" name="marks12" id="marks12" value="{{ old('marks12') }}" required>
             </div>
-            <span class="text-danger" style="color: red;">@error('marks12') {{ $message }} @enderror</span>
+            {{-- <span class="text-danger" style="color: red;">@error('marks12') {{ $message }} @enderror</span> --}}
         </div>
         
         <div class="mb-3">
@@ -95,7 +95,7 @@
             <div class="relative">
                 <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter CGPA" name="cgpa" id="cgpa" value="{{ old('cgpa') }}" required>
             </div>
-            <span class="text-danger" style="color: red;">@error('cgpa') {{ $message }} @enderror</span>
+            {{-- <span class="text-danger" style="color: red;">@error('cgpa') {{ $message }} @enderror</span> --}}
         </div>
         
         <div class="mb-3">
@@ -106,7 +106,7 @@
             <div class="relative">
                 <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Campus" name="campus" id="campus" value="{{ old('campus') }}" required>
             </div>
-            <span class="text-danger" style="color: red;">@error('campus') {{ $message }} @enderror</span>
+            {{-- <span class="text-danger" style="color: red;">@error('campus') {{ $message }} @enderror</span> --}}
         </div>
         
         
