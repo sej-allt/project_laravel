@@ -104,5 +104,22 @@ class AuthController extends Controller
         $user = DB::table('students')->where('student_id', '=', $student_id)->first();
         return view('profile')->with('user', $user);
     }
-}
 
+
+public function store(Request $request){
+    $title="Bulk Upload";
+
+    $filename= time().'.'.request()->file->getClientOriginalExtension();
+
+    $request->file->move(public_path('blogs'), $filename);
+
+    $blog= new student;
+    //$blog->title= $title;
+    $blog->file =$filename;
+    //$progress= ...;//fetch progress
+    $blog->save();
+
+    return response()->json(['succsess'=>'File uploaded successfully']);
+
+}
+}

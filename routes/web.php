@@ -87,3 +87,6 @@ Route::get('/viewRequests', function () {
 })->name('viewRequests');
 
 Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('viewRequests');
+
+
+Route::post('/store',[AdminController::class,'store']);

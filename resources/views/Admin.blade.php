@@ -51,8 +51,35 @@
   <div class="position-absolute top-50 start-50 translate-middle">
     <div class="flex justify-center items-center">
       <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+
     </div>
   </div>
+  {{-- riya ka style --}}
+
+
+  <style>
+    .progress {
+        position: relative;
+        width: 100%;
+        background-color: #c9cfc9;
+    }
+
+    .bar {
+        background-color: #2dcf2d;
+        width: 0%;
+        height: 100px;
+    }
+
+    .percent {
+        position: absolute;
+        display: inline-block;
+        left: 50%;
+        color: #040608;
+    }
+</style>
+
+
+
 {{-- <div><a href="{{route('logout')}}"><button type="button" class="btn btn-outline-success my-2 mx-4 btn-sm px-4">log-out</button></a></div> --}}
 </div>
 
@@ -93,6 +120,11 @@
                     <!-- Add the @csrf directive in your Laravel Blade file -->
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                    <div class="progress">
+                        <div class="bar"></div>
+                        <div class="percent">0%</div>
+                    </div>
+
                     <!-- File input for uploading CSV -->
                     <div class="mb-3">
                         <label for="csvFile" class="form-label">Choose CSV File</label>
@@ -115,7 +147,31 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+<script>
+    $(document).ready(function() {
+        var bar = $(".bar");
+        var percent = $(".percent");
+
+        $('#uploadForm').ajaxForm({
+            beforeSend: function() {
+                var percentVal = '0%';
+                bar.width(percentVal);
+                percent.html(percentVal);
+            },
+            uploadProgress: function(event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal);
+                percent.html(percentVal);
+            },
+            complete: function(res) {
+                console.log(res);
+                alert("File has been uploaded");
+            }
+        });
+    });
+</script>
 
 
 
