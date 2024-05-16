@@ -7,7 +7,7 @@
 @section('main_content')
 
 <div class="bg-white w-4/5 mx-auto border-2 shadow rounded-[20px] p-3">
-    <form action="{{url('/create_event')}}" class="mx-auto px-3" method="POST">
+    <form action="{{route('create_event')}}" class="mx-auto px-3" method="POST">
         @csrf
         <div class="mb-5">
             <h2 class="text-lg font-medium mb-2">Event Name</h2>
