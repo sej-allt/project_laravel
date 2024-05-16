@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Mail;
-use App\Models\Blog;
-
+//use App\Models\Blog;
+use App\Models\cgpa;
+use App\Models\Course;
+use App\Models\Marks;
 // use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\HtmlString;
@@ -22,12 +24,24 @@ use App\Models\EmailContent;
 class AdminController extends Controller
 {
     protected $errorOccured;
+    // public function index()
+    // {
+    //     return view('Admin_home');
+    // }
+
     public function index()
-    {
-        return view('Admin_home');
+    {   
+        $courses =Course::orderBy('name', 'ASC')->with('sub_course')->where('status',1)->get();
+        $marks= Marks::orderBy('name', 'ASC')->where('status', 1)->get();//these are the filter names
+        $cgpa= cgpa::orderBy('id', 'DESC')->where('status',1)->get();
+        
+        $data['courses']= $course;
+        $data['marks']= $Marks;
+        $data['cgpa']= $cgpa;
+
+        return view('Admin', $data);
     }
-
-
+    
     public function bulk()
     {
         return view('admin');

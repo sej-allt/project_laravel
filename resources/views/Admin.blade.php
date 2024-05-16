@@ -6,6 +6,73 @@
     <a href="Admin_home" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
 @endsection
 
+@section('content')
+
+<section class="section-6 pt-5">
+  <div class="container">
+    <div class="row">            
+      <div class="col-md-3 sidebar">
+        <div class="sub-title">
+          <h2>Courses</h2>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="accordion accordion-flush" id="accordionExample">                          
+              @if($courses->isNotEmpty())                        
+                @foreach ($courses as $key => $course)
+                  <div class="accordion-item">                                                   
+                    @if($course->sub_course->isNotEmpty())
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$key}}" aria-expanded="false" aria-controls="collapseOne-{{$key}}">
+                          {{$course->name}}
+                        </button>
+                      </h2>
+                    @else
+                      <a href="#" class="nav-item nav-link">{{$course->name}}</a>                                       
+                    @endif
+                  </div>                            
+                @endforeach
+              @endif
+            </div>
+          </div>
+        </div>
+        <div class="sub-title mt-5">
+          <h2>Marks</h2>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            @if($marks->isNotEmpty())
+              @foreach ($marks as $mark)
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" name="marks[]" value="{{$mark->id}}" id="marks-{{$mark->id}}">
+                  <label class="form-check-label" for="marks-{{$mark->id}}">
+                    {{$mark->name}}
+                  </label>
+                </div>  
+              @endforeach
+            @endif                                  
+          </div>
+        </div>
+        <div class="sub-title mt-5">
+          <h2>cgpa</h2>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                {{$cgpa->name}}
+              </label>
+            </div>                 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+@endsection
+
 
  <!doctype html>
 <html lang="en">

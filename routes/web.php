@@ -11,16 +11,23 @@ use App\Http\Controllers\FilterController;
 
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ShopController;
 
 
 Route::get('/progress', 'ProgressController@getProgress')->name('progress');
 
+//home page 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+//Route::get('/',[FrontController::class, 'index'])->name('front.home');
+//Route::get('/shop',[ShopController::class, 'index'])->name('front.shop');
+//Route::get('/admin',[AdminController::class, 'index'])->name('front.shop');
 
-Route::post('/store',[BlogController::class,'store']);
+//Route::post('/store',[BlogController::class,'store']);
+Route::post('/store',[AdminController::class,'store']);
 
 
 Route::post('/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
@@ -28,8 +35,9 @@ Route::get('/individualReg', [AdminController::class, 'IndividualReg'])->name('i
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
+    //Route::get('/Admin_home', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin', [AdminController::class, 'bulk'])->name('bulk');
+    Route::get('/admin',[AdminController::class, 'index'])->name('admin');
 });
 
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin');
