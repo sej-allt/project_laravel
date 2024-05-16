@@ -67,6 +67,7 @@
                     });
 
                     scanner.addListener('scan', function(content) {
+                        console.log("qwerty");
                         handleScannedData(content);
                     });
 
@@ -106,8 +107,9 @@
 
                         function handleScannedData(content) {
                             // Send the data to your Laravel backend for processing
-                            displayScanningSuccess();
-                            fetch("{{ route('scan') }}?qr_data"+encodeURIComponent(content), {
+                           // displayScanningSuccess();
+                           console.log('Scanned QR code data:', content);
+                            fetch("{{ route('scan') }}", {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -117,13 +119,15 @@
                                         qr_data: content
                                     })
                                 })
-                                .then(response => response.json())
+                                .then(response => {
+                                    console.log(respose);
+                                    return response.json()})
                                 .then(data => {
                                     // Handle response from backend
                                     console.log(data);
                                     // Display result to the user if necessary
-                                    window.location.href = "{{ route('scan') }}?qr_data=" + encodeURIComponent(content);
-                                    document.getElementById('scanned-result').innerHTML = data.message;
+                                    // window.location.href = "{{ route('scan') }}?qr_data=" + encodeURIComponent(content);
+                                    // document.getElementById('scanned-result').innerHTML = data.message;
                                 })
                                 .catch(error => console.error('Error:', error));
                         }
