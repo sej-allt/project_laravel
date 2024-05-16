@@ -9,7 +9,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
-
+use App\Http\Controllers\QRController;
 require __DIR__ . '/adminroutes.php';
 
 
@@ -95,3 +95,7 @@ Route::get('/viewRequests', function () {
 Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('viewRequests');
 
 Route::get('/get-email-content', [EmailContentController::class, 'getEmailContent'])->name('email.get-content');
+
+// Route::post('/scan', 'QRController@scan')->name('scan');
+Route::get('/scanner', [QRController::class, 'index'])->name('scanner');
+Route::post('/scan', [QRController::class, 'scan'])->name('scan');
