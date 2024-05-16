@@ -18,7 +18,7 @@
             <span class="text-danger" style="color: red;">@error('event_name') {{$message}} @enderror</span>
         </div>
 
-        {{-- <div class="mb-5">
+        <div class="mb-5">
             <h2 class="text-lg font-medium mb-2">Event Date</h2>
             <div class="grid grid-cols-2 gap-6">
                 <div class="relative">
@@ -48,7 +48,7 @@
                     <input type="time" id="end_time" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="endtime" min="09:00" max="18:00" value="18:00" required>
                 </div>
             </div>
-        </div> --}}
+        </div>
         
 
         <div class="mb-5">
