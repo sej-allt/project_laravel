@@ -6,7 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "bacon/bacon-qr-code": "^3.0",
+        "bacon/bacon-qr-code": "*",
+        "simplesoftwareio/qr-code": "*",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9"
     },
@@ -63,6 +64,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "prefer-stable": true
 }
