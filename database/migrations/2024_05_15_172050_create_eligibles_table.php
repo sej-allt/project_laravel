@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('student_id');
             $table->integer('present')->default(0);
+            $table->integer('qrexists')->default(0);
             $table->foreign('event_id')->references('id')->on('events')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('student_id')->references('student_id')->on('students')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

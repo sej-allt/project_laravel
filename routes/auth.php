@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\qrcontrol;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginreq'])->name('login');
@@ -27,15 +28,21 @@ Route::group(['middleware' => 'dashboard'], function () {
 
 //testing
 
-Route::get('/adminhead', function () {
-    return view('layout.adminheader');
+// Route::get('/adminhead', function () {
+//     return view('layout.adminheader');
+// });
+// Route::get('/userhead', function () {
+//     return view('layout.userheader');
+// });
+// Route::get('/dash', function () {
+//     return view('partials.dash');
+// })->name('dash');
+// Route::get('/other', function () {
+//     return view('partials.other');
+// })->name('other');
+
+//qrtest
+Route::get('/qrgen', [qrcontrol::class, 'generateqr'])->name('generate');
+Route::get('/gen', function () {
+    return view('qrcode.generateqr');
 });
-Route::get('/userhead', function () {
-    return view('layout.userheader');
-});
-Route::get('/dash', function () {
-    return view('partials.dash');
-})->name('dash');
-Route::get('/other', function () {
-    return view('partials.other');
-})->name('other');
