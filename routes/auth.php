@@ -43,6 +43,3 @@ Route::group(['middleware' => 'dashboard'], function () {
 
 //qrtest
 Route::get('/qrgen', [qrcontrol::class, 'generateqr'])->name('generate');
-Route::get('/gen', function () {
-    return view('qrcode.generateqr');
-});

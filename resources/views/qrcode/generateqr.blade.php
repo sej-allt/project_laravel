@@ -21,8 +21,9 @@
         // Get the element where you want to render the QR code
         var qrCodeDiv = document.getElementById('qrcode');
         var event_id = {{$event_id}};
-        var student_id = {{session('student_id')}}
-        var data = student_id.toString() + ' ' + event_id;      //make it string in the tables and dleete this comment
+        var student_id = {{session('student_id')}};
+        var data = student_id.toString() + ' ' + event_id.toString();      //make it string in the tables and dleete this
+        // var data = "2345";
         // Create a QR code instance
         var qr = new QRCode(qrCodeDiv, {
             text: data, // Your QR code data
