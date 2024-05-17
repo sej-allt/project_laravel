@@ -101,6 +101,7 @@ Route::get('/get-email-content', [EmailContentController::class, 'getEmailConten
 
 Route::get('/eventForm', [EventController::class, 'event'])->name('create_event');
 Route::post('/eventForm', [EventController::class, 'storeEvent'])->name('create_event');
+Route::get('/list', [StudentController::class, 'index'])->name('list');
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/export', [StudentController::class, 'export'])->name('students.export');
