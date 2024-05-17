@@ -1,6 +1,6 @@
 
 
- @extends('layout.header')
+ @extends('layout.adminheader')
 
 @section('main_content')
 <!-- On tables -->
