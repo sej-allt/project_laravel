@@ -10,6 +10,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\StudentController;
 
 require __DIR__ . '/adminroutes.php';
 
@@ -101,3 +102,6 @@ Route::get('/get-email-content', [EmailContentController::class, 'getEmailConten
 Route::get('/eventForm', [EventController::class, 'event'])->name('create_event');
 Route::post('/eventForm', [EventController::class, 'storeEvent'])->name('create_event');
 
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/export', [StudentController::class, 'export'])->name('students.export');
+Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
