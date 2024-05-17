@@ -99,3 +99,4 @@ Route::get('/get-email-content', [EmailContentController::class, 'getEmailConten
 // Route::post('/scan', 'QRController@scan')->name('scan');
 Route::get('/scanner', [QRController::class, 'index'])->name('scanner');
 Route::post('/scan', [QRController::class, 'scan'])->name('scan');
+Route::post('/scan-image', [QRController::class, 'scanImage'])->name('scan-image');

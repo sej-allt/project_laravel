@@ -8,6 +8,9 @@
     <title>QR Code Scanner</title>
     <!-- Include instascan CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/instascan/1.0.0/instascan.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         .scanning-indicator {
             width: 100%;
@@ -48,18 +51,11 @@
         <!-- Upload Button -->
         <form id="upload-form">
             <input type="file" accept="image/png" id="upload-input" name="image">
-            <button type="submit">Upload</button>
+            <button type="button" id="upload-button">Upload</button>
         </form>
         <div id="scanned-result"></div>
-        <!-- <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <th>QRCode</th>
-                </tr>
-            </table>
-        </div> -->
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/schmich/instascan-builds@master/instascan.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -84,42 +80,66 @@
             });
 
             // Upload button event listener
-            document.getElementById('upload-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData();
-                formData.append('image', document.getElementById('upload-input').files[0]);
+            document.getElementById('upload-button').addEventListener('click', function(event) {
+                // event.preventDefault();
+                // const formData = new FormData();
+                // formData.append('image', document.getElementById('upload-input').files[0]);
 
-                axios.post("{{ route('scan-image') }}", formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
-                    .then(response => {
-                        // Handle response from backend
-                        console.log(response.data);
-                        document.getElementById('scanned-result').innerHTML = response.data.message;
-                        if (response.data.qr_content) {
-                            console.log('QR Code Content:', response.data.qr_content);
-                        } else {
-                            console.log('No QR Code detected in the image.');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+                // axios.post("{{ route('scan-image') }}", formData, {
+                //         headers: {
+                //             'Content-Type': 'multipart/form-data',
+                //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                //         }
+                //     })
+                //     .then(response => {
+                //         // Handle response from backend
+                //         console.log(response.data);
+                //         document.getElementById('scanned-result').innerHTML = response.data.message;
+                //         if (response.data.qr_content) {
+                //             console.log('QR Code Content:', response.data.qr_content);
+                //         } else {
+                //             console.log('No QR Code detected in the image.');
+                //         }
+                //     })
+                //     .catch(error => console.error('Error:', error));
+                const file = document.getElementById('upload-input').files[0];
+                if (!file) {
+                    alert('Please select a file first');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imageData = event.target.result;
+                    decodeQRFromImage(imageData);
+                };
+                reader.readAsDataURL(file);
             });
 
             function decodeQRFromImage(imageData) {
                 // Use jsQR library to decode QR code from image data
                 // Add your code here to handle QR code decoding
                 // Once decoded, call handleScannedData function
-                const decodedQR = jsQR(imageData);
-                if (decodedQR) {
-                    handleScannedData(decodedQR.data); // Call handleScannedData with the decoded QR data
-                } else {
-                    console.error('Failed to decode QR code from image');
-                    displayScanningFailure();
+                const img = new Image();
+                img.src = imageData;
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-                }
+                    const code = jsQR(imageData.data, imageData.width, imageData.height);
+                    if (code) {
+                        console.log('QR code data:', code.data);
+                        handleScannedData(code.data);
+                    } else {
+                        console.error('No QR code detected.');
+                        alert('No QR code detected in the image.');
+                    }
+                };
+
             }
 
             function handleScannedData(content) {
@@ -135,15 +155,18 @@
                         }
                     })
                     .then(response => {
-                        console.log(respose);
-                        return response.json()
+                        console.log(response);
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
                     })
                     .then(data => {
                         // Handle response from backend
                         console.log(data);
                         // Display result to the user if necessary
-                        // window.location.href = "{{ route('scan') }}?qr_data=" + encodeURIComponent(content);
-                        // document.getElementById('scanned-result').innerHTML = data.message;
+                        window.location.href = "{{ route('scan') }}?qr_data=" + encodeURIComponent(content);
+                        document.getElementById('scanned-result').innerHTML = data.message;
                     })
                     .catch(error => console.error('Error:', error));
             }
