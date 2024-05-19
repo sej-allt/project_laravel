@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+
+use Mail;
+//use App\Models\Blog;
+use App\Models\cgpa;
+use App\Models\Course;
+use App\Models\Marks;
+// use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationConfirmation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
@@ -18,12 +24,24 @@ use App\Models\EmailContent;
 class AdminController extends Controller
 {
     protected $errorOccured;
+    // public function index()
+    // {
+    //     return view('Admin_home');
+    // }
+
     public function index()
-    {
-        return view('Admin_home');
+    {   
+        $courses =Course::orderBy('name', 'ASC')->with('sub_course')->where('status',1)->get();
+        $marks= Marks::orderBy('name', 'ASC')->where('status', 1)->get();//these are the filter names
+        $cgpa= cgpa::orderBy('id', 'DESC')->where('status',1)->get();
+        
+        $data['courses']= $course;
+        $data['marks']= $Marks;
+        $data['cgpa']= $cgpa;
+
+        return view('Admin', $data);
     }
-
-
+    
     public function bulk()
     {
         return view('admin');
@@ -123,6 +141,8 @@ class AdminController extends Controller
             'csvFile' => 'required|mimes:csv,txt', // Accept only CSV files
         ]);
 
+        
+
         // Retrieve the uploaded file
         $file = $request->file('csvFile');
 
@@ -143,6 +163,22 @@ class AdminController extends Controller
             return redirect()->route('bulk')->with('status', 'success');
     }
 
+    public function store(Request $request){
+        $title="Bulk Upload";
+
+        $filename= time().'.'.request()->file->getClientOriginalExtension();
+
+        $request->file->move(public_path('blogs'), $filename);
+
+        $blog= new student;
+        //$blog->title= $title;
+        $blog->file =$filename;
+        //$progress= ...;//fetch progress
+        $blog->save();
+
+        return response()->json(['succsess'=>'File uploaded successfully']);
+
+    }
     //deletecsv
 
     public function deletecsv()
@@ -255,4 +291,5 @@ class AdminController extends Controller
         }
 
     }
+    
 }
