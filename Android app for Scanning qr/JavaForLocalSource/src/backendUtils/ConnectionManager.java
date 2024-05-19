@@ -16,7 +16,7 @@ public class ConnectionManager {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // JDBC connection parameters
-            String url = "jdbc:mysql://localhost:3306/androidapptestdatabase";
+            String url = "jdbc:mysql://localhost:3306/project_folders";
             String username = "root";
             String password = "";
             connection = DriverManager.getConnection(url, username, password);

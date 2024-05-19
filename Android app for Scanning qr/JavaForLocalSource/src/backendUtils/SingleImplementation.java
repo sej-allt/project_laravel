@@ -39,7 +39,7 @@ public class SingleImplementation {
     private boolean isStudentIdAndEventIdPresentInDatabase(Connection con) {
         try {
             // Check if the entry exists in the database
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM temptable WHERE Student_Id = ? AND Event_Id = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM eligibles WHERE student_id = ? AND event_id = ?");
             statement.setString(1, studentId);
             statement.setString(2, eventId);
             ResultSet resultSet = statement.executeQuery();
@@ -56,18 +56,18 @@ public class SingleImplementation {
     // helper function to mark student as present
     private void markPresent(Connection con){
         try{
-            PreparedStatement checkStatement = con.prepareStatement("SELECT Present FROM temptable WHERE Student_Id = ? AND Event_Id = ?");
+            PreparedStatement checkStatement = con.prepareStatement("SELECT present FROM eligibles WHERE student_id = ? AND event_id = ?");
             checkStatement.setString(1,studentId);
             checkStatement.setString(2,eventId);
             ResultSet resultSet=checkStatement.executeQuery();
             if(resultSet.next()){
-                int presentValue = resultSet.getInt("Present");
+                int presentValue = resultSet.getInt("present");
                 if (presentValue == 1) {
                     System.out.println("Student with id "+studentId+" Already marked present");
                     return;
                 }
             }
-            PreparedStatement updateStatement = con.prepareStatement("UPDATE temptable SET Present = 1 WHERE Student_Id = ? AND Event_Id = ?");
+            PreparedStatement updateStatement = con.prepareStatement("UPDATE eligibles SET present = 1 WHERE student_id = ? AND event_id = ?");
             updateStatement.setString(1, studentId);
             updateStatement.setString(2, eventId);
             updateStatement.executeUpdate();
