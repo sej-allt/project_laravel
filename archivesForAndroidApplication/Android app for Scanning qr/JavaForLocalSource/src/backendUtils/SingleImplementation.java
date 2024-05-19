@@ -80,7 +80,7 @@ public class SingleImplementation {
     }
 
     public static void main(String[] args) {
-        String filePath="D:\\Laravell project under ashish sir\\my local repo\\project_laravel\\Android app for Scanning qr\\JavaForLocalSource\\src\\backendUtils\\qrs for testing\\qr1.jpg";
+        String filePath="D:\\Laravell project under ashish sir\\my local repo\\project_laravel\\Android app 2 for Scanning QR\\Java2ForLocalSource\\src\\main\\java\\org\\example\\backendUtils\\qrs for testing\\qr1.jpg";
         backendUtils.SingleImplementation obj=new backendUtils.SingleImplementation();
         obj.ScanAndGiveOutput(filePath);
     }

@@ -10,7 +10,7 @@ public class ConnectionTesterApp {
         try {
             Connection con= ConnectionManager.getInstance().getConnection();
             Statement statement=con.createStatement();
-            ResultSet resultSet=statement.executeQuery("select * from temptable");
+            ResultSet resultSet=statement.executeQuery("select * from eligibles");
             while(resultSet.next()){
                 System.out.println(resultSet.getInt(1)+" "+resultSet.getInt(2));
             }
