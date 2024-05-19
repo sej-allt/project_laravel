@@ -1,0 +1,97 @@
+import backendUtils.ConnectionManager;
+import backendUtils.MyQrScanner;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class SingleImplementation {
+    private String studentId;
+    private String eventId;
+
+    public void ScanAndGiveOutput(String filePath){
+        step1_ReadQR(filePath);
+        step2_WorkaOnDataFromQR();;
+    }
+    private void step1_ReadQR(String filePath){
+        String[] res=new MyQrScanner().readQR(filePath);
+        studentId=res[0];
+        eventId=res[1];
+        System.out.println("student id : "+studentId+" and event id : "+eventId+" has been read from QR Code");
+    }
+    private void step2_WorkaOnDataFromQR(){
+        System.out.println("Connecting to database ...");
+        Connection connection=ConnectionManager.getInstance().getConnection();
+        if(isStudentIdAndEventIdPresentInDatabase(connection)){
+            markPresent(connection);
+        }
+        else{
+            System.out.println("student id :"+studentId+" and event Id : "+eventId+" not found in the database together");
+        }
+        System.out.println("closing connection to database ...");
+        ConnectionManager.getInstance().closeConnection();
+    }
+
+
+    private boolean isStudentIdAndEventIdPresentInDatabase(Connection con) {
+        try {
+            // Check if the entry exists in the database
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM temptable WHERE Student_Id = ? AND Event_Id = ?");
+            statement.setString(1, studentId);
+            statement.setString(2, eventId);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Return false if any exception occurs or no entry found
+        return false;
+    }
+    private void markPresent(Connection con){
+        try{
+            PreparedStatement checkStatement = con.prepareStatement("SELECT Present FROM temptable WHERE Student_Id = ? AND Event_Id = ?");
+            checkStatement.setString(1,studentId);
+            checkStatement.setString(2,eventId);
+            ResultSet resultSet=checkStatement.executeQuery();
+            if(resultSet.next()){
+                int presentValue = resultSet.getInt("Present");
+                if (presentValue == 1) {
+                    System.out.println("Student with id "+studentId+" Already marked present");
+                    return;
+                }
+            }
+            PreparedStatement updateStatement = con.prepareStatement("UPDATE temptable SET Present = 1 WHERE Student_Id = ? AND Event_Id = ?");
+            updateStatement.setString(1, studentId);
+            updateStatement.setString(2, eventId);
+            updateStatement.executeUpdate();
+
+            System.out.println("Student id : " + studentId + " marked present");
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        String filePath="D:\\Laravell project under ashish sir\\my local repo\\project_laravel\\Android app for Scanning qr\\JavaForLocalSource\\src\\backendUtils\\qrs for testing\\qr1.jpg";
+        SingleImplementation obj=new SingleImplementation();
+        obj.ScanAndGiveOutput(filePath);
+    }
+//    before adding 1001 as student id and 2300 as event id inside mysql database
+
+//    student id : 1001 and event id : 2300 has been read from QR Code
+//    Connecting to database ...
+//    student id :1001 and event Id : 2300 not found in the database together
+//    closing connection to database ...
+//****************************************************************************************************************************
+//    after adding 1001 as student id and 2300 as event id in mysql database with 0 as present value
+//    student id : 1001 and event id : 2300 has been read from QR Code
+//    Connecting to database ...
+//    Student id : 1001 marked present
+//    closing connection to database ...
+//    **************************************************************************************************************************
+}
