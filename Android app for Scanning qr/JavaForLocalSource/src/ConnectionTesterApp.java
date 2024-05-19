@@ -1,12 +1,14 @@
+import backendUtils.ConnectionManager;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TrialApp {
+public class ConnectionTesterApp {
     public static void main(String[] args) {
         try {
-            Connection con=ConnectionManager.getInstance().getConnection();
+            Connection con= ConnectionManager.getInstance().getConnection();
             Statement statement=con.createStatement();
             ResultSet resultSet=statement.executeQuery("select * from temptable");
             while(resultSet.next()){

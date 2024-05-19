@@ -3,7 +3,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\LazyCollection;
-use DB;
+
+use Illuminate\support\Facades\DB;
 
 class StudentCsvValidator
 {

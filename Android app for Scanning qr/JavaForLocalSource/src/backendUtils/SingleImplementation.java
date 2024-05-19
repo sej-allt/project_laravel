@@ -1,5 +1,4 @@
-import backendUtils.ConnectionManager;
-import backendUtils.MyQrScanner;
+package backendUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,16 +9,19 @@ public class SingleImplementation {
     private String studentId;
     private String eventId;
 
+    //takes filePath of QR Code File and then uses it for implementation to database
     public void ScanAndGiveOutput(String filePath){
         step1_ReadQR(filePath);
         step2_WorkaOnDataFromQR();;
     }
+    // reads data from qr code
     private void step1_ReadQR(String filePath){
         String[] res=new MyQrScanner().readQR(filePath);
         studentId=res[0];
         eventId=res[1];
         System.out.println("student id : "+studentId+" and event id : "+eventId+" has been read from QR Code");
     }
+    //implements on data from qr code
     private void step2_WorkaOnDataFromQR(){
         System.out.println("Connecting to database ...");
         Connection connection=ConnectionManager.getInstance().getConnection();
@@ -33,7 +35,7 @@ public class SingleImplementation {
         ConnectionManager.getInstance().closeConnection();
     }
 
-
+    // helper function to check if studentid and event id is present in database or not
     private boolean isStudentIdAndEventIdPresentInDatabase(Connection con) {
         try {
             // Check if the entry exists in the database
@@ -51,6 +53,7 @@ public class SingleImplementation {
         // Return false if any exception occurs or no entry found
         return false;
     }
+    // helper function to mark student as present
     private void markPresent(Connection con){
         try{
             PreparedStatement checkStatement = con.prepareStatement("SELECT Present FROM temptable WHERE Student_Id = ? AND Event_Id = ?");
@@ -78,7 +81,7 @@ public class SingleImplementation {
 
     public static void main(String[] args) {
         String filePath="D:\\Laravell project under ashish sir\\my local repo\\project_laravel\\Android app for Scanning qr\\JavaForLocalSource\\src\\backendUtils\\qrs for testing\\qr1.jpg";
-        SingleImplementation obj=new SingleImplementation();
+        backendUtils.SingleImplementation obj=new backendUtils.SingleImplementation();
         obj.ScanAndGiveOutput(filePath);
     }
 //    before adding 1001 as student id and 2300 as event id inside mysql database
@@ -94,4 +97,9 @@ public class SingleImplementation {
 //    Student id : 1001 marked present
 //    closing connection to database ...
 //    **************************************************************************************************************************
+//    after marking 1001 student id and 2300 event id as present
+//    student id : 1001 and event id : 2300 has been read from QR Code
+//    Connecting to database ...
+//    Student with id 1001 Already marked present
+//    closing connection to database ...
 }
