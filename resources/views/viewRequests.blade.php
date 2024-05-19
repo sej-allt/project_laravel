@@ -1,6 +1,6 @@
 
 
- @extends('layout.header')
+ @extends('layout.adminheader')
 
 @section('main_content')
 <!-- On tables -->
@@ -11,20 +11,30 @@
                 <th scope="col" class="px-6 py-3">S.No</th>
                 <th scope="col" class="px-6 py-3">Student ID</th>
                 <th scope="col" class="px-6 py-3">Update Information</th>
-                {{-- <th scope="col" class="px-6 py-3">Current Marks</th> --}}
+             
+                <!-- Added column -->
                 <th scope="col" class="px-6 py-3">New Marks</th>
+                 <th scope="col" class="px-6 py-3">View PDF</th>
                 <th scope="col" class="px-6 py-3">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach($data as $index => $row)
-            <tr class="approval-row odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <td class="px-6 py-4 ">{{ $index + 1 }}</td>
+            <tr class="approval-row odd:bg-white odd:dark:bg-white-900 even:bg-white-50 even:dark:bg-white-800 border-b dark:border-white-700">
+                {{-- <td class="px-6 py-4 ">{{ $index + 1 }}</td>
                 <td class="px-6 py-4">{{ $row->stu_id }}</td>
-                <td class="px-6 py-4">{{ $row->update_type }}</td>
-                {{-- <td class="px-6 py-4">{{ $row->current_marks }}</td> --}}
-                {{-- <td class="px-6 py-4">{{ $row->new_marks }}</td> --}}
-                <td class="px-6 py-4">{{ $row->{$row->update_type} }}</td>
+                <td class="px-6 py-4">{{ $row->update_type }}</td> --}}
+                <td class="px-6 py-4 text-black">{{ $index + 1 }}</td>
+                <td class="px-6 py-4 text-black">{{ $row->stu_id }}</td>
+                <td class="px-6 py-4 text-black">{{ $row->update_type }}</td>
+
+               
+                <td class="px-6 py-4 text-black">{{ $row->{$row->update_type} }}</td>
+
+                <td class="px-6 py-4">
+                    <a href="{{ Storage::url($row->filepath) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">View PDF</a>
+                </td>
+
 
                 <td class="px-6 py-4">
                     <form id="approve-form-{{ $index }}" method="POST" action="{{ route('updateMarks') }}">
@@ -78,4 +88,6 @@
     });
 </script>
 @endsection
+
+
 

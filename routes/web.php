@@ -9,6 +9,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
+use App\Http\Controllers\StudentListController;
 
 require __DIR__ . '/adminroutes.php';
 
@@ -95,3 +96,9 @@ Route::get('/viewRequests', function () {
 Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('viewRequests');
 
 Route::get('/get-email-content', [EmailContentController::class, 'getEmailContent'])->name('email.get-content');
+
+Route::get('list', [StudentListController::class, 'viewList'])->name('list');
+
+Route::get('/list', [StudentListController::class, 'index'])->name('list');
+
+Route::post('/filterstudents', [StudentListController::class, 'filterStudents'])->name('filterstudents');
