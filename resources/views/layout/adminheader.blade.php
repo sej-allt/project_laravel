@@ -59,14 +59,13 @@
                           <li>
                             <a href="{{route('individualReg')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Individual Registration</a> <!-- Removed text color for hover state -->
                           </li>
-                          {{-- <li>
-                            <a href="{{route('email.create')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update email</a> <!-- Removed text color for hover state -->
-                          </li> --}}
+                           <li>
+                            <!-- <a href="{{route('email.create')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Update email</a> Removed text color for hover state -->
+                          </li>
                         </ul>
                       </div>
                 </div>
 
-                <!-- <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Add Event</a> -->
                 <a href="{{route('list')}}" class="{{Request::is('list')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Student List</a>
                 <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a>
 
