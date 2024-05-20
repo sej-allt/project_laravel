@@ -275,6 +275,12 @@ function applyFilters() {
             var uniqueValues = [];
 
             if (filterType === 'programs') {
+                 options += `
+                    <label for="${filterType}-clear-all" class="block">
+                        <input type="checkbox" id="${filterType}-clear-all" class="clear-all mr-2 leading-tight text-blue-600">
+                        <span class="text-white">Clear All</span>
+                    </label>
+                `;
                 var courses = ['BTech', 'BBA', 'Biotech', 'BCA'];
                 courses.forEach(function(course) {
                     options += `
