@@ -11,6 +11,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\EventPageController;
 
 require __DIR__ . '/adminroutes.php';
 
@@ -106,3 +107,14 @@ Route::get('/list', [StudentController::class, 'index'])->name('list');
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
+
+Route::get('/events', [EventPageController::class, 'index'])->name('events');
+Route::get('/', [EventPageController::class, 'index'])->name('events.index');
+Route::get('/events/{event}', [EventPageController::class, 'show'])->name('events.show');
+Route::get('/archive', [EventPageController::class, 'archive'])->name('events.archive');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('event.show');
+
+Route::get('/events/{id}', 'EventPageController@show')->name('events.show');
+Route::get('/archive', 'EventPageController@archive')->name('archive');
+
+Route::get('archive', [EventPageController::class, 'archive'])->name('archive');
