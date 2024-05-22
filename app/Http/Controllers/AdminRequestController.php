@@ -9,16 +9,142 @@ use App\Models\update_approvals;
 class AdminRequestController extends Controller
 {
 
-    //  public function showUpdateForm()
-    // {
-    //         $message = "Your request has been sent.";
-    //     return view('updateUserDetails.updateMarks', compact('message'));
-    // }
-
-    public function store(Request $request)
-
+     public function showUpdateForm()
     {
+            $message = "Your request has been sent.";
+        return view('updateUserDetails.updateMarks', compact('message'));
+    }
 
+//     public function store(Request $request)
+
+//     {
+
+// {
+//     $request->validate([
+//         'class' => 'required',
+//         'new_marks' => 'required',
+//         'pdf_document' => 'required|file|mimes:pdf|max:10240', // Max file size is 10MB
+//     ]);
+
+//     $file = $request->file('pdf_document');
+//     $fileName = $file->getClientOriginalName();
+//     $filePath = $file->storeAs('pdf_documents', $fileName, 'public');
+//     // Store the uploaded file
+//    // $filePath = $request->file('pdf_document')->store('pdf_documents');
+
+//     // Create a new UpdateApproval instance and store it in the database
+//     // UpdateApproval::create([
+//     //     'class' => $request->class,
+//     //     'new_marks' => $request->new_marks,
+//     //     'file_path' => $filePath,
+//     // ]);
+
+// //     return redirect()->back()->with('success', 'File uploaded and record created successfully.');
+// // }
+
+//     //     $request->validate([
+//     //     'pdf_document' => 'required|file|mimes:pdf', // Example validation rules
+//     // ]);
+
+//         //      $validatedData = $request->validate([
+//         //     //'student_id' => 'required',
+//         //     'class' => 'required',
+//         //     'new_marks' => 'required',
+//         //     //'password' => 'required',
+//         // ]);
+//   $studentId = session('student_id');
+
+//         // $studentId = $request->input('student_id');
+//         $class = $request->input('class');
+//          $new_marks = $request->input('new_marks');
+//         //$password = $request->input('password');
+
+//         $storagePath = 'storage/app/public/markspdf files';
+//         $filename = 'marks.pdf'; 
+
+//         $path = $file->storeAs('markspdf', $filename, 'public');
+
+//         $user=DB::table('logins')
+//         ->where('stu_id',$studentId)
+//         ->first();
+//         if(!$user)
+//         {
+//             return redirect()->back()->with('error', 'User not found');
+//         }
+       
+
+//           $columnName = 'marks10'; // Initialize column name variable
+            
+//     switch ($class) {
+//         case 'Class 10':
+//             $columnName = 'marks10';
+//             break;
+//         case 'Class 12':
+//             $columnName = 'marks12';
+//             break;
+//         case '1st Semester':
+//             $columnName = 'sem1';
+//             break;
+//         case '2nd Semester':
+//             $columnName = 'sem2';
+//             break;
+//         case '3rd Semester':
+//             $columnName = 'sem3';
+//             break;
+//         case '4th Semester':
+//             $columnName = 'sem4';
+//             break;
+//         case '5th Semester':
+//             $columnName = 'sem5';
+//             break;
+//         case '6th Semester':
+//             $columnName = 'sem6';
+//             break;
+//         case '7th Semester':
+//             $columnName = 'sem7';
+//             break;
+//         case '8th Semester':
+//             $columnName = 'sem8';
+//             break;
+//         case '9th Semester':
+//             $columnName = 'sem9';
+//             break;
+//         case '10th Semester':
+//             $columnName = 'sem10';
+//             break;
+        
+//     }
+//     DB::table('update_approvals')->insert([
+//         'stu_id' => $studentId,
+//         $columnName => $new_marks,
+//         'filepath' => $filePath,
+
+//         'update_type' => $columnName ,
+//         'delete' => '0'
+//     ]);
+
+//         // Redirect back with success message
+//         return redirect()->back()->with('success', 'Your request has been sent to admin');
+
+//     }
+// }
+
+    public function index()
+    {
+        // Retrieve data from the update_approvals table using the UpdateApproval model
+       $data = DB::table('update_approvals')
+            ->where('delete', 0)
+            ->get();
+
+        // Pass the data to the 'viewRequests' view
+        return view('viewRequests', compact('data'));
+    }
+
+
+   
+// }
+
+public function store(Request $request)
 {
     $request->validate([
         'class' => 'required',
@@ -28,53 +154,19 @@ class AdminRequestController extends Controller
 
     $file = $request->file('pdf_document');
     $fileName = $file->getClientOriginalName();
-    $filePath = $file->storeAs('pdf_documents', $fileName, 'public');
+
     // Store the uploaded file
-   // $filePath = $request->file('pdf_document')->store('pdf_documents');
+    $path = $file->storeAs('markspdf', $fileName, 'public');
 
-    // Create a new UpdateApproval instance and store it in the database
-    // UpdateApproval::create([
-    //     'class' => $request->class,
-    //     'new_marks' => $request->new_marks,
-    //     'file_path' => $filePath,
-    // ]);
+    // Get student ID from session
+    $studentId = session('student_id');
 
-//     return redirect()->back()->with('success', 'File uploaded and record created successfully.');
-// }
+    // Get class and new marks from request
+    $class = $request->input('class');
+    $newMarks = $request->input('new_marks');
 
-    //     $request->validate([
-    //     'pdf_document' => 'required|file|mimes:pdf', // Example validation rules
-    // ]);
-
-        //      $validatedData = $request->validate([
-        //     //'student_id' => 'required',
-        //     'class' => 'required',
-        //     'new_marks' => 'required',
-        //     //'password' => 'required',
-        // ]);
-  $studentId = session('student_id');
-
-        // $studentId = $request->input('student_id');
-        $class = $request->input('class');
-         $new_marks = $request->input('new_marks');
-        //$password = $request->input('password');
-
-        $storagePath = 'storage/app/public/markspdf files';
-        $filename = 'marks.pdf'; 
-
-        $path = $file->storeAs('markspdf', $filename, 'public');
-
-        $user=DB::table('logins')
-        ->where('stu_id',$studentId)
-        ->first();
-        if(!$user)
-        {
-            return redirect()->back()->with('error', 'User not found');
-        }
-       
-
-          $columnName = 'marks10'; // Initialize column name variable
-            
+    // Determine the column name based on the class
+    $columnName = '';
     switch ($class) {
         case 'Class 10':
             $columnName = 'marks10';
@@ -82,7 +174,7 @@ class AdminRequestController extends Controller
         case 'Class 12':
             $columnName = 'marks12';
             break;
-        case '1st Semester':
+             case '1st Semester':
             $columnName = 'sem1';
             break;
         case '2nd Semester':
@@ -114,34 +206,19 @@ class AdminRequestController extends Controller
             break;
         
     }
+
+    // Insert a new record into the update_approvals table
     DB::table('update_approvals')->insert([
         'stu_id' => $studentId,
-        $columnName => $new_marks,
-        'filepath' => $filePath,
-
-        'update_type' => $columnName ,
+        $columnName => $newMarks,
+        'filepath' => $path, // Use $path instead of $filePath
+        'update_type' => $columnName,
         'delete' => '0'
     ]);
 
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Your request has been sent to admin');
-
-    }
+    // Redirect back with success message
+    return redirect()->back()->with('success', 'Your request has been sent to admin');
 }
-
-    public function index()
-    {
-        // Retrieve data from the update_approvals table using the UpdateApproval model
-       $data = DB::table('update_approvals')
-            ->where('delete', 0)
-            ->get();
-
-        // Pass the data to the 'viewRequests' view
-        return view('viewRequests', compact('data'));
-    }
-
-
-   
 }
 
 
