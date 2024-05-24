@@ -10,16 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->date('startdate');
-            $table->date('enddate')->nullable();
-            $table->time('starttime');
-            $table->time('endtime');
-            $table->string('marks10');
-            $table->string('marks12');
-            $table->string('cgpa');
+        Schema::table('events', function (Blueprint $table) {
             $table->string('campus');
             $table->string('company');
             $table->string('role');
@@ -27,7 +18,6 @@ return new class extends Migration {
             $table->text('eligibility');
             $table->date('registration_date');
             $table->date('last_date_of_registration');
-            $table->timestamps();
         });
     }
 
@@ -36,6 +26,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropColumn('campus');
+            $table->dropColumn('company');
+            $table->dropColumn('role');
+            $table->dropColumn('responsibility');
+            $table->dropColumn('eligibility');
+            $table->dropColumn('registration_date');
+            $table->dropColumn('last_date_of_registration');
+        });
     }
 };

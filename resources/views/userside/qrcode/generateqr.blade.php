@@ -16,7 +16,13 @@
 </head>
 <body>
     {{-- placholder for qr --}}
-    <div id="qrcode"></div>
+   {{-- @extends('layout.content')--}}
+   <div class = " relative bg-white min-h-96 rounded-[20px]">
+        <div class="  ">
+    <div class = " inset-y-10 mr-5 pr-5 md:absolute end-0" id="qrcode"></div>
+</div>
+
+    </div>
     <script type="text/javascript">
         // Get the element where you want to render the QR code
         var qrCodeDiv = document.getElementById('qrcode');
@@ -27,8 +33,8 @@
         // Create a QR code instance
         var qr = new QRCode(qrCodeDiv, {
             text: data, // Your QR code data
-            width: 240,
-            height: 240,
+            width: 260,
+            height: 260,
             colorDark : "#000000",
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H // Error correction level
