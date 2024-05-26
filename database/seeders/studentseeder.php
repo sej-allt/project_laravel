@@ -37,6 +37,21 @@ class studentseeder extends Seeder
             ->chunk(1000)
             ->each(function (LazyCollection $chunk) {
 
+                $login_array = $chunk->map(function ($row) {
+                    if (!$row[8])
+                        $type = 0;
+                    else
+                        $type = $row[8];
+
+                    return [
+                        'user_id' => $row[0],
+                        'password' => md5($row[0]),
+                        'type' => $type,
+                        'TTL' => 0
+                    ];
+                })->toArray();
+                DB::table('logins')->insert($login_array);
+
                 $records = $chunk->map(function ($row) {
                     // dd($row);
                     if (!$row[8])
@@ -75,20 +90,7 @@ class studentseeder extends Seeder
 
                 DB::table('students')->insert($records);
 
-                $login_array = $chunk->map(function ($row) {
-                    if (!$row[8])
-                        $type = 0;
-                    else
-                        $type = $row[8];
 
-                    return [
-                        'stu_id' => $row[0],
-                        'password' => md5($row[0]),
-                        'type' => $type,
-                        'TTL' => 0
-                    ];
-                })->toArray();
-                DB::table('logins')->insert($login_array);
             });
 
 

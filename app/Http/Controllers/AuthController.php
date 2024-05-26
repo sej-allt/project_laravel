@@ -28,16 +28,16 @@ class AuthController extends Controller
         // $error = Auth::check();
         // echo $error;
         // dd($credentials);
-        $student_id = $credentials['stu_id'];
-        $student_password = md5($credentials['password']);
+        $user_id = $credentials['stu_id'];
+        $user_password = md5($credentials['password']);
         // dd($student_id);
-        $user = DB::table('logins')->where('stu_id', '=', $student_id)->first();
+        $user = DB::table('logins')->where('user_id', '=', $user_id)->first();
         // dd($user);
         if ($user) {
             $a_password = $user->password;
             $a_type = $user->type;
-            $a_id = $user->stu_id;
-            if ($a_password == $student_password) {
+            $a_id = $user->user_id;
+            if ($a_password == $user_password) {
 
                 if ($a_type == 0) {
                     session(['student_id' => $a_id]);

@@ -9,13 +9,13 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UpdateUserDataController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentController;
 
-=======
+
 use App\Http\Controllers\QRController;
->>>>>>> f99dc32c1abcb62779e9361ea3c49331231390f7
+
 require __DIR__ . '/adminroutes.php';
 
 
@@ -102,7 +102,7 @@ Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('vie
 
 Route::get('/get-email-content', [EmailContentController::class, 'getEmailContent'])->name('email.get-content');
 
-<<<<<<< HEAD
+
 
 Route::get('/eventForm', [EventController::class, 'event'])->name('create_event');
 Route::post('/eventForm', [EventController::class, 'storeEvent'])->name('create_event');
@@ -110,9 +110,12 @@ Route::post('/eventForm', [EventController::class, 'storeEvent'])->name('create_
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
-=======
+
 // Route::post('/scan', 'QRController@scan')->name('scan');
 Route::get('/scanner', [QRController::class, 'index'])->name('scanner');
 Route::post('/scan', [QRController::class, 'scan'])->name('scan');
 Route::post('/scan-image', [QRController::class, 'scanImage'])->name('scan-image');
->>>>>>> f99dc32c1abcb62779e9361ea3c49331231390f7
+
+Route::get('/students', function () {
+    return view('adminside.liststudents');
+})->name('list');

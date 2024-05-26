@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id')->unique();
+            $table->unsignedBigInteger('student_id');           //foreign
             $table->string('email')->unique()->nullable(false);
             $table->string('student_name')->nullable(false);
             $table->string('course')->nullable(false)->default('-');
@@ -36,6 +36,7 @@ return new class extends Migration {
             $table->string('sem10')->nullable();
             $table->string('cgpa')->nullable();
             $table->timestamps();
+            $table->foreign('student_id')->references('user_id')->on('logins')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
