@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/nav_ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_attendance_qr_scan"
+            android:icon="@drawable/nav_ic_attendance_qr"
+            android:title="Attendance Scan" />
+        <item
+            android:id="@+id/nav_ongoing_eve"
+            android:icon="@drawable/nav_ic_current_event"
+            android:title="Ongoing Events" />
+        <item
+            android:id="@+id/nav_upcoming_eve"
+            android:icon="@drawable/nav_ic_upcoming_event"
+            android:title="Upcoming Events" />
+        <item
+            android:id="@+id/nav_archieved_eve"
+            android:icon="@drawable/nav_ic_archived_event"
+            android:title="Archived Events" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/nav_ic_about"
+            android:title="About App" />
+    </group>
+    <item
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/nav_ic_logout"
+                android:title="Logout"/>
+        </menu>
+    </item>
+</menu>

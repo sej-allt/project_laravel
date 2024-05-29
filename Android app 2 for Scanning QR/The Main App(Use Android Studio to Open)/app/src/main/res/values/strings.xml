@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">CampusConnect</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_from_ongoing_activities">hello from ongoing activities</string>
+    <string name="hello_from_archived_activities">Hello from archived activities</string>
+    <string name="hello_from_upcoming_activities">hello from upcoming activities</string>
+    <string name="home_dashboard_welcomes_you">Home Dashboard Welcomes You</string>
 </resources>
