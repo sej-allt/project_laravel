@@ -1,7 +1,7 @@
 <!-- resources/views/events/show.blade.php -->
-@extends('layout.app')
+@extends('layout.adminheader')
 
-@section('content')
+@section('main_content')
     <div class="container mt-5">
         <h1>{{ $event->name }}</h1>
         <div class="card">

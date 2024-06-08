@@ -1,6 +1,49 @@
-@extends('layout.app')
+@extends('layout.adminheader')
 
-@section('content')
+@section('header')
+    Create Event
+@endsection
+
+@section('main_content')
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Navbar content -->
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @yield('content')
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <!-- Sidebar Toggle Button -->
+                <button class="btn btn-primary sidebar-toggle">&#8942;</button>
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="archive-sidebar">
+                        <a href="{{ route('archive') }}" class="archive-link">Archive</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebar = document.querySelector('.sidebar');
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show-sidebar');
+            });
+        });
+    </script>
+</div>
     <div class="container mt-5">
         <div class="mt-4 mb-5" style="padding-left: 100px; padding-top: 50px">
             <h1>Upcoming Events</h1>

@@ -10,7 +10,7 @@
     <style>
         .archive-sidebar {
             position: fixed;
-            top: 0;
+            top: 300px;
             bottom: 0;
             right: -300px;
             width: 300px;
@@ -64,6 +64,7 @@
 
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Navbar content -->

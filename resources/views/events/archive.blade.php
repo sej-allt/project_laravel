@@ -1,9 +1,9 @@
 <!-- resources/views/events/archive.blade.php -->
-@extends('layout.app')
+@extends('layout.adminheader')
 
 @section('title', 'Archived Events')
 
-@section('content')
+@section('main_content')
     <div class="container mt-5" style="padding-left: 100px; padding-top: 50px">
         <h1>Archived Events</h1>
         <div class="row">
