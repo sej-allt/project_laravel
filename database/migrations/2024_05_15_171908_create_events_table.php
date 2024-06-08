@@ -21,6 +21,12 @@ return new class extends Migration {
             $table->string('marks12');
             $table->string('cgpa');
             $table->string('campus');
+            $table->string('company');
+            $table->string('role');
+            $table->string('responsibity');
+            $table->string('eligibility');
+            $table->date('registration_date');
+            $table->date('last_date_of_registration ')->nullable();
             $table->timestamps();
         });
     }

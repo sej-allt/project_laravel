@@ -12,6 +12,17 @@
                 <p class="card-text">End Date: {{ $event->enddate }}</p>
                 <p class="card-text">Start Time: {{ $event->starttime }}</p>
                 <p class="card-text">End Time: {{ $event->endtime }}</p>
+                <p class="card-text">Company: {{ $event->company }}</p>
+                <p class="card-text">Campus: {{ $event->campus }}</p>
+                <p class="card-text">Marks10: {{ $event->marks10 }}</p>
+                <p class="card-text">Marks12: {{ $event->marks12 }}</p>
+                <p class="card-text">Cgpa: {{ $event->cgpa }}</p>
+                <p class="card-text">Role: {{ $event->role }}</p>
+                <p class="card-text">Responsibility: {{ $event->responsibility }}</p>
+                <p class="card-text">Eligibility: {{ $event->eligibility }}</p>
+                <p class="card-text">Registration Date: {{ $event->registration_date }}</p>
+                <p class="card-text">Last Date Of Registration: {{ $event->last_date_of_registration }}</p>
+
             </div>
         </div>
     </div>

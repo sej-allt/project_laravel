@@ -32,6 +32,12 @@ class EventController extends Controller
             'marks12' => 'required|string|max:255',
             'cgpa' => 'required|string|max:255',
             'campus' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
+            'responsibility' => 'required|string|max:255',
+            'eligibility' => 'required|string|max:255',
+            'registration_date' => 'required|date',
+            'last_date_of_registration' => 'required|date|after_or_equal:registration_date',
         ]);
 
         $event = Event::create([
@@ -44,6 +50,12 @@ class EventController extends Controller
             'marks12' => $request->input('marks12'),
             'cgpa' => $request->input('cgpa'),
             'campus' => $request->input('campus'),
+            'company' => $request->input('company'),
+            'role' => $request->input('role'),
+            'responsibility' => $request->input('responsibility'),
+            'eligibility' => $request->input('eligibility'),
+            'registration_date' => $request->input('registration_date'),
+            'last_date_of_registration' => $request->input('last_date_of_registration'),
         ]);
 
         return redirect()->route('create_event')->with('success', 'Event Created successful!');

@@ -109,12 +109,76 @@
             {{-- <span class="text-danger" style="color: red;">@error('campus') {{ $message }} @enderror</span> --}}
         </div>
         
+        <div class="mb-3">
+            <div class="flex items-center mb-1">
+                <h2 class="text-lg font-medium mr-2">Company<span class="text-red-500">*</span></h2>
+                <label for="campus" class="block text-sm font-medium text-gray-900 dark:text-white">Company:</label>
+            </div>
+            <div class="relative">
+                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Company" name="company" id="company" value="{{ old('company') }}" required>
+            </div>
+            {{-- <span class="text-danger" style="color: red;">@error('company') {{ $message }} @enderror</span> --}}
+        </div>
+
+        <div class="mb-3">
+            <div class="flex items-center mb-1">
+                <h2 class="text-lg font-medium mr-2">Role<span class="text-red-500">*</span></h2>
+                <label for="role" class="block text-sm font-medium text-gray-900 dark:text-white">Role:</label>
+            </div>
+            <div class="relative">
+                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Role" name="role" id="role" value="{{ old('role') }}" required>
+            </div>
+            {{-- <span class="text-danger" style="color: red;">@error('role') {{ $message }} @enderror</span> --}}
+        </div>
+
+        <div class="mb-3">
+            <div class="flex items-center mb-1">
+                <h2 class="text-lg font-medium mr-2">Responsibility<span class="text-red-500">*</span></h2>
+                <label for="responsibility" class="block text-sm font-medium text-gray-900 dark:text-white">Responsibility:</label>
+            </div>
+            <div class="relative">
+                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Responsibility" name="responsibility" id="responsibility" value="{{ old('responsibility') }}" required>
+            </div>
+            {{-- <span class="text-danger" style="color: red;">@error('responsibility') {{ $message }} @enderror</span> --}}
+        </div>
+
+        <div class="mb-3">
+            <div class="flex items-center mb-1">
+                <h2 class="text-lg font-medium mr-2">Eligibility<span class="text-red-500">*</span></h2>
+                <label for="eligibility" class="block text-sm font-medium text-gray-900 dark:text-white">Eligibility:</label>
+            </div>
+            <div class="relative">
+                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Eligibility" name="eligibility" id="eligibility" value="{{ old('responsibility') }}" required>
+            </div>
+            {{-- <span class="text-danger" style="color: red;">@error('eligibility') {{ $message }} @enderror</span> --}}
+        </div>
+
+        <div class="mb-3">
+            <div class="flex items-center mb-1">
+                <h2 class="text-lg font-medium mr-2">Registration Date<span class="text-red-500">*</span></h2>
+                <label for="registration_date" class="block text-sm font-medium text-gray-900 dark:text-white">Registration Date:</label>
+            </div>
+            <div class="relative">
+                <input type="date" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="registration_date" id="registration_date" value="{{ old('registration_date') }}" required>
+            </div>
+            {{-- <span class="text-danger" style="color: red;">@error('registration_date') {{ $message }} @enderror</span> --}}
+        </div>
+
+        <div class="mb-3">
+            <div class="flex items-center mb-1">
+                <h2 class="text-lg font-medium mr-2">Last Date Of Registration<span class="text-red-500">*</span></h2>
+                <label for="last_date_of_registration" class="block text-sm font-medium text-gray-900 dark:text-white">Last Date Of Registration:</label>
+            </div>
+            <div class="relative">
+                <input type="date" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="last_date_of_registration" id="last_date_of_registration" value="{{ old('last_date_of_registration') }}" required>
+            </div>
+            {{-- <span class="text-danger" style="color: red;">@error('last_date_of_registration') {{ $message }} @enderror</span> --}}
+        </div>
         
         <div class="flex justify-center items-center my-0">
             <button type="submit" class="tracking-wide text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  mb-1 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
         </div>
     </form>
 </div>
-
 
 @endsection

@@ -19,5 +19,11 @@ class Event extends Model
         'marks12',
         'cgpa',
         'campus',
+        'company',
+        'role',
+        'responsibility',
+        'eligibility',
+        'registration_date',
+        'last_date_of_registration',
     ];
 }
