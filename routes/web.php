@@ -22,7 +22,13 @@ Route::get('/', function () {
 })->name('welcome');
 
 // Individual registration routes
-Route::match(['get', 'post'], '/individualReg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
+
+Route::get('/indreg', function () {
+    return view('individualReg');
+});
+Route::post('/indreg', [AdminController::class, 'IndividualRegistration'])->name('individualReg');
+
+
 Route::post('/upload-csv', [AdminController::class, 'uploadCSV']);
 
 // Admin routes group with middleware protection

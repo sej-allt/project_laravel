@@ -56,10 +56,9 @@
 
                 {{-- <a href="{{route('other')}}" class="{{Request::is('other')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Add Event</a> --}}
 
-                <a href="{{route('list')}}" class="{{Request::is('list')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Student List</a>
-                <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a>
-
-
+                {{-- <a href="{{route('list')}}" class="{{Request::is('list')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Student List</a>
+                <a href="{{route('email.create')}}" class="{{Request::is('email/create')?'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} hover:no-underline rounded-md px-3 py-2 text-sm font-medium">Update-Email-content</a> --}}
+                
                                 @yield('navbar')
                             </div>
                         </div>

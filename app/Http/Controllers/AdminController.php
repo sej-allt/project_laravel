@@ -64,35 +64,41 @@ class AdminController extends Controller
             'student_id',
             'email',
             'student_name',
+            'program_id',
+            'semester',
             'father_name',
             'phone_number',
             'campus',
             'type',
-            'qddress',
-            'marks10',
-            'marks12'
+            'address',
+            'T1',
+            'T2'
         ];
-        for ($i = 1; $i <= 10; $i++) {
-            $header[] = 'sem' . $i;
+        for ($i = 2; $i <= 12; $i++) {
+            $header[] = 'T' . $i;
         }
-
+        $header[] = 'cgpa';
         // Form the data row for CSV
         $data = [
             $request->student_id,
             $request->email,
             $request->name,
+            $request->program_id,
+            $request->semester,
             $request->father_name, // Assuming father_name might be optional
             $request->phn_no,
             $request->campus,
             $request->type, // Assuming type might be optional
             $request->address, // Assuming address might be optional
-            $request->marks10,
-            $request->marks12,
+            $request->T1,
+            $request->T2,
         ];
-        for ($i = 1; $i <= 10; $i++) {
-            $semesterGradeKey = 'sem' . $i;
+        for ($i = 2; $i <= 12; $i++) {
+            $semesterGradeKey = 'T' . $i;
             $data[] = $request->has($semesterGradeKey) ? $request->$semesterGradeKey : '';
         }
+
+        //cgpa needed. will look into it.
 
         // Combine header and data rows
         $rows = [$header, $data];

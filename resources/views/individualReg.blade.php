@@ -39,7 +39,7 @@
      @endif
  @endif
  <div  class = " bg-white  w-4/5  mx-auto border-2 shadow rounded-[20px] p-3">
-<form action="{{url('/individualReg')}}/" class = " mx-auto px-3" method="POST">
+<form action="{{url('/indreg')}}/" class = " mx-auto px-3" method="POST">
   @csrf
   <div class = "text-lg mb-2 font-bold tracking-widest ">STUDENT DETAILS</div>
   <div class="flex justify-between">
@@ -82,6 +82,18 @@
     </div>
     <span class='text-danger' style='color: red;'>
       @error('name')
+        {{$message}}
+      @enderror
+    </span>
+  </div>
+  <div class="mb-3 ml-2 mr-3 w-7/12 font-medium">
+    <div class="relative">
+      <label for="program_id" class="form-label left-1 px-1 mx-2">Course</label>
+      <input type="text" class="form-control rounded-[20px]  bg-gray-50  text-sm" placeholder="Enter student name" name="program_id" id="program_id" value="{{old('course')}}">
+      <span class="absolute top-0 left-0 mt-1 mr-2 text-red-500">*</span>
+    </div>
+    <span class='text-danger' style='color: red;'>
+      @error('program_id')
         {{$message}}
       @enderror
     </span>

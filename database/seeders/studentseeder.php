@@ -63,7 +63,7 @@ class studentseeder extends Seeder
                             'student_id' => $row[0],
                             'email' => $row[1],
                             'student_name' => $row[2],
-                            'course' => $row[3],
+                            'program_id' => $row[3],
                             'semester' => $row[4],
                             'father_name' => $row[5],
                             'phone_number' => $row[6],
