@@ -67,7 +67,7 @@ class EventController extends Controller
         $eventids = DB::table('eligibles')->where('student_id', '=', $student_id)->get();
         $events = [];
         foreach ($eventids as $event_id) {
-            $event = DB::table('events')->where('id', '=', $event_id->event_id)->first();
+            $event = DB::table('events')->where('event_id', '=', $event_id->event_id)->first();
             $events[] = $event;
         }
         return view('userside.events')->with('events', $events);
