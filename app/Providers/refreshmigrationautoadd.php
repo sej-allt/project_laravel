@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Database\Seeders\adminseeder;
+use Database\Seeders\EmailContentSeeder;
 use Illuminate\Support\ServiceProvider;
 use Database\Seeders;
+use Database\Seeders\gradeSeeder;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Events\MigrationsEnded;
 
@@ -26,7 +28,8 @@ class refreshmigrationautoadd extends ServiceProvider
         Event::listen(MigrationsEnded::class, function () {
             // Call your custom seeder class here
             adminseeder::run();
-
+            EmailContentSeeder::run();
+            gradeSeeder::run();
         });
     }
 }

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -18,7 +18,6 @@ class AuthController extends Controller
 
     public function loginreq(Request $request)
     {
-        // dd($request->all());
         $credentials = $request->validate([
             'stu_id' => 'required',
             'password' => 'required'
@@ -28,16 +27,16 @@ class AuthController extends Controller
         // $error = Auth::check();
         // echo $error;
         // dd($credentials);
-        $student_id = $credentials['stu_id'];
-        $student_password = md5($credentials['password']);
+        $user_id = $credentials['stu_id'];
+        $user_password = md5($credentials['password']);
         // dd($student_id);
-        $user = DB::table('logins')->where('stu_id', '=', $student_id)->first();
+        $user = DB::table('logins')->where('user_id', '=', $user_id)->first();
         // dd($user);
         if ($user) {
             $a_password = $user->password;
             $a_type = $user->type;
-            $a_id = $user->stu_id;
-            if ($a_password == $student_password) {
+            $a_id = $user->user_id;
+            if ($a_password == $user_password) {
 
                 if ($a_type == 0) {
                     session(['student_id' => $a_id]);
@@ -51,11 +50,6 @@ class AuthController extends Controller
             } else
                 return redirect()->route('welcome');
         }
-        // if (Auth::attempt($request->only('stu_id', 'password'))) {
-
-        //     return view('home');
-        // } else
-        //     return view('welcome');
     }
 
     public function logout()

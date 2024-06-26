@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string('event_id')->unique();
             $table->string('name');
             $table->date('startdate');
             $table->date('enddate')->nullable();
@@ -21,6 +22,12 @@ return new class extends Migration {
             $table->string('marks12');
             $table->string('cgpa');
             $table->string('campus');
+            $table->string('company');
+            $table->string('role');
+            $table->text('responsibility');
+            $table->text('eligibility');
+            $table->date('registration_date');
+            $table->date('last_date_of_registration');
             $table->timestamps();
         });
     }

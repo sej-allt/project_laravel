@@ -12,11 +12,10 @@ return new class extends Migration {
     {
         Schema::create('logins', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('stu_id');
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('password');
             $table->integer('type');
             $table->boolean('TTL');
-            $table->foreign('stu_id')->references('student_id')->on('students')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
