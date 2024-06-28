@@ -43,7 +43,7 @@ Route::group(['middleware' => 'admin'], function () {
 Route::get('/forgot', function () {
     return view('auth.forgot');
 })->name('forgot');
-Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
 
 // Reset password routes
 Route::get('reset-password/{stu_id}/{token}', [ResetPasswordController::class, 'showResetForm'])->name('reset-password');
@@ -74,7 +74,7 @@ Route::get('updateMarks', [UpdateUserDataController::class, 'showUpdateMarksForm
 Route::post('updateMarks', [UpdateUserDataController::class, 'updateMarks'])->name('updateMarks');
 
 // Admin request route
-Route::post('reqAdmin', [AdminRequestController::class, 'updatereqtable'])->name('reqAdmin');
+Route::post('reqAdmin', [AdminRequestController::class, 'store'])->name('reqAdmin');
 
 // View requests route
 Route::get('/viewRequests', [AdminRequestController::class, 'index'])->name('viewRequests');

@@ -37,7 +37,7 @@ public function reset(Request $request, $stu_id, $token)
 
 
 $us=DB::table('logins')
-            ->where('stu_id', '=', $stu_id)
+            ->where('user_id', '=', $stu_id)
             ->first();
 
 
@@ -73,7 +73,7 @@ $ttl=$us->TTL;
     {
        
         DB::table('logins')
-            ->where('stu_id', '=', $stu_id)
+            ->where('user_id', '=', $stu_id)
             ->update(['password' =>md5($request->password)]);
 
             DB::table('password_reset_tokens')
