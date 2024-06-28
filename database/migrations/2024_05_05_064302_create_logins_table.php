@@ -15,7 +15,9 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('password');
             $table->integer('type');
+            $table->string('program_id');
             $table->boolean('TTL');
+            $table->foreign('program_id')->references('program_id')->on('programs')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

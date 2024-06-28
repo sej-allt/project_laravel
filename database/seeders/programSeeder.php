@@ -10,7 +10,7 @@ class programSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         $content = [
             'program_id'=>'MBA',

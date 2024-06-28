@@ -10,7 +10,7 @@ class campusSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         $content = [
             'campus_id'=>'GEHUD',
