@@ -91,5 +91,13 @@ Route::get('/students', [StudentController::class, 'index'])->name('students.ind
 Route::get('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
 
+
+
+Route::get('list', [StudentListController::class, 'viewList'])->name('list');
+
+Route::get('/list', [StudentListController::class, 'index'])->name('list');
+
+Route::post('/filterstudents', [StudentListController::class, 'filterStudents'])->name('filterstudents');
+
 // Include auth routes
 require __DIR__ . '/auth.php';
