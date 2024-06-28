@@ -22,6 +22,12 @@
     <form action="{{ route('create_event') }}" class="mx-auto px-3" method="POST">
         @csrf
         <div class="mb-3">
+            <h2 class="text-lg font-medium mb-1">Event ID<span class="text-red-500">*</span></h2>
+            <div class="relative">
+                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="event_id" id="event_id" placeholder="Enter Event Id" value="{{ old('event_id') }}" required>
+            </div>
+        </div>
+        <div class="mb-3">
             <h2 class="text-lg font-medium mb-1">Event Name<span class="text-red-500">*</span></h2>
             <div class="relative">
                 <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="name" id="event_name" placeholder="Enter Event Name" value="{{ old('name') }}" required>
@@ -82,9 +88,9 @@
         </div>
 
         <div class="mb-3">
-            <h2 class="text-lg font-medium mb-1">Eligibility<span class="text-red-500">*</span></h2>
+            <h2 class="text-lg font-medium mb-1">Program<span class="text-red-500">*</span></h2>
             <div class="relative">
-                <textarea class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="eligibility" id="eligibility" placeholder="Enter Eligibility" required>{{ old('eligibility') }}</textarea>
+                <input class="form-control rounded-[20px] bg-gray-50 text-sm w-full" name="program_id" id="program_id" placeholder="Enter program_id" value = "{{ old('program_id') }}"  required>
             </div>
         </div>
 
@@ -135,10 +141,10 @@
         <div class="mb-3">
             <div class="flex items-center mb-1">
                 <h2 class="text-lg font-medium mr-2">Campus<span class="text-red-500">*</span></h2>
-                <label for="campus" class="block text-sm font-medium text-gray-900 dark:text-white">Campus:</label>
+                <label for="campus_id" class="block text-sm font-medium text-gray-900 dark:text-white">Campus:</label>
             </div>
             <div class="relative">
-                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Campus" name="campus" id="campus" value="{{ old('campus') }}" required>
+                <input type="text" class="form-control rounded-[20px] bg-gray-50 text-sm w-full" placeholder="Enter Campus" name="campus_id" id="campus_id" value="{{ old('campus_id') }}" required>
             </div>
         </div>
 

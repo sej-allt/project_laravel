@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Criteria;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use DB;
@@ -18,6 +19,7 @@ class EventController extends Controller
         try {
             // Validate the incoming request data
             $validatedData = $request->validate([
+                'event_id' => 'required|string|max:255',
                 'name' => 'required|string|max:255',
                 'startdate' => 'required|date',
                 'enddate' => 'required|date|after_or_equal:startdate',
@@ -26,17 +28,18 @@ class EventController extends Controller
                 'marks10' => 'required|string|max:255',
                 'marks12' => 'required|string|max:255',
                 'cgpa' => 'required|string|max:255',
-                'campus' => 'required|string|max:255',
+                'campus_id' => 'required|string|max:255',
                 'company' => 'required|string|max:255',
                 'role' => 'required|string|max:255',
                 'responsibility' => 'required|string|max:1000',
-                'eligibility' => 'required|string|max:1000',
+                'program_id' => 'required|string|max:1000',
                 'registration_date' => 'required|date',
                 'last_date_of_registration' => 'required|date|after_or_equal:registration_date',
             ]);
 
             // Create a new event with the validated data
             $event = Event::create([
+                'event_id' => $request->input('event_id'),
                 'name' => $request->input('name'),
                 'startdate' => $request->input('startdate'),
                 'enddate' => $request->input('enddate'),
@@ -45,13 +48,22 @@ class EventController extends Controller
                 'marks10' => $request->input('marks10'),
                 'marks12' => $request->input('marks12'),
                 'cgpa' => $request->input('cgpa'),
-                'campus' => $request->input('campus'),
+                'campus_id' => $request->input('campus_id'),
                 'company' => $request->input('company'),
                 'role' => $request->input('role'),
                 'responsibility' => $request->input('responsibility'),
-                'eligibility' => $request->input('eligibility'),
+                'program_id' => $request->input('program_id'),
                 'registration_date' => $request->input('registration_date'),
                 'last_date_of_registration' => $request->input('last_date_of_registration'),
+            ]);
+
+            $criteria = Criteria::create([
+                'event_id' => $request->input('event_id'),
+                'marks10' => $request->input('marks10'),
+                'marks12' => $request->input('marks12'),
+                'cgpa' => $request->input('cgpa'),
+                'campus_id' => $request->input('campus'),
+                'program_id' => $request->input('program_id'),
             ]);
 
             return redirect()->route('create_event')->with('success', 'Event Created successfully!');

@@ -21,14 +21,16 @@ return new class extends Migration {
             $table->string('marks10');
             $table->string('marks12');
             $table->string('cgpa');
-            $table->string('campus');
+            $table->string('campus_id')->nullable(true);
             $table->string('company');
             $table->string('role');
             $table->text('responsibility');
-            $table->text('eligibility');
+            $table->string('program_id');
             $table->date('registration_date');
             $table->date('last_date_of_registration');
             $table->timestamps();
+            $table->foreign('campus_id')->references('campus_id')->on('campus')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('program_id')->references('program_id')->on('programs')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
