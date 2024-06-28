@@ -21,7 +21,7 @@ class Event extends Model
         'marks10',
         'marks12',
         'cgpa',
-        'campus',
+        'campus_id',
         'company',
         'role',
         'responsibility',

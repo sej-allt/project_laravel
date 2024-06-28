@@ -36,7 +36,7 @@ class EventController extends Controller
                 'registration_date' => 'required|date',
                 'last_date_of_registration' => 'required|date|after_or_equal:registration_date',
             ]);
-
+            Log::info('Received request with campus_id: ' . $request->input('campus_id'));
             // Create a new event with the validated data
             $event = Event::create([
                 'event_id' => $request->input('event_id'),
@@ -62,7 +62,7 @@ class EventController extends Controller
                 'marks10' => $request->input('marks10'),
                 'marks12' => $request->input('marks12'),
                 'cgpa' => $request->input('cgpa'),
-                'campus_id' => $request->input('campus'),
+                'campus_id' => $request->input('campus_id'),
                 'program_id' => $request->input('program_id'),
             ]);
 
