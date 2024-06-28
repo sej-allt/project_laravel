@@ -47,6 +47,7 @@ class studentseeder extends Seeder
                         'user_id' => $row[0],
                         'password' => md5($row[0]),
                         'type' => $type,
+                        'program_id' => $row[3],
                         'TTL' => 0
                     ];
                 })->toArray();

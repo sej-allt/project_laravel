@@ -17,6 +17,7 @@ class adminseeder extends Seeder
             'user_id' => 1000,
             'password' => md5("admin"),
             'type' => 1,
+            'program_id' =>'Btech',
             'ttl' => 0
         ];
         DB::table('logins')->insert($adminlogin);
