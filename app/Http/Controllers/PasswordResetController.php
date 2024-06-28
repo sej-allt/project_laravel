@@ -57,7 +57,7 @@ class PasswordResetController extends Controller
         $token = Str::random(32); // Adjust the length as needed
 
     // Retrieve TTL value from the logins table
-    $ttl = DB::table('logins')->where('stu_id', $stu_id)->value('TTL');
+    $ttl = DB::table('logins')->where('user_id', $stu_id)->value('TTL');
 
     // Define the expiration timestamp based on TTL
     $expiration = now()->addMinutes(15); // Adjust as needed
@@ -91,7 +91,7 @@ $newttl=15;
 
 // Update the TTL in the logins table
 DB::table('logins')
-    ->where('stu_id', $stu_id) // Assuming email is the unique identifier for a user
+    ->where('user_id', $stu_id) // Assuming email is the unique identifier for a user
     ->update(['TTL' => $newttl]);
     $emailContent = EmailContent::where('type', 'password reset')->first();
     Mail::to($email)->send(new resetPasswordEmail($stu_name,$stu_id, $token,$emailContent));
