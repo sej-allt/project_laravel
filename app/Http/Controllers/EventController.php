@@ -62,7 +62,7 @@ class EventController extends Controller
                 'marks10' => $request->input('marks10'),
                 'marks12' => $request->input('marks12'),
                 'cgpa' => $request->input('cgpa'),
-                'campus_id' => $request->input('campus'),
+                'campus_id' => $request->input('campus_id'),
                 'program_id' => $request->input('program_id'),
             ]);
 
