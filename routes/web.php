@@ -14,8 +14,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentController;
 
 // Including admin routes
+//require _DIR_ . '/adminroutes.php';
 require __DIR__ . '/adminroutes.php';
-
 // Default welcome route
 Route::get('/', function () {
     return view('welcome');
