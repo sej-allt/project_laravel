@@ -242,7 +242,7 @@ class UpdateUserDataController extends Controller
             $updatewhat = DB::table('update_approvals')
     ->where('id', $approvalId)
     ->where('delete', 1)
-    ->value('update_type');
+    ->value('grade_id');
     
 
     $studentId = DB::table('update_approvals')
@@ -255,7 +255,7 @@ class UpdateUserDataController extends Controller
     ->where('id', $approvalId)
     ->where('delete', 1)
      
-    ->value($updatewhat);
+    ->value('updates');
 
                 DB::table('students')
             ->where('student_id', $studentId)

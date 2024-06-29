@@ -86,10 +86,23 @@ Route::get('/get-email-content', [EmailContentController::class, 'getEmailConten
 Route::get('/eventForm', [EventController::class, 'event'])->name('create_event');
 Route::post('/eventForm', [EventController::class, 'storeEvent'])->name('create_event');
 
+Route::get('/viewEvent{id}', [ViewEventController::class, 'view'])->name('viewEvent');
+//Route::post('/eventForm', [ViewEventController::class, 'storeEvent'])->name('create_event');
+
+
+
 // Student routes
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
+
+//Route::get('showcards', [EventController::class, 'showcards'])->name('showcards');
+
+Route::get('list', [StudentListController::class, 'viewList'])->name('list');
+
+Route::get('/list', [StudentListController::class, 'index'])->name('list');
+
+Route::post('/filterstudents', [StudentListController::class, 'filterStudents'])->name('filterstudents');
 
 // Include auth routes
 require __DIR__ . '/auth.php';
