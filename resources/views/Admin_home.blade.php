@@ -22,9 +22,19 @@
     <li><a class="dropdown-item" href="{{route('email.create')}}">Update email</a></li>
   </ul>
 </div> --}}
-@section('cards')
+
+
+{{-- original --}}
+
+
+{{-- @section('cards')
   @include('partials.card')
-@endsection
+@endsection --}}
+
+{{-- Akii --}}
+@section('cards')
+        @include('partials.card', ['criterias' => $criterias])
+    @endsection
 
 @section('header')
     Admin   

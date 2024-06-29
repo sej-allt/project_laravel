@@ -84,4 +84,5 @@ class EventController extends Controller
         }
         return view('userside.events')->with('events', $events);
     }
+
 }

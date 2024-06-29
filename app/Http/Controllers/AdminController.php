@@ -20,7 +20,10 @@ class AdminController extends Controller
     protected $errorOccured;
     public function index()
     {
-        return view('Admin_home');
+         $criterias = DB::table('criterias')->select('event_id')->get();
+
+        return view('Admin_home', compact('criterias'));
+        //return view('Admin_home');
     }
 
 
