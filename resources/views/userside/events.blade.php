@@ -9,7 +9,6 @@
           <svg class="h-6 w-6 stroke-sky-500 group-hover:stroke-white" fill="none" viewBox="0 0 24 24"><!-- ... --></svg>
           <h3 class="text-slate-900 group-hover:text-white text-sm font-semibold">{{$event->name}}</h3>
         </div>
-        <p class="text-slate-500 group-hover:text-white text-sm">Create a new project from a variety of starting templates.</p>
       </a>
       @endforeach
     

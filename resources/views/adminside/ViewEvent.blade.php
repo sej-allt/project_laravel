@@ -1,14 +1,65 @@
-
-
-
-
 @extends('layout.adminheader')
 
 @section('header')
-   {{$criteria->event_id}}
+    {{ $event->name }}
 @endsection
+<style>
+    /* Custom styles for card content */
+    .card-text {
+        margin-bottom: 10px; /* Adjust spacing between each card text item */
+    }
 
+    .card {
+        border: 1px solid gray; /* Dark blue border for the card */
+        border-radius: 5px; /* Rounded corners for the card */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for a subtle lift effect */
+        padding: 20px; /* Padding inside the card */
+        margin-bottom: 20px; /* Spacing below the card */
+    }
+
+    .card-text strong {
+        display: inline-block; /* Make strong tags behave like block elements */
+        width: 220px; /* Adjust the width to create a tab-like effect */
+        font-weight: bold; /* Ensure the text is bold */
+        padding: 8px; /* Padding inside the circular edged rectangular */
+        border-radius: 20px; /* Rounded corners for the circular edged rectangular */
+        background-color: gray; /* Dark blue background color */
+        color: white; /* White text color */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Slight shadow */
+        margin-bottom: 10px; /* Space below each heading */
+    }
+
+    .card-text span {
+        border: 1.5px solid black;
+        display: inline-block; /* Ensure span behaves like block element */
+        padding: 8px; /* Padding inside the value container */
+        background-color: white; /* White background color */
+        border-radius: 5px; /* Rounded corners for the value container */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Slight shadow */
+        margin-left: 100px; /* Space between heading and value */
+        margin-bottom: 10px; /* Space below each value */
+        width: 120px;
+    }
+</style>
 @section('main_content')
+<div class="container mt-5">
+    <div class="card">
+    <p class="card-text"><strong>Start Date:</strong><span>{{ $event->startdate }}</span></p>
+            <p class="card-text"><strong>End Date:</strong><span>{{ $event->enddate }}</span></p>
+            <p class="card-text"><strong>Start Time:</strong><span>{{ $event->starttime }}</span></p>
+            <p class="card-text"><strong>End Time:</strong><span>{{ $event->endtime }}</span></p>
+            <p class="card-text"><strong>Company:</strong><span>{{ $event->company }}</span></p>
+            <p class="card-text"><strong>Marks10:</strong><span>{{ $event->marks10 }}</span></p>
+            <p class="card-text"><strong>Marks12:</strong><span>{{ $event->marks12 }}</span></p>
+            <p class="card-text"><strong>Cgpa:</strong><span>{{ $event->cgpa }}</span></p>
+            <p class="card-text"><strong>Role:</strong><span>{{ $event->role }}</span></p>
+            <p class="card-text"><strong>Responsibility:</strong><span>{{ $event->responsibility }}</span></p>
+            <p class="card-text"><strong>Registration Date:</strong><span>{{ $event->registration_date }}</span></p>
+            <p class="card-text"><strong>Last Date Of Registration:</strong><span>{{ $event->last_date_of_registration }}</span></p>
+        
+    </div>
+</div>
+
 <div class="container mt-4">
     <div class="mt-10 text-center">
         <button class="btn btn-primary" id="viewButton">

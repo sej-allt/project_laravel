@@ -9,22 +9,42 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-
 use App\Services\StudentCsvValidator;
 use Illuminate\Support\Facades\Log;
-
+use Carbon\Carbon;
 use App\Models\EmailContent;
 
 class AdminController extends Controller
 {
     protected $errorOccured;
     public function index()
-    {
-         $criterias = DB::table('criterias')->select('event_id')->get();
+{
+    // Fetch all events
+    $events = DB::table('events')->select('event_id', 'name', 'startdate', 'enddate')->get();
 
-        return view('Admin_home', compact('criterias'));
-        //return view('Admin_home');
-    }
+    // Get the current date and time
+    $now = Carbon::now();
+
+    // Categorize events
+    $upcomingEvents = $events->filter(function ($event) use ($now) {
+        return $event->startdate > $now;
+    });
+
+    $liveEvents = $events->filter(function ($event) use ($now) {
+        return $event->startdate <= $now && $event->enddate >= $now;
+    });
+
+    $archivedEvents = $events->filter(function ($event) use ($now) {
+        return $event->enddate < $now;
+    });
+
+    return view('Admin_home', [
+        'upcomingEvents' => $upcomingEvents,
+        'liveEvents' => $liveEvents,
+        'archivedEvents' => $archivedEvents,
+    ]);
+}
+
 
 
     public function bulk()
