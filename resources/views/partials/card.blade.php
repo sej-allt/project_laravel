@@ -75,7 +75,7 @@
 </div> --}}
 <div class="grid grid-cols-3 gap-2 gap-y-2 mx-auto pb-3">
     @foreach ($criterias as $criteria)
-    <a href="{{ route('viewEvent', ['id' => $criteria->event_id]) }}" class="group block mx-auto rounded-lg overflow-hidden hover:shadow-xl transform hover:scale-105 bg-white ring-1 ring-slate-900/5 shadow-lg hover:bg-sky-500 hover:ring-sky-500 transition-all duration-300 ease-in-out" style="width: 350px; height: 120px; border-radius: 15px;">
+    <a href="{{ route('viewEvent', ['id' => $criteria->event_id]) }}" class="group block mx-auto rounded-lg overflow-hidden hover:shadow-xl transform hover:scale-105 bg-white ring-1 ring-slate-900/5 shadow-lg hover:bg-sky-500 hover:ring-sky-500 transition-all duration-300 ease-in-out" style="width: 350px; height: 100px; border-radius: 15px;">
         <div class="flex flex-col h-full">
             <div class="flex items-center justify-center p-6">
                 <svg class="h-6 w-6 stroke-sky-500 group-hover:stroke-white" fill="none" viewBox="0 0 24 24"><!-- ... --></svg>

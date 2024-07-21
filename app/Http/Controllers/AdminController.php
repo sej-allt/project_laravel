@@ -20,7 +20,7 @@ class AdminController extends Controller
     public function index()
 {
     // Fetch all events
-    $events = DB::table('events')->select('event_id', 'name', 'startdate', 'enddate')->get();
+    $events = DB::table('events')->select('event_id', 'name', 'startdate', 'enddate','starttime','endtime')->get();
 
     // Get the current date and time
     $now = Carbon::now();
