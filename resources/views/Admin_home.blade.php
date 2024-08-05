@@ -27,17 +27,19 @@
 {{-- original --}}
 
 
-{{-- @section('cards')
+@section('main-content')
   @include('partials.card')
-@endsection --}}
+@endsection
 
 {{-- Akii --}}
-@section('cards')
+{{-- @section('cards')
         @include('partials.card', ['criterias' => $criterias])
-    @endsection
+    @endsection --}}
 
-@section('header')
-    Admin   
+@section('dashhead')
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item active" >DashboardAdmin</li>
+  </ul>
 @endsection
 
 {{-- 

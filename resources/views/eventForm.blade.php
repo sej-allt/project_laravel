@@ -4,7 +4,7 @@
     Create Event
 @endsection
 
-@section('main_content')
+@section('main-content')
 
 @if(session('success'))
     <div class="alert alert-success">

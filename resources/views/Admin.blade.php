@@ -1,19 +1,10 @@
 @extends('layout.adminheader')
 
-
-
-
-  
-  
-  
-
-
-@section('header')
+@section('dashhead')
     Bulk Upload
 @endsection
 
-
-@section('main_content')
+@section('main-content')
  {{-- {{ dd(session()->has('errors'))}} --}}
  @if(session()->has('errors'))
 
@@ -110,6 +101,7 @@
     </div>
 </div>
 </div>
+
 
 @endsection
 

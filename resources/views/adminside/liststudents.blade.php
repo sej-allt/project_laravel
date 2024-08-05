@@ -1,95 +1,100 @@
 
-
 @extends('layout.adminheader')
 
-@section('main_content')
-<div class="flex flex-col md:flex-row">
-    <aside class="w-full md:w-64 h-screen bg-gray-100 p-4 dark:bg-gray-800 md:fixed md:left-0 md:top-16 overflow-y-auto">
-        <h2 class="text-xl font-bold mb-4 dark:text-white">Filters</h2>
-        <div class="space-y-4">
-            <div>
-                <button type="button" data-filter="programs" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Course
-                </button>
-                <div id="programs-dropdown" class="hidden space-y-2"></div>
-            </div>
-            <div>
-                <button type="button" data-filter="semesters" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Semester
-                </button>
-                <div id="semesters-dropdown" class="hidden space-y-2"></div>
-            </div>
-            <div>
-                <button type="button" data-filter="marks10" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
-                    10 Marks
-                </button>
-                <div id="marks10-dropdown" class="hidden space-y-2">
-                    <input type="range" id="marks10-slider" min="0" max="100" step="1" value="0" class="w-full">
-                    <span id="marks10-slider-value" class="text-white">0</span>
+@section('main-content')
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="flex flex-col">
+            <aside class="  bg-gray-100 ">
+                <h2 class="text-xl font-bold mb-2 text-slate-700 ">Filters</h2>
+                <div class=" flex justify-evenly ">
+                    <div>
+                        <button type="button" data-filter="programs" class="py-1 px-2 text-slate-700 ">
+                            Course
+                        </button>
+                        <div id="programs-dropdown" class="hidden space-y-2"></div>
+                    </div>
+                    <div>
+                        <button type="button" data-filter="semesters" class="py-1 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Semester
+                        </button>
+                        <div id="semesters-dropdown" class="hidden space-y-2"></div>
+                    </div>
+                    <div>
+                        <button type="button" data-filter="marks10" class="py-1 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+                            10 Marks
+                        </button>
+                        <div id="marks10-dropdown" class="hidden space-y-2">
+                            <input type="range" id="marks10-slider" min="0" max="100" step="1" value="0" class="">
+                            <span id="marks10-slider-value" class="text-white">0</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" data-filter="marks12" class=" py-1 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+                            12 Marks
+                        </button>
+                        <div id="marks12-dropdown" class="hidden space-y-2">
+                            <input type="range" id="marks12-slider" min="0" max="100" step="1" value="0" class="">
+                            <span id="marks12-slider-value" class="text-white">0</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" data-filter="cgpa" class="w-full py-1 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+                            CGPA
+                        </button>
+                        <div id="cgpa-dropdown" class="hidden space-y-2">
+                            <input type="range" id="cgpa-slider" min="0" max="10" step="0.1" value="0" class="w-full">
+                            <span id="cgpa-slider-value" class="text-white">0</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <button type="button" data-filter="marks12" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
-                    12 Marks
-                </button>
-                <div id="marks12-dropdown" class="hidden space-y-2">
-                    <input type="range" id="marks12-slider" min="0" max="100" step="1" value="0" class="w-full">
-                    <span id="marks12-slider-value" class="text-white">0</span>
+            </aside>
+        
+            <main class=" p-1 flex-grow w-full bg-white dark:bg-gray-800">
+                <h1 class="text-2xl font-bold  dark:text-white">Course Data</h1>
+                <div id="dynamic-filter" class="mb-4 hidden">
+                    <form id="dynamic-filter-form" class="space-y-4">
+                        <div id="dynamic-filter-options" class="space-y-2"></div>
+                        <button type="button" id="apply-dynamic-filters" class="w-full py-1 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Apply Filters
+                        </button>
+                    </form>
                 </div>
-            </div>
-            <div>
-                <button type="button" data-filter="cgpa" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
-                    CGPA
-                </button>
-                <div id="cgpa-dropdown" class="hidden space-y-2">
-                    <input type="range" id="cgpa-slider" min="0" max="10" step="0.1" value="0" class="w-full">
-                    <span id="cgpa-slider-value" class="text-white">0</span>
+                <div>
+                    <table id="students-table" class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white-700 uppercase bg-white-50 dark:bg-white-700 dark:text-white-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-black">S.No</th>
+                                <th scope="col" class="px-6 py-3 text-black">Student ID</th>
+                                <th scope="col" class="px-6 py-3 text-black">Name</th>
+                                <th scope="col" class="px-6 py-3 text-black">Course</th>
+                                <th scope="col" class="px-6 py-3 text-black">Semester</th>
+                                <th scope="col" class="px-6 py-3 text-black">10 Marks</th>
+                                <th scope="col" class="px-6 py-3 text-black">12 Marks</th>
+                                <th scope="col" class="px-6 py-3 text-black">CGPA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($data as $index => $student)
+                            <tr class="odd:bg-white even:bg-white-50 dark:odd:bg-white-900 dark:even:bg-white-800 border-b dark:border-white-700">
+                                <td class="px-6 py-4 text-black">{{ $index + 1 }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->student_id }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->student_name }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->program_id }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->semester }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->T1 }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->T2 }}</td>
+                                <td class="px-6 py-4 text-black">{{ $student->cgpa }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            </main>
         </div>
-    </aside>
-
-    <main class="ml-64 mt-16 p-4 flex-grow w-full bg-white dark:bg-gray-800">
-        <h1 class="text-2xl font-bold mb-4 dark:text-white">Course Data</h1>
-        <div id="dynamic-filter" class="mb-4 hidden">
-            <form id="dynamic-filter-form" class="space-y-4">
-                <div id="dynamic-filter-options" class="space-y-2"></div>
-                <button type="button" id="apply-dynamic-filters" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Apply Filters
-                </button>
-            </form>
         </div>
-        <div>
-            <table id="students-table" class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400">
-                <thead class="text-xs text-white-700 uppercase bg-white-50 dark:bg-white-700 dark:text-white-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-black">S.No</th>
-                        <th scope="col" class="px-6 py-3 text-black">Student ID</th>
-                        <th scope="col" class="px-6 py-3 text-black">Name</th>
-                        <th scope="col" class="px-6 py-3 text-black">Course</th>
-                        <th scope="col" class="px-6 py-3 text-black">Semester</th>
-                        <th scope="col" class="px-6 py-3 text-black">10 Marks</th>
-                        <th scope="col" class="px-6 py-3 text-black">12 Marks</th>
-                        <th scope="col" class="px-6 py-3 text-black">CGPA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($data as $index => $student)
-                    <tr class="odd:bg-white even:bg-white-50 dark:odd:bg-white-900 dark:even:bg-white-800 border-b dark:border-white-700">
-                        <td class="px-6 py-4 text-black">{{ $index + 1 }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->student_id }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->student_name }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->program_id }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->semester }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->T1 }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->T2 }}</td>
-                        <td class="px-6 py-4 text-black">{{ $student->cgpa }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </main>
+</div>
 </div>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">

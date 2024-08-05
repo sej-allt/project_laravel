@@ -1,9 +1,9 @@
 @extends('layout.adminheader')
 
-@section('header')
+@section('dashhead')
     Registration
 @endsection
-@section('main_content')
+@section('main-content')
 
  {{-- {{ dd(session()->has('errors'))}} --}}
  @if(session()->has('errors'))
@@ -38,10 +38,10 @@
          @endsection
      @endif
  @endif
- <div  class = " bg-white  w-4/5  mx-auto border-2 shadow rounded-[20px] p-3">
-<form action="{{url('/indreg')}}/" class = " mx-auto px-3" method="POST">
+ <div  class = " bg-white  w-4/5  mx-auto border-2 shadow rounded-[20px] p-3 mb-3">
+<form action="{{url('/indreg')}}/" class = " mx-auto px-3 " method="POST">
   @csrf
-  <div class = "text-lg mb-2 font-bold tracking-widest ">STUDENT DETAILS</div>
+  <div class = "text-lg mb-2 text-slate-700 font-bold tracking-widest ">STUDENT DETAILS</div>
   <div class="flex justify-between">
     
   <div class="mb-3 ml-2 mr-3 w-7/12 font-medium">
