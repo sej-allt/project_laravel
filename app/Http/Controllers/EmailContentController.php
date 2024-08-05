@@ -20,7 +20,9 @@ class EmailContentController extends Controller
             'body' => 'required|string',
             'link' => 'nullable|url',
             'conclusion' => 'nullable|string',
+            'custom_type' => 'nullable|string|max:255'
         ]);
+        $type = $request->type === 'custom' ? $request->custom_type : $request->type;
 
         // Create a new EmailContent instance
         $emailContent = EmailContent::updateOrCreate(
