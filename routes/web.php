@@ -105,6 +105,6 @@ Route::get('list', [StudentListController::class, 'viewList'])->name('list');
 Route::get('/list', [StudentListController::class, 'index'])->name('list');
 
 Route::post('/filterstudents', [StudentListController::class, 'filterStudents'])->name('filterstudents');
-
+Route::get('/filter-students-ajax', [StudentListController::class, 'filterAjax'])->name('filter.students.ajax');
 // Include auth routes
 require __DIR__ . '/auth.php';
